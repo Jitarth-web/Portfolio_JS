@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Production builds
+dist/
+
+# Vercel configuration
+.vercel/
+
+# Design files and archives
+*.zip
+work/
