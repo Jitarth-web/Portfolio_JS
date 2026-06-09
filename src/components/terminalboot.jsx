@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-const BOOT_LINES = [
-  { text: "JITARTH BIOS v2.0.26", instant: true },
+const BOOT_LINES = [  { text: "JITARTH BIOS v2.0.26", instant: true },
   { text: "Copyright (C) 2026 Jitarth Singh. All Rights Reserved.", instant: true },
   { text: "NIT Delhi Systems Division", instant: true },
   { text: "--------------------------------------------------", instant: true },
@@ -21,7 +20,28 @@ export default function TerminalBoot({ onFadeStart, onComplete }) {
   const [currentText, setCurrentText] = useState("");
   const [isFading, setIsFading] = useState(false);
 
+  const hasRun = useRef(false);
+  const cleanupTimeoutRef = useRef(null);
+
+  // Keep references to current callbacks to prevent stale closures
+  // and avoid re-running the effect when they change.
+  const onFadeStartRef = useRef(onFadeStart);
+  const onCompleteRef = useRef(onComplete);
+
+  onFadeStartRef.current = onFadeStart;
+  onCompleteRef.current = onComplete;
+
   useEffect(() => {
+    if (cleanupTimeoutRef.current) {
+      clearTimeout(cleanupTimeoutRef.current);
+      cleanupTimeoutRef.current = null;
+    }
+
+    if (hasRun.current) {
+      return;
+    }
+    hasRun.current = true;
+
     let active = true;
     let timer;
 
@@ -31,7 +51,10 @@ export default function TerminalBoot({ onFadeStart, onComplete }) {
         const line = BOOT_LINES[i];
 
         if (line.instant) {
-          setDisplayedLines((prev) => [...prev, line.text]);
+          setDisplayedLines((prev) => {
+            if (prev.includes(line.text)) return prev;
+            return [...prev, line.text];
+          });
         } else {
           setCurrentLineIdx(i);
           let typed = "";
@@ -43,7 +66,10 @@ export default function TerminalBoot({ onFadeStart, onComplete }) {
             typed += line.text[j];
             setCurrentText(typed);
           }
-          setDisplayedLines((prev) => [...prev, line.text]);
+          setDisplayedLines((prev) => {
+            if (prev.includes(line.text)) return prev;
+            return [...prev, line.text];
+          });
           setCurrentText("");
 
           if (!active) return;
@@ -59,21 +85,24 @@ export default function TerminalBoot({ onFadeStart, onComplete }) {
       });
 
       setIsFading(true);
-      if (active) onFadeStart();
+      if (active) onFadeStartRef.current();
 
       await new Promise((resolve) => {
         timer = setTimeout(resolve, 800);
       });
-      if (active) onComplete();
+      if (active) onCompleteRef.current();
     };
 
     run();
 
     return () => {
-      active = false;
-      clearTimeout(timer);
+      // Defer actual cleanup to handle React Strict Mode's synchronous remounting
+      cleanupTimeoutRef.current = setTimeout(() => {
+        active = false;
+        clearTimeout(timer);
+      }, 0);
     };
-  }, [onFadeStart, onComplete]);
+  }, []);
 
   return (
     <div className={`terminal-overlay ${isFading ? "fade-out" : ""}`}>

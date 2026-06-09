@@ -1,0 +1,133 @@
+.dogContainer {
+  position: fixed;
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: bottom center;
+}
+
+/* Make sure the canvas rendering is crisp and pixelated */
+.dogCanvas {
+  width: 100%;
+  height: 100%;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+}
+
+/* Click target that matches the dog's sprite area */
+.clickTarget {
+  position: absolute;
+  left: 30px;
+  top: 45px;
+  width: 100px;
+  height: 85px;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 12px;
+}
+
+/* Retro pixel speech bubble */
+.speechBubble {
+  position: absolute;
+  bottom: 125px; /* Position above the dog's head */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #04171a;
+  border: 3px solid #ff6a21;
+  color: #ffffff;
+  padding: 6px 12px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 900;
+  font-size: 13px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  z-index: 20;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Pixel-art style arrow for the speech bubble */
+.speechBubble::after {
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #ff6a21;
+}
+
+.speechBubble::before {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #04171a;
+  z-index: 1;
+}
+
+/* Shadows under the dog */
+.dogShadow {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 8px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 50%;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Floating heart particles */
+.heartParticle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  color: #ff3e6c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Paw print particles left on the webpage */
+.pawParticle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  color: rgba(73, 223, 223, 0.35); /* Styled in soft cyan to match the theme */
+  transform-origin: center;
+  transition: opacity 0.5s ease;
+}
+
+
+
+/* Simple keyframe animations */
+@keyframes spinDog {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinAnimation {
+  animation: spinDog 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}

@@ -1,0 +1,5 @@
+- Single-file architecture combining HTML structure, CSS styling, and JavaScript logic within `bernese-pixel-dog.html`.
+- Rendering pipeline uses a fixed-timestep game loop (`step` function with `FIXED_DT`) decoupled from the variable frame rate `requestAnimationFrame` loop for consistent physics and animation updates.
+- State machine pattern manages dog behaviors (idle, walking, running, sleeping, happy, scratching, stretching) with transition logic based on user interaction and idle timers.
+- Procedural pixel art generation via coordinate-based rectangle drawing (`rect` helper) rather than sprite sheets, allowing dynamic scaling and animation interpolation.
+- Particle system handles visual effects (hearts, sparkles, dust, dream bubbles) with independent update and render passes.

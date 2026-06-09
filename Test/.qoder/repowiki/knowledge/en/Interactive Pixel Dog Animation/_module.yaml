@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: ""
+title: Interactive Pixel Dog Animation
+scope:
+    - bernese-pixel-dog.html
+source_files: []
+depends_on: []
+related_to: []

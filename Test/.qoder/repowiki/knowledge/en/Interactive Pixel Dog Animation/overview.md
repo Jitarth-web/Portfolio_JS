@@ -1,0 +1,1 @@
+A self-contained HTML5 Canvas application rendering an interactive, state-driven pixel art Bernese Mountain Dog with particle effects and responsive animations.

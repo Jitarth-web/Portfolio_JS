@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "./components/Navbar";
 import HomePage from "./sections/HomePage";
 import TerminalBoot from "./components/TerminalBoot";
+import PortfolioDog from "./components/PortfolioDog";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -126,6 +127,7 @@ export default function App() {
       <div ref={appRef} className="app-shell" style={{ opacity: booting ? 0 : 1 }}>
         <Navbar />
         <HomePage />
+        <PortfolioDog booting={booting} />
       </div>
     </>
   );

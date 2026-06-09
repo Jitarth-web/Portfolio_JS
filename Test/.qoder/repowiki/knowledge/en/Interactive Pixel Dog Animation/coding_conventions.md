@@ -1,0 +1,3 @@
+- Pixel art elements are drawn using integer-rounded coordinates and dimensions via a custom `R` (Math.round) wrapper to ensure crisp, non-aliased pixel edges on the canvas.
+- Animation states drive visual properties through conditional checks in the `drawDog` function, using sine-wave based oscillators for idle breathing, tail wagging, and ear wiggling.
+- User interactions (pointer move, click, keydown) directly mutate the dog's target coordinates or force state transitions, with immediate feedback via particle spawning and speech bubble display.
