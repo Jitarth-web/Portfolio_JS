@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "./components/Navbar";
 import HomePage from "./sections/HomePage";
-import TerminalBoot from "./components/TerminalBoot";
+import TerminalBoot from "./components/terminalboot";
 import PortfolioDog from "./components/PortfolioDog";
 
 gsap.registerPlugin(ScrollTrigger);
