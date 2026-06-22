@@ -6,7 +6,7 @@ export default function Projects() {
   return (
     <section id="projects" className="content-section">
       <div className="section-inner">
-        <SectionHeading label="Projects" title="Real-world builds with clean presentation." />
+        <SectionHeading label="Projects" title="Real-World Builds with Clean Presentation." />
         <div className="projects-grid">
           {projects.map((project, index) => (
             <article className="glass-card project-card reveal" key={project.title}>

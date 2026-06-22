@@ -5,7 +5,7 @@ export default function About() {
   return (
     <section id="about" className="content-section">
       <div className="section-inner two-column">
-        <SectionHeading label="About" title="CSE student building modern digital experiences." />
+        <SectionHeading label="About" title="CSE Student Building Modern Digital Experiences." />
         <div className="glass-card about-card reveal">
           <p>{profile.education}</p>
           <p>

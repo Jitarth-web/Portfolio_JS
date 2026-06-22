@@ -5,7 +5,7 @@ export default function Experience() {
   return (
     <section id="experience" className="content-section">
       <div className="section-inner">
-        <SectionHeading label="Experience" title="A focused software development path." />
+        <SectionHeading label="Experience" title="A Focused Software Development Path." />
         <div className="timeline">
           {experience.map((item) => (
             <article className="timeline-item reveal" key={item.title}>

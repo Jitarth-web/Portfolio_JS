@@ -1,3 +1,12 @@
+import cert1 from "../pages/cert1.png";
+import cert2 from "../pages/cert2.png";
+import cert3 from "../pages/cert3.png";
+import cert4 from "../pages/cert4.png";
+import cert5 from "../pages/cert5.png";
+import cert6 from "../pages/cert6.png";
+import cert7 from "../pages/cert7.png";
+import image from "./comingsoon.png";
+
 export const profile = {
   name: "Jitarth Singh",
   title: "FULL STACK AI WEB DEVELOPER",
@@ -11,7 +20,7 @@ export const profile = {
   resume: "/241210049_Jitarth.pdf"
 };
 
-export const navItems = ["Home", "About", "Skills", "Projects", "Experience", "Contact"];
+export const navItems = ["Home", "About", "Skills", "Projects", "Experience", "Certifications", "Contact"];
 
 export const orbitSkills = [
   "HTML",
@@ -31,7 +40,7 @@ export const skills = [
   { group: "Backend", items: ["Python", "Flask", "Node.js","FastAPI"] },
   { group: "Tools", items: ["Git", "GitHub", "VS Code", "Figma","Cursor","Devin"] }
 ];
-import image from "./comingsoon.png";
+
 export const projects = [
   {
     title: "Student Management System",
@@ -86,4 +95,57 @@ export const experience = [
     detail:
       "Exploring artificial intelligence, backend systems, and practical solutions for real-world technical problems."
   }
+];
+
+export const certifications = [
+  {
+    title: "AWS Solutions Architecture",
+    issuer: "AWS × Forage",
+    date: "Jul 2025",
+    image: cert1,
+    credentialUrl: "#"
+  },
+  {
+    title: "Data Analytics Simulation",
+    issuer: "Deloitte × Forage",
+    date: "Jul 2025",
+    image: cert2,
+    credentialUrl: "#"
+  },
+  {
+    title: "Data Visualization",
+    issuer: "Tata × Forage",
+    date: "Jul 2025",
+    image: cert3,
+    credentialUrl: "#"
+  },
+  {
+    title: "AI Foundations",
+    issuer: "HP LIFE",
+    date: "Jul 2025",
+    image: cert4,
+    credentialUrl: "#"
+  },
+   {
+    title: "Excel Fundamentals",
+    issuer: "Coursera",
+    date: "Jul 2025",
+    image: cert6,
+    credentialUrl: "#"
+  },
+  {
+    title: "Azure Computer Vision",
+    issuer: "Microsoft × Coursera",
+    date: "Jul 2025",
+    image: cert7,
+    credentialUrl: "#"
+  },
+  {
+    title: "Resume & Interview Skills",
+    issuer: "HP LIFE",
+    date: "Jul 2025",
+    image: cert5,
+    credentialUrl: "#"
+  }
+
 ];

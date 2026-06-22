@@ -5,7 +5,7 @@ export default function Skills() {
   return (
     <section id="skills" className="content-section">
       <div className="section-inner">
-        <SectionHeading label="Skills" title="Frontend, backend, and tools." />
+        <SectionHeading label="Skills" title="Frontend, Backend, and Tools." />
         <div className="skills-grid">
           {skills.map((group) => (
             <article className="glass-card skill-group reveal" key={group.group}>

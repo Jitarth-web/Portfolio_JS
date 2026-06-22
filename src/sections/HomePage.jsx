@@ -4,6 +4,7 @@ import Experience from "./Experience";
 import Hero from "./Hero";
 import Projects from "./Projects";
 import Skills from "./Skills";
+import Certifications from "./Certifications";
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
       <Skills />
       <Projects />
       <Experience />
+      <Certifications />
       <Contact />
     </>
   );
