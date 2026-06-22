@@ -8,7 +8,7 @@ export const profile = {
   email: "jitarthsingh@gmail.com",
   github: "https://github.com/Jitarth-web/",
   linkedin: "https://in.linkedin.com/in/jitarth-singh-25560b369/",
-  resume: "/jitarthsingh_resume_amazon_ml.pdf"
+  resume: "/241210049_Jitarth.pdf"
 };
 
 export const navItems = ["Home", "About", "Skills", "Projects", "Experience", "Contact"];
@@ -31,15 +31,15 @@ export const skills = [
   { group: "Backend", items: ["Python", "Flask", "Node.js","FastAPI"] },
   { group: "Tools", items: ["Git", "GitHub", "VS Code", "Figma","Cursor","Devin"] }
 ];
-
+import image from "./comingsoon.png";
 export const projects = [
   {
     title: "Student Management System",
     description:
       "A web application for tracking Student attendance, Social Dashboard, and Obtaining Notes.",
     tech: ["Python Flask", "Fast-API","SQLite"],
-    github: "https://github.com/",
-    live: "https://vercel.com/"
+    github: "https://github.com/Jitarth-web/ClassClan",
+    live: image
   },
   {
     title: "AgriSort",
@@ -47,23 +47,23 @@ export const projects = [
       "A Platform where Farmers can see real-time crop prices and market trends.",
     tech: ["Python Flask", "Fast-API","SQLite"],
     github: "https://github.com/",
-    live: "https://vercel.com/"
+    live: image
   },
   {
     title: "Smart Waste Management System",
     description:
       "A web Application where citizens can report waste issues and track collection status.",
     tech: ["Python Flask", "React.JS","SQL-Persistent","Fast-API","Docker"],
-    github: "https://github.com/",
-    live: "https://vercel.com/"
+    github: "https://github.com/Jitarth-web/SwachhCity",
+    live: image
   },
   {
     title: "SoundWave-AI",
     description:
       "An AI-powered music recommendation system that analyzes user preferences and generates personalized playlists.",
     tech: ["React.JS","Node.JS","MongoDB"],
-    github: "https://github.com/",
-    live: "https://vercel.com/"
+    github: "https://github.com/ka0-0/Soundwave_AI",
+    live: "https://soundwave-ai-ioik.vercel.app"
   }
 ];
 

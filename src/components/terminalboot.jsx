@@ -1,124 +1,277 @@
-import { useEffect, useState, useRef } from "react";
+import {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+    startTransition,
+} from "react"
 
-const BOOT_LINES = [  { text: "JITARTH BIOS v2.0.26", instant: true },
-  { text: "Copyright (C) 2026 Jitarth Singh. All Rights Reserved.", instant: true },
-  { text: "NIT Delhi Systems Division", instant: true },
-  { text: "--------------------------------------------------", instant: true },
-  { text: "Initializing CPU: Full Stack AI Web Developer...", delay: 400 },
-  { text: "Checking memory bank... 16384MB OK", delay: 200 },
-  { text: "Loading Core Modules: React, GSAP, CSS, Flask, Node...", delay: 500 },
-  { text: "Establishing secure link to portfolio assets...", delay: 350 },
-  { text: "Loading portfolio content...", delay: 300 },
-  { text: "Welcome to my portfolio!", delay: 200 },
-  { text: "Initializing responsive interface elements...", delay: 250 },
-  { text: "Boot completed. Redirecting to workspace...", delay: 500 }
-];
+// User request: Update BootTypingLog to include full-screen background video, dark overlay, and matching boot text overlay while keeping exact BOOT_LINES and typing behavior; expose props for className, style, videoSrc, typingSpeed, startDelay, overlayOpacity, fontSize, leftOffset, textWidth, and onComplete in a single copyable JSX file.
 
-export default function TerminalBoot({ onFadeStart, onComplete }) {
-  const [displayedLines, setDisplayedLines] = useState([]);
-  const [currentLineIdx, setCurrentLineIdx] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isFading, setIsFading] = useState(false);
+const BOOT_LINES = [
+    { text: "JITARTH BIOS v2.0.26", instant: true },
+    {
+        text: "Copyright (C) 2026 Jitarth Singh. All Rights Reserved.",
+        instant: true,
+    },
+    { text: "NIT Delhi Systems Division", instant: true },
+    {
+        text: "--------------------------------------------------",
+        instant: true,
+    },
+    { text: "Initializing CPU: Full Stack AI Web Developer...", delay: 400 },
+    { text: "Checking memory bank... 16384MB OK", delay: 200 },
+    {
+        text: "Loading Core Modules: React, GSAP, CSS, Flask, Node...",
+        delay: 500,
+    },
+    { text: "Establishing secure link to portfolio assets...", delay: 350 },
+    { text: "Loading portfolio content...", delay: 300 },
+    { text: "Welcome to my portfolio!", delay: 200 },
+    { text: "Initializing responsive interface elements...", delay: 250 },
+    { text: "Boot completed. Redirecting to workspace...", delay: 500 },
+]
 
-  const hasRun = useRef(false);
-  const cleanupTimeoutRef = useRef(null);
+/**
+ * @framerSupportedLayoutWidth fixed
+ * @framerSupportedLayoutHeight fixed
+ */
+export default function BootTypingLog(props) {
+    const {
+        className,
+        style,
+        videoSrc = "https://framerusercontent.com/assets/DQdJ9GP6oi2AQep6lGlVZFGM.mp4",
+        typingSpeed = 32,
+        startDelay = 0,
+        overlayOpacity = 0.45,
+        fontSize = 20,
+        leftOffset = "6%",
+        textWidth = "62%",
+        onComplete,
+        onFadeStart,
+    } = props
 
-  // Keep references to current callbacks to prevent stale closures
-  // and avoid re-running the effect when they change.
-  const onFadeStartRef = useRef(onFadeStart);
-  const onCompleteRef = useRef(onComplete);
+    const [visibleLines, setVisibleLines] = useState([])
+    const [currentLineIndex, setCurrentLineIndex] = useState(0)
+    const [cursorVisible, setCursorVisible] = useState(true)
+    const timersRef = useRef([])
+    const hasStartedRef = useRef(false)
 
-  onFadeStartRef.current = onFadeStart;
-  onCompleteRef.current = onComplete;
+    // Store callbacks in refs to prevent dependency cycles
+    const onCompleteRef = useRef(onComplete)
+    const onFadeStartRef = useRef(onFadeStart)
 
-  useEffect(() => {
-    if (cleanupTimeoutRef.current) {
-      clearTimeout(cleanupTimeoutRef.current);
-      cleanupTimeoutRef.current = null;
-    }
+    useEffect(() => {
+        onCompleteRef.current = onComplete
+        onFadeStartRef.current = onFadeStart
+    }, [onComplete, onFadeStart])
 
-    if (hasRun.current) {
-      return;
-    }
-    hasRun.current = true;
+    const clearTimers = useCallback(() => {
+        if (typeof window === "undefined") return
+        timersRef.current.forEach((timerId) => window.clearTimeout(timerId))
+        timersRef.current = []
+    }, [])
 
-    let active = true;
-    let timer;
+    const schedule = useCallback((fn, ms) => {
+        if (typeof window === "undefined") return
+        const timerId = window.setTimeout(fn, ms)
+        timersRef.current.push(timerId)
+    }, [])
 
-    const run = async () => {
-      for (let i = 0; i < BOOT_LINES.length; i++) {
-        if (!active) return;
-        const line = BOOT_LINES[i];
+    const safeTypingSpeed = useMemo(
+        () => Math.max(10, Number(typingSpeed) || 32),
+        [typingSpeed]
+    )
+    const safeStartDelay = useMemo(
+        () => Math.max(0, Number(startDelay) || 0),
+        [startDelay]
+    )
+    const safeOverlayOpacity = useMemo(() => {
+        const value = Number(overlayOpacity)
+        if (Number.isNaN(value)) return 0.45
+        return Math.max(0, Math.min(1, value))
+    }, [overlayOpacity])
 
-        if (line.instant) {
-          setDisplayedLines((prev) => {
-            if (prev.includes(line.text)) return prev;
-            return [...prev, line.text];
-          });
-        } else {
-          setCurrentLineIdx(i);
-          let typed = "";
-          for (let j = 0; j < line.text.length; j++) {
-            if (!active) return;
-            await new Promise((resolve) => {
-              timer = setTimeout(resolve, 20);
-            });
-            typed += line.text[j];
-            setCurrentText(typed);
-          }
-          setDisplayedLines((prev) => {
-            if (prev.includes(line.text)) return prev;
-            return [...prev, line.text];
-          });
-          setCurrentText("");
+    const completeBoot = useCallback(() => {
+        clearTimers()
+        startTransition(() => {
+            setCurrentLineIndex(-1)
+        })
+        if (typeof onFadeStartRef.current === "function") onFadeStartRef.current()
+        
+        // Optional delay before completely removing the boot screen to allow app fade-in
+        setTimeout(() => {
+            if (typeof onCompleteRef.current === "function") onCompleteRef.current()
+        }, 500)
+    }, [clearTimers])
 
-          if (!active) return;
-          await new Promise((resolve) => {
-            timer = setTimeout(resolve, line.delay || 300);
-          });
+    const typeLine = useCallback(
+        (lineIndex) => {
+            if (lineIndex >= BOOT_LINES.length) {
+                completeBoot()
+                return
+            }
+
+            const line = BOOT_LINES[lineIndex]
+            if (line.instant) {
+                startTransition(() => {
+                    setVisibleLines((prev) => [...prev, line.text])
+                    setCurrentLineIndex(lineIndex + 1)
+                })
+                schedule(() => typeLine(lineIndex + 1), 0)
+                return
+            }
+
+            const initialDelay = Math.max(0, line.delay || 0)
+            schedule(() => {
+                let charIndex = 0
+                startTransition(() => {
+                    setVisibleLines((prev) => [...prev, ""])
+                    setCurrentLineIndex(lineIndex)
+                })
+
+                const typeNextChar = () => {
+                    charIndex += 1
+                    startTransition(() => {
+                        setVisibleLines((prev) => {
+                            const updated = [...prev]
+                            updated[lineIndex] = line.text.slice(0, charIndex)
+                            return updated
+                        })
+                    })
+
+                    if (charIndex < line.text.length) {
+                        schedule(typeNextChar, safeTypingSpeed)
+                    } else {
+                        startTransition(() => {
+                            setCurrentLineIndex(lineIndex + 1)
+                        })
+                        schedule(() => typeLine(lineIndex + 1), 0)
+                    }
+                }
+
+                schedule(typeNextChar, safeTypingSpeed)
+            }, initialDelay)
+        },
+        [completeBoot, safeTypingSpeed, schedule]
+    )
+
+    useEffect(() => {
+        if (typeof window === "undefined") return
+        if (hasStartedRef.current) return
+        hasStartedRef.current = true
+
+        clearTimers()
+        startTransition(() => {
+            setVisibleLines([])
+            setCurrentLineIndex(0)
+            setCursorVisible(true)
+        })
+
+        schedule(() => typeLine(0), safeStartDelay)
+
+        return () => {
+            clearTimers()
+            hasStartedRef.current = false
         }
-      }
+    }, [clearTimers, schedule, safeStartDelay, typeLine])
 
-      if (!active) return;
-      await new Promise((resolve) => {
-        timer = setTimeout(resolve, 500);
-      });
+    useEffect(() => {
+        if (typeof window === "undefined") return
+        const blinkId = window.setInterval(() => {
+            startTransition(() => {
+                setCursorVisible((prev) => !prev)
+            })
+        }, 500)
 
-      setIsFading(true);
-      if (active) onFadeStartRef.current();
+        return () => {
+            window.clearInterval(blinkId)
+        }
+    }, [])
 
-      await new Promise((resolve) => {
-        timer = setTimeout(resolve, 800);
-      });
-      if (active) onCompleteRef.current();
-    };
+    const rootStyle = useMemo(
+        () => ({
+            position: "fixed",
+            top: 0,
+            left: 0,
+            zIndex: 9999,
+            width: "100%",
+            height: "100%",
+            minHeight: "100vh",
+            background: "#000000",
+            overflow: "hidden",
+            transition: "opacity 0.5s ease-out",
+            cursor: "pointer",
+            ...style,
+        }),
+        [style]
+    )
 
-    run();
+    const videoStyle = {
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        zIndex: 0,
+    }
 
-    return () => {
-      // Defer actual cleanup to handle React Strict Mode's synchronous remounting
-      cleanupTimeoutRef.current = setTimeout(() => {
-        active = false;
-        clearTimeout(timer);
-      }, 0);
-    };
-  }, []);
+    const overlayStyle = {
+        position: "absolute",
+        inset: 0,
+        background: `rgba(0, 0, 0, ${safeOverlayOpacity})`,
+        zIndex: 1,
+    }
 
-  return (
-    <div className={`terminal-overlay ${isFading ? "fade-out" : ""}`}>
-      <div className="terminal-content">
-        {displayedLines.map((line, idx) => (
-          <div key={idx} className="terminal-line">
-            {line}
-          </div>
-        ))}
-        {currentLineIdx < BOOT_LINES.length && !BOOT_LINES[currentLineIdx].instant && (
-          <div className="terminal-line">
-            {currentText}
-            <span className="terminal-cursor" />
-          </div>
-        )}
-      </div>
-    </div>
-  );
+    const terminalStyle = {
+        position: "absolute",
+        left: leftOffset,
+        top: "50%",
+        transform: "translateY(-50%)",
+        width: textWidth,
+        color: "#FFFFFF",
+        background: "transparent",
+        fontFamily:
+            '"Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+        fontSize,
+        lineHeight: 1.45,
+        letterSpacing: "0.01em",
+        whiteSpace: "pre-wrap",
+        pointerEvents: "none",
+        zIndex: 2,
+        textShadow: "0 1px 2px rgba(0,0,0,0.55)",
+    }
+
+    return (
+        <div className={className} style={rootStyle} onClick={completeBoot} onTouchStart={completeBoot}>
+            <video
+                src={videoSrc}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                style={videoStyle}
+                aria-hidden="true"
+            />
+            <div style={overlayStyle} aria-hidden="true" />
+            <div style={terminalStyle} aria-live="polite">
+                {visibleLines.map((lineText, index) => {
+                    const isCurrentLineTyping =
+                        index === currentLineIndex &&
+                        currentLineIndex >= 0 &&
+                        currentLineIndex < BOOT_LINES.length &&
+                        !BOOT_LINES[index]?.instant
+
+                    return (
+                        <div key={`${index}-${lineText.length}`}>
+                            {lineText}
+                            {isCurrentLineTyping && cursorVisible ? "_" : ""}
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    )
 }
