@@ -7,10 +7,61 @@
   box-sizing: border-box;
 }
 
+:root, .theme-teal {
+  --bg-color-1: #061819;
+  --bg-color-2: #041315;
+  --bg-grad-1: rgba(7, 126, 126, 0.42);
+  --bg-grad-2: rgba(255, 106, 33, 0.08);
+  --bg-panel-1: rgba(7, 126, 126, 0.58);
+  --bg-panel-2: rgba(4, 72, 76, 0.5);
+  --bg-panel-3: rgba(0, 29, 32, 0.96);
+}
+
+.theme-blue {
+  --bg-color-1: #061119;
+  --bg-color-2: #040c15;
+  --bg-grad-1: rgba(7, 98, 126, 0.42);
+  --bg-grad-2: rgba(33, 150, 255, 0.08);
+  --bg-panel-1: rgba(7, 98, 126, 0.58);
+  --bg-panel-2: rgba(4, 55, 76, 0.5);
+  --bg-panel-3: rgba(0, 18, 32, 0.96);
+}
+
+.theme-red {
+  --bg-color-1: #190606;
+  --bg-color-2: #150404;
+  --bg-grad-1: rgba(126, 7, 7, 0.42);
+  --bg-grad-2: rgba(255, 33, 33, 0.08);
+  --bg-panel-1: rgba(126, 7, 7, 0.58);
+  --bg-panel-2: rgba(76, 4, 4, 0.5);
+  --bg-panel-3: rgba(32, 0, 0, 0.96);
+}
+
+.theme-orange {
+  --bg-color-1: #190c06;
+  --bg-color-2: #150904;
+  --bg-grad-1: rgba(126, 55, 7, 0.42);
+  --bg-grad-2: rgba(255, 106, 33, 0.08);
+  --bg-panel-1: rgba(126, 55, 7, 0.58);
+  --bg-panel-2: rgba(76, 33, 4, 0.5);
+  --bg-panel-3: rgba(32, 14, 0, 0.96);
+}
+
+.theme-green {
+  --bg-color-1: #06190a;
+  --bg-color-2: #041508;
+  --bg-grad-1: rgba(7, 126, 33, 0.42);
+  --bg-grad-2: rgba(33, 255, 80, 0.08);
+  --bg-panel-1: rgba(7, 126, 33, 0.58);
+  --bg-panel-2: rgba(4, 76, 20, 0.5);
+  --bg-panel-3: rgba(0, 32, 8, 0.96);
+}
+
 html {
   scroll-behavior: smooth;
-  background: #061819;
+  background: var(--bg-color-1);
   overflow-x: hidden;
+  transition: background-color 0.4s ease;
 }
 
 body {
@@ -18,8 +69,9 @@ body {
   min-width: 320px;
   font-family: "Poppins", Arial, sans-serif;
   color: #ffffff;
-  background: #061819;
+  background: var(--bg-color-1);
   overflow-x: hidden;
+  transition: background-color 0.4s ease;
 }
 
 a,
@@ -47,17 +99,19 @@ svg {
   min-height: 100vh;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 68% 16%, rgba(7, 126, 126, 0.42), transparent 28rem),
-    radial-gradient(circle at 10% 18%, rgba(255, 106, 33, 0.08), transparent 22rem),
-    linear-gradient(180deg, #061819 0%, #041315 54%, #061819 100%);
+    radial-gradient(circle at 68% 16%, var(--bg-grad-1), transparent 28rem),
+    radial-gradient(circle at 10% 18%, var(--bg-grad-2), transparent 22rem),
+    linear-gradient(180deg, var(--bg-color-1) 0%, var(--bg-color-2) 54%, var(--bg-color-1) 100%);
+  transition: background 0.4s ease;
 }
 
 .section-panel,
 .content-section {
   width: 100%;
   background:
-    radial-gradient(circle at 68% 42%, rgba(7, 126, 126, 0.58) 0, rgba(4, 72, 76, 0.5) 20%, rgba(0, 29, 32, 0.96) 45%, transparent 70%),
-    #061819;
+    radial-gradient(circle at 68% 42%, var(--bg-panel-1) 0, var(--bg-panel-2) 20%, var(--bg-panel-3) 45%, transparent 70%),
+    var(--bg-color-1);
+  transition: background 0.4s ease;
 }
 
 .figma-hero {
@@ -283,17 +337,6 @@ svg {
   backdrop-filter: blur(20px);
 
   z-index: 20;
-}
-.testimonial-card {
-    position: absolute;
-    top: 50px;
-    right: -350px;
-
-    width: 280px;
-    padding: 20px;
-
-    border-radius: 20px;
-    z-index: 20;
 }
 
 .card-title {

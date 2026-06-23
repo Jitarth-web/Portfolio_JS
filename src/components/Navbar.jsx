@@ -3,7 +3,6 @@ import { DownloadIcon } from "./Icons";
 import { navItems, profile } from "../data/portfolio";
 import { useActiveSection } from "../hooks/useActiveSection";
 import { GithubIcon, LinkedinIcon, MailIcon } from "./Icons";
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const ids = navItems.map((item) => item.toLowerCase());
