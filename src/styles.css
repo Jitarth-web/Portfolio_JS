@@ -15,6 +15,8 @@
   --bg-panel-1: rgba(7, 126, 126, 0.58);
   --bg-panel-2: rgba(4, 72, 76, 0.5);
   --bg-panel-3: rgba(0, 29, 32, 0.96);
+  --bg-nav: rgba(4, 23, 26, 0.72);
+  --bg-nav-solid: rgba(4, 23, 26, 0.92);
 }
 
 .theme-blue {
@@ -25,6 +27,8 @@
   --bg-panel-1: rgba(7, 98, 126, 0.58);
   --bg-panel-2: rgba(4, 55, 76, 0.5);
   --bg-panel-3: rgba(0, 18, 32, 0.96);
+  --bg-nav: rgba(4, 15, 26, 0.72);
+  --bg-nav-solid: rgba(4, 15, 26, 0.92);
 }
 
 .theme-red {
@@ -35,6 +39,8 @@
   --bg-panel-1: rgba(126, 7, 7, 0.58);
   --bg-panel-2: rgba(76, 4, 4, 0.5);
   --bg-panel-3: rgba(32, 0, 0, 0.96);
+  --bg-nav: rgba(26, 4, 4, 0.72);
+  --bg-nav-solid: rgba(26, 4, 4, 0.92);
 }
 
 .theme-orange {
@@ -45,6 +51,8 @@
   --bg-panel-1: rgba(126, 55, 7, 0.58);
   --bg-panel-2: rgba(76, 33, 4, 0.5);
   --bg-panel-3: rgba(32, 14, 0, 0.96);
+  --bg-nav: rgba(26, 12, 4, 0.72);
+  --bg-nav-solid: rgba(26, 12, 4, 0.92);
 }
 
 .theme-green {
@@ -55,6 +63,8 @@
   --bg-panel-1: rgba(7, 126, 33, 0.58);
   --bg-panel-2: rgba(4, 76, 20, 0.5);
   --bg-panel-3: rgba(0, 32, 8, 0.96);
+  --bg-nav: rgba(4, 26, 10, 0.72);
+  --bg-nav-solid: rgba(4, 26, 10, 0.92);
 }
 
 html {
@@ -152,11 +162,12 @@ svg {
   padding: 0 22px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 999px;
-  background: rgba(4, 23, 26, 0.72);
+  background: var(--bg-nav);
   backdrop-filter: blur(24px) saturate(145%);
   box-shadow:
     0 18px 50px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.13);
+  transition: background 0.4s ease;
 }
 
 .nav-pill button {
@@ -189,7 +200,7 @@ svg {
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 999px;
 
-  background: rgba(4, 23, 26, 0.72);
+  background: var(--bg-nav);
   backdrop-filter: blur(24px) saturate(145%);
 
   box-shadow:
@@ -448,7 +459,7 @@ svg {
   place-items: center;
   border-radius: 8px;
   color: #ffffff;
-  background: rgba(4, 23, 26, 0.72);
+  background: var(--bg-nav);
   box-shadow:
     0 12px 18px rgba(0, 0, 0, 0.24),
     0 0 18px rgba(73, 223, 223, 0.2);
@@ -474,7 +485,7 @@ svg {
 .tech-5 { color: #111111; background: #ffd43b; }
 .tech-6,
 .tech-7,
-.tech-9 { background: rgba(4, 23, 26, 0.82); }
+.tech-9 { background: var(--bg-nav-solid); }
 .tech-8 { background: transparent; box-shadow: none; }
 
 .figma-mark {
@@ -842,7 +853,7 @@ svg {
     height: 44px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 50%;
-    background: rgba(4, 23, 26, 0.72);
+    background: var(--bg-nav);
     cursor: pointer;
     transition: all 0.3s ease;
   }
@@ -880,7 +891,7 @@ svg {
     align-items: stretch;
     padding: 14px;
     border-radius: 26px;
-    background: rgba(4, 23, 26, 0.92);
+    background: var(--bg-nav-solid);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     z-index: 100;
@@ -1378,13 +1389,13 @@ svg {
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.24);
 
-  background: rgba(4,23,26,0.72);
+  background: var(--bg-nav);
   backdrop-filter: blur(24px);
 
   color: white;
 
   flex-shrink: 0;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, background 0.4s ease;
 }
 
 .social-btn:hover {

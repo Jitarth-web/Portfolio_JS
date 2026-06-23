@@ -32,7 +32,7 @@ export default function ThemeSelector() {
         zIndex: 1000,
         display: 'flex',
         gap: '10px',
-        background: 'rgba(4, 23, 26, 0.72)',
+        background: 'var(--bg-nav)',
         backdropFilter: 'blur(24px) saturate(145%)',
         padding: '12px 18px',
         borderRadius: '999px',
