@@ -5,6 +5,9 @@ import cert4 from "../pages/cert4.png";
 import cert5 from "../pages/cert5.png";
 import cert6 from "../pages/cert6.png";
 import cert7 from "../pages/cert7.png";
+import cert8 from "../pages/cert8.png";
+import cert9 from "../pages/cert9.png";
+import campus from "../pages/campus.png"
 import image from "./comingsoon.png";
 
 export const profile = {
@@ -135,7 +138,14 @@ export const certifications = [
     image: cert4,
     credentialUrl: "#"
   },
-   {
+  {
+    title: "Introduction to AI",
+    issuer: "Google × Coursera",
+    date: "Jun 2026",
+    image: cert9,
+    credentialUrl: "#"
+  },
+  {
     title: "Excel Fundamentals",
     issuer: "Coursera",
     date: "Jul 2025",
@@ -154,6 +164,20 @@ export const certifications = [
     issuer: "HP LIFE",
     date: "Jul 2025",
     image: cert5,
+    credentialUrl: "#"
+  },
+  {
+    title: "Writing Prompts",
+    issuer: "Google × Coursera",
+    date: "Jun 2026",
+    image: cert8,
+    credentialUrl: "#"
+  },
+  {
+    title: "Campus Crew",
+    issuer: "Founder",
+    date: "Jun 2026",
+    image: campus,
     credentialUrl: "#"
   }
 
