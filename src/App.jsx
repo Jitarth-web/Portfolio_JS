@@ -6,6 +6,7 @@ import HomePage from "./sections/HomePage";
 import TerminalBoot from "./components/terminalboot";
 import PortfolioDog from "./components/PortfolioDog";
 import ThemeSelector from "./components/ThemeSelector";
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
