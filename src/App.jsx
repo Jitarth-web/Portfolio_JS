@@ -6,7 +6,6 @@ import HomePage from "./sections/HomePage";
 import TerminalBoot from "./components/terminalboot";
 import PortfolioDog from "./components/PortfolioDog";
 import ThemeSelector from "./components/ThemeSelector";
-import { Analytics } from "@vercel/analytics/next";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
