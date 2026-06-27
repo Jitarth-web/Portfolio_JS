@@ -43,6 +43,15 @@ export const skills = [
 
 export const projects = [
   {
+    title: "Shagun Fashions",
+    description:
+      "A modern and premium tailoring website for school uniforms, custom stitching, and bulk garment manufacturing. Features a cinematic UI, responsive design, smooth animations, and an elegant user experience.",
+    tech: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
+    github: "https://github.com/yash062988-glitch/shagun_fashion",
+    live: "https://shagun-fashion.vercel.app/",
+    image: image,
+  },
+  {
     title: "Student Management System",
     description:
       "A web application for tracking Student attendance, Social Dashboard, and Obtaining Notes.",
