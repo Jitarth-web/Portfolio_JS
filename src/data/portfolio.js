@@ -71,7 +71,7 @@ export const projects = [
     live: image
   },
   {
-    title: "Smart Waste Management System",
+    title: "Smart Waste Management System (SwachhCity)",
     description:
       "A web Application where citizens can report waste issues and track collection status.",
     tech: ["Python Flask", "React.JS","SQL-Persistent","Fast-API","Docker"],
