@@ -76,7 +76,7 @@ export const projects = [
       "A web Application where citizens can report waste issues and track collection status.",
     tech: ["Python Flask", "React.JS","SQL-Persistent","Fast-API","Docker"],
     github: "https://github.com/Jitarth-web/SwachhCity",
-    live: image
+    live: "https://swachh-city-16db.vercel.app/"
   },
   {
     title: "SoundWave-AI",
