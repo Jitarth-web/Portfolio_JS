@@ -20,7 +20,7 @@ export const profile = {
   email: "jitarthsingh@gmail.com",
   github: "https://github.com/Jitarth-web/",
   linkedin: "https://in.linkedin.com/in/jitarth-singh-25560b369/",
-  resume: "/241210049_Jitarth.pdf"
+  resume: "/241210049_Jitarth_NEW.pdf"
 };
 
 export const navItems = ["Home", "About", "Skills", "Projects", "Experience", "Certifications", "Contact"];
@@ -85,7 +85,15 @@ export const projects = [
     tech: ["React.JS","Node.JS","MongoDB"],
     github: "https://github.com/ka0-0/Soundwave_AI",
     live: "https://soundwave-ai-ioik.vercel.app"
-  }
+  },
+  {
+    title: "Domiq AI",
+    description:
+      "A modern AI-powered platform that analyzes floor plans, recommends personalized interior designs, generates smart room layouts, estimates construction costs, and creates immersive 3D visualizations using Gemini AI.",
+    tech: ["React.JS", "Node.JS", "MongoDB", "Gemini AI"],
+    github: "https://github.com/",
+    live: image
+  },
 ];
 
 export const experience = [

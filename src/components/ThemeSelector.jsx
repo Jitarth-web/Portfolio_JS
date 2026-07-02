@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 
 const themes = [
-  { name: 'teal', color: '#077e7e' },
-  { name: 'blue', color: '#085ece' },
-  { name: 'red', color: '#e53935' },
-  { name: 'orange', color: '#ff6a21' },
   { name: 'green', color: '#43a047' },
+  { name: 'red', color: '#e53935' },
+  { name: 'blue', color: '#085ece' },
+  { name: 'teal', color: '#077e7e' },
+  { name: 'orange', color: '#ff6a21' },
 ];
 
 export default function ThemeSelector() {
-  const [currentTheme, setCurrentTheme] = useState('teal');
+  const [currentTheme, setCurrentTheme] = useState('green');
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme') || 'teal';
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'green';
     setCurrentTheme(savedTheme);
     document.documentElement.className = `theme-${savedTheme}`;
   }, []);

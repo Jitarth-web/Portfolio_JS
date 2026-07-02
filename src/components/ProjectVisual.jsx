@@ -3,12 +3,14 @@ import paymentGateway from "../assets/figma/agrisort.png";
 import blindStick from "../assets/figma/smart_waste_management.png";
 import attendanceSystem from "../assets/figma/soundwave_ai.png";
 import shagunFashions from "../assets/figma/shaun.png";
+import domiqAi from "../assets/figma/domiq.png";
 const thumbnails = [
   shagunFashions,
   studentManagement,
   paymentGateway,
   blindStick,
   attendanceSystem,
+  domiqAi,
 ];
 
 export default function ProjectVisual({ index }) {
