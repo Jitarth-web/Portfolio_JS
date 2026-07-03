@@ -55,6 +55,7 @@ export default function BootTypingLog(props) {
     const [visibleLines, setVisibleLines] = useState([])
     const [currentLineIndex, setCurrentLineIndex] = useState(0)
     const [cursorVisible, setCursorVisible] = useState(true)
+    const [isMobile, setIsMobile] = useState(false)
     const timersRef = useRef([])
     const hasStartedRef = useRef(false)
 
@@ -185,8 +186,15 @@ export default function BootTypingLog(props) {
             })
         }, 500)
 
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768)
+        }
+        handleResize()
+        window.addEventListener('resize', handleResize)
+
         return () => {
             window.clearInterval(blinkId)
+            window.removeEventListener('resize', handleResize)
         }
     }, [])
 
@@ -226,15 +234,15 @@ export default function BootTypingLog(props) {
 
     const terminalStyle = {
         position: "absolute",
-        left: leftOffset,
-        top: "50%",
+        left: isMobile ? "5%" : leftOffset,
+        top: isMobile ? "40%" : "50%",
         transform: "translateY(-50%)",
-        width: textWidth,
+        width: isMobile ? "90%" : textWidth,
         color: "#FFFFFF",
         background: "transparent",
         fontFamily:
             '"Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-        fontSize,
+        fontSize: isMobile ? Math.max(14, fontSize - 6) : fontSize,
         lineHeight: 1.45,
         letterSpacing: "0.01em",
         whiteSpace: "pre-wrap",
@@ -273,14 +281,15 @@ export default function BootTypingLog(props) {
                 })}
             </div>
             
-            {/* Cyberpunk 3D Helmet iframe positioned in the right corner */}
+            {/* Cyberpunk 3D Helmet iframe positioned responsibly */}
             <div 
                 style={{
                     position: 'absolute',
-                    bottom: '0%',
-                    right: '0%',
-                    width: '500px',
-                    height: '500px',
+                    bottom: isMobile ? '5%' : '0%',
+                    right: isMobile ? '50%' : '0%',
+                    transform: isMobile ? 'translateX(50%)' : 'none',
+                    width: isMobile ? '320px' : '500px',
+                    height: isMobile ? '320px' : '500px',
                     zIndex: 10,
                     overflow: 'visible'
                 }}
