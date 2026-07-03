@@ -272,6 +272,27 @@ export default function BootTypingLog(props) {
                     )
                 })}
             </div>
+            
+            {/* Cyberpunk 3D Helmet iframe positioned in the right corner */}
+            <div 
+                style={{
+                    position: 'absolute',
+                    bottom: '0%',
+                    right: '0%',
+                    width: '500px',
+                    height: '500px',
+                    zIndex: 10,
+                    overflow: 'visible'
+                }}
+                onClick={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+            >
+                <iframe 
+                    src="/cyber_punk/index.html" 
+                    title="Cyberpunk 3D Element" 
+                    style={{ width: '100%', height: '100%', border: 'none', position: 'absolute', inset: 0, zIndex: 1 }} 
+                />
+            </div>
         </div>
     )
 }

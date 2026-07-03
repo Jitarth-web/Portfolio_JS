@@ -1,0 +1,12 @@
+{
+  "name": "cyber-punk-root",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix js_prtfolio",
+    "build": "npm run build --prefix js_prtfolio",
+    "preview": "npm run preview --prefix js_prtfolio"
+  },
+  "dependencies": {
+    "three": "^0.185.1"
+  }
+}

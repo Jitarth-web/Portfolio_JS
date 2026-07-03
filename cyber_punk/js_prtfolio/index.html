@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="main w-full">
+    <div class="w-full h-screen overflow-hidden relative">
+      <!-- 1. Background Blur (removed) -->
+
+      <!-- 2. Helmet Canvas (z-20) -->
+      <canvas id="cybercanvas" class="absolute top-0 left-0 w-full h-full z-20"></canvas>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </div>
+</body>
+
+</html>
