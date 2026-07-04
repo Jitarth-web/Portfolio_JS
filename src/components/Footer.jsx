@@ -37,10 +37,10 @@ export default function Footer() {
       <div 
           style={{
               position: 'absolute',
-              bottom: isMobile ? '-45px' : '-65px',
-              left: isMobile ? '-25px' : '-10px',
-              width: isMobile ? '200px' : '320px',
-              height: isMobile ? '200px' : '320px',
+              bottom: isMobile ? '-30px' : '-65px',
+              left: isMobile ? '-15px' : '-10px',
+              width: isMobile ? '140px' : '320px',
+              height: isMobile ? '140px' : '320px',
               zIndex: 1,
               overflow: 'visible',
               pointerEvents: 'none'
