@@ -1,18 +1,6 @@
-import { useState, useEffect } from "react";
 import image164 from "../assets/figma/image 164.png";
 
 export default function Footer() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <footer className="w-full py-8 border-t border-[rgba(255,255,255,0.05)] relative overflow-hidden min-h-[180px] flex items-center">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 w-full">
@@ -29,18 +17,35 @@ export default function Footer() {
             <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]"></span>
           </div>
           
-          <img src={image164} alt="Decorative Footer Element" className="w-16 md:w-20 opacity-80 float-anim-2" />
+          {/* Group decorative element and 3D helmet side-by-side on mobile */}
+          <div className="flex flex-row items-center gap-4">
+            <img src={image164} alt="Decorative Footer Element" className="w-16 md:w-20 opacity-80 float-anim-2" />
+            
+            {/* Mobile-only Cyberpunk 3D Helmet iframe (hidden on desktop) */}
+            <div 
+                className="md:hidden relative w-[160px] h-[160px] z-10 pointer-events-none overflow-visible"
+                onClick={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+            >
+                <iframe 
+                    src="/cyber_punk/index.html" 
+                    title="Cyberpunk 3D Element (Mobile)" 
+                    style={{ width: '100%', height: '100%', border: 'none', position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'auto' }} 
+                />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Cyberpunk 3D Helmet iframe positioned in the left corner */}
+      {/* Desktop-only Cyberpunk 3D Helmet iframe (original position & styling, hidden on mobile) */}
       <div 
+          className="hidden md:block"
           style={{
               position: 'absolute',
-              bottom: isMobile ? '-30px' : '-65px',
-              left: isMobile ? '-15px' : '-10px',
-              width: isMobile ? '140px' : '320px',
-              height: isMobile ? '140px' : '320px',
+              bottom: '-65px',
+              left: '-10px',
+              width: '320px',
+              height: '320px',
               zIndex: 1,
               overflow: 'visible',
               pointerEvents: 'none'
@@ -50,7 +55,7 @@ export default function Footer() {
       >
           <iframe 
               src="/cyber_punk/index.html" 
-              title="Cyberpunk 3D Element" 
+              title="Cyberpunk 3D Element (Desktop)" 
               style={{ width: '100%', height: '100%', border: 'none', position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'auto' }} 
           />
       </div>

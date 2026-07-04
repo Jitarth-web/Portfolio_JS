@@ -24,15 +24,15 @@ export default function Experience() {
               
               if (index === 0) {
                 imgSrc = astronaut;
-                imgClass = "absolute -right-8 md:-right-16 -top-12 md:-top-20 w-28 md:w-56 z-[-1]";
+                imgClass = "absolute right-[-15%] md:right-[-25%] top-[-25%] w-28 md:w-56 z-20";
                 floatClass = "float-anim-1";
               } else if (index === 1) {
                 imgSrc = image34;
-                imgClass = "absolute -left-8 md:-left-16 bottom-4 w-24 md:w-44 z-[-1]";
+                imgClass = "absolute left-[-15%] md:left-[-25%] bottom-4 w-24 md:w-44 z-20";
                 floatClass = "float-anim-2";
               } else if (index === 2) {
                 imgSrc = image35;
-                imgClass = "absolute -right-8 md:-right-16 -bottom-10 w-28 md:w-48 z-[-1]";
+                imgClass = "absolute right-[-15%] md:right-[-25%] bottom-[-15%] w-28 md:w-48 z-20";
                 floatClass = "float-anim-3";
               }
 
