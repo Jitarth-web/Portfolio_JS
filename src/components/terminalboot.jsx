@@ -281,7 +281,7 @@ export default function BootTypingLog(props) {
                 })}
             </div>
             
-            {/* Cyberpunk 3D Helmet iframe positioned responsibly */}
+            {/* Cyberpunk 3D Helmet iframe positioned responsibly 
             <div 
                 style={{
                     position: 'absolute',
@@ -302,6 +302,7 @@ export default function BootTypingLog(props) {
                     style={{ width: '100%', height: '100%', border: 'none', position: 'absolute', inset: 0, zIndex: 1 }} 
                 />
             </div>
+            */}
         </div>
     )
 }

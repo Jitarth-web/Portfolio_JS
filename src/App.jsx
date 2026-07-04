@@ -90,6 +90,27 @@ export default function App() {
         });
       });
 
+      gsap.utils.toArray(".reveal-timeline").forEach((element) => {
+        gsap.from(element, {
+          opacity: 0,
+          x: element.classList.contains("md:ml-auto") ? 50 : -50,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { trigger: element, start: "top 80%" }
+        });
+      });
+
+      gsap.to(".timeline-line-progress", {
+        height: "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".experience-timeline",
+          start: "top center",
+          end: "bottom center",
+          scrub: true
+        }
+      });
+
       gsap.utils.toArray(".orbit-icon").forEach((icon) => {
         icon.addEventListener("mouseenter", () => gsap.to(icon, { scale: 1.16, duration: 0.22, ease: "power2.out" }));
         icon.addEventListener("mouseleave", () => gsap.to(icon, { scale: 1, duration: 0.24, ease: "power2.out" }));

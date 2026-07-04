@@ -41,6 +41,7 @@ export const orbitSkills = [
 export const skills = [
   { group: "Frontend", items: ["HTML", "CSS", "JavaScript", "React","Shery.JS","GSAP"] },
   { group: "Backend", items: ["Python", "Flask", "Node.js","FastAPI"] },
+  { group: "AI", items: ["Prompt Engineering", "LLMs", "Machine Learning", "Data Analysis"] },
   { group: "Tools", items: ["Git", "GitHub", "VS Code", "Figma","Cursor","Devin"] }
 ];
 

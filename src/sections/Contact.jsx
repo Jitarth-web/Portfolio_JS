@@ -1,6 +1,8 @@
 import { useState } from "react";
 import SectionHeading from "../components/SectionHeading";
 import { profile } from "../data/portfolio";
+import ringImg from "../assets/figma/image 163.png";
+import womanImg from "../assets/figma/3d-rendering-cartoon-like-woman-working-computer 2.png";
 
 export default function Contact() {
   const [status, setStatus] = useState("idle");
@@ -30,8 +32,13 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="content-section contact-section">
-      <div className="section-inner two-column">
+    <section id="contact" className="content-section contact-section relative overflow-hidden">
+      
+      {/* Background / Side elements */}
+      <img src={ringImg} alt="Ring Element" className="absolute left-[-15%] top-[5%] w-[350px] md:w-[600px] opacity-40 pointer-events-none spin-anim z-0" />
+      <img src={womanImg} alt="Woman working" className="absolute right-[-2%] bottom-[0%] w-64 md:w-[450px] opacity-90 pointer-events-none float-anim-1 z-0" style={{ filter: 'drop-shadow(0px 20px 30px rgba(0,0,0,0.5))' }} />
+
+      <div className="section-inner two-column relative z-10">
         <div>
           <SectionHeading label="Contact" title="Let us Connect and Build something useful." />
           <div className="contact-links reveal">
