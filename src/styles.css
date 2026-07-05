@@ -595,7 +595,7 @@ svg {
 }
 
 .bolt-left {
-  left: -1vw;
+  left: -3.5vw;
   bottom: -2vh;
   width: 220px;
   z-index: 2;
@@ -603,7 +603,7 @@ svg {
 
 .doll-large {
   position: absolute;
-  left: 8vw;
+  left: 5vw;
   bottom: 0;
   width: 180px;
   z-index: 3;
