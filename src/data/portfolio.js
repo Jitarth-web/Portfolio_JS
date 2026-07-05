@@ -31,11 +31,26 @@ export const orbitSkills = [
   "JavaScript",
   "React",
   "Node.js",
+  "Three.js",
+  "GSAP",
+  "MongoDB",
+  "SQL",
+  "C++",
+  "LeetCode",
   "Python",
   "GitHub",
   "Git",
   "Figma",
-  "VS Code"
+  "VS Code",
+  "LinkedIn",
+  "Mail"
+];
+
+export const orbitGroups = [
+  ["HTML", "CSS", "JavaScript", "React", "Node.js"],
+  ["Three.js", "GSAP", "MongoDB", "SQL", "C++"],
+  ["LeetCode", "Python", "GitHub", "Git"],
+  ["Figma", "VS Code", "LinkedIn", "Mail"]
 ];
 
 export const skills = [

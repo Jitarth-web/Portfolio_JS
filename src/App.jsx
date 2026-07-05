@@ -41,15 +41,6 @@ export default function App() {
         .from(".orbit-icon", { opacity: 0, scale: 0, duration: 0.42, stagger: 0.08, ease: "back.out(1.9)" }, "-=0.18")
         .from(".bolt", { opacity: 0, scale: 0.9, duration: 0.55, stagger: 0.12 }, "-=0.15");
 
-      gsap.to(".orbit-system", { rotate: 360, duration: 28, repeat: -1, ease: "none" });
-      gsap.to(".orbit-icon", {
-        y: -9,
-        duration: 2.4,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: 0.2
-      });
       gsap.to(".figma-spin", { rotate: -360, duration: 12, repeat: -1, ease: "none" });
       gsap.to(".avatar-main", {
         y: -12,
@@ -111,10 +102,6 @@ export default function App() {
         }
       });
 
-      gsap.utils.toArray(".orbit-icon").forEach((icon) => {
-        icon.addEventListener("mouseenter", () => gsap.to(icon, { scale: 1.16, duration: 0.22, ease: "power2.out" }));
-        icon.addEventListener("mouseleave", () => gsap.to(icon, { scale: 1, duration: 0.24, ease: "power2.out" }));
-      });
     }, root);
 
     const hero = root.querySelector(".figma-hero");

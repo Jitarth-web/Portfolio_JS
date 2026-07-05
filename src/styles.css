@@ -46,8 +46,8 @@
 .theme-orange {
   --bg-color-1: #190c06;
   --bg-color-2: #150904;
-  --bg-grad-1: rgba(126, 55, 7, 0.42);
-  --bg-grad-2: rgba(255, 106, 33, 0.08);
+  --bg-grad-1: rgba(255, 102, 0, 0.877);
+  --bg-grad-2: rgb(255, 85, 0);
   --bg-panel-1: rgba(126, 55, 7, 0.58);
   --bg-panel-2: rgba(76, 33, 4, 0.5);
   --bg-panel-3: rgba(32, 14, 0, 0.96);
@@ -66,7 +66,69 @@
   --bg-nav: rgba(4, 26, 10, 0.72);
   --bg-nav-solid: rgba(4, 26, 10, 0.92);
 }
+.theme-purple {
+  --bg-color-1: #1a0619;
+  --bg-color-2: #150415;
+  --bg-grad-1: rgba(126, 7, 126, 0.42);
+  --bg-grad-2: rgba(142, 68, 173, 0.08);
+  --bg-panel-1: rgba(126, 7, 126, 0.58);
+  --bg-panel-2: rgba(76, 4, 76, 0.5);
+  --bg-panel-3: rgba(32, 0, 32, 0.96);
+  --bg-nav: rgba(26, 4, 26, 0.72);
+  --bg-nav-solid: rgba(26, 4, 26, 0.92);
+}
 
+.theme-pink {
+  --bg-color-1: #190612;
+  --bg-color-2: #150410;
+  --bg-grad-1: rgba(126, 7, 62, 0.42);
+  --bg-grad-2: rgba(232, 62, 140, 0.08);
+  --bg-panel-1: rgba(126, 7, 62, 0.58);
+  --bg-panel-2: rgba(76, 4, 38, 0.5);
+  --bg-panel-3: rgba(32, 0, 16, 0.96);
+  --bg-nav: rgba(26, 4, 12, 0.72);
+  --bg-nav-solid: rgba(26, 4, 12, 0.92);
+}
+
+.theme-yellow {
+  --bg-color-1: #1a1400;
+  --bg-color-2: #2b2100;
+
+  --bg-grad-1: rgba(255, 255, 0, 0.60);   /* Pure Yellow */
+  --bg-grad-2: rgba(255, 215, 0, 0.45);   /* Gold */
+
+  --bg-panel-1: rgba(255, 255, 0, 0.30);
+  --bg-panel-2: rgba(255, 230, 0, 0.45);
+  --bg-panel-3: rgba(40, 32, 0, 0.96);
+
+  --bg-nav: rgba(35, 28, 0, 0.80);
+  --bg-nav-solid: rgba(35, 28, 0, 0.96);
+}
+.theme-indigo {
+  --bg-color-1: #0b1026;
+  --bg-color-2: #16113f;
+
+  --bg-grad-1: rgba(79, 70, 229, 0.35);   /* Indigo */
+  --bg-grad-2: rgba(99, 102, 241, 0.18);   /* Light Indigo */
+
+  --bg-panel-1: rgba(79, 70, 229, 0.20);
+  --bg-panel-2: rgba(55, 48, 163, 0.32);
+  --bg-panel-3: rgba(15, 23, 42, 0.96);
+
+  --bg-nav: rgba(17, 24, 39, 0.72);
+  --bg-nav-solid: rgba(17, 24, 39, 0.94);
+}
+.theme-black {
+  --bg-color-1: #000000;
+  --bg-color-2: #000000;
+  --bg-grad-1: rgba(0, 0, 0, 0.42);
+  --bg-grad-2: rgba(0, 0, 0, 0.08);
+  --bg-panel-1: rgba(0, 0, 0, 0.58);
+  --bg-panel-2: rgba(0, 0, 0, 0.5);
+  --bg-panel-3: rgba(0, 0, 0, 0.96);
+  --bg-nav: rgba(0, 0, 0, 0.72);
+  --bg-nav-solid: rgba(0, 0, 0, 0.92);
+}
 html {
   scroll-behavior: smooth;
   background: var(--bg-color-1);
@@ -429,7 +491,7 @@ svg {
 .orbit-system {
   position: absolute;
   right: -2.5vw;
-  bottom: -18vh;
+  bottom: -10vh;
   z-index: 2;
   width: min(64vw, 900px);
   aspect-ratio: 1;
@@ -437,56 +499,60 @@ svg {
   will-change: transform;
 }
 
-.orbit {
-  position: absolute;
-  border: 0.7px solid rgba(97, 210, 214, 0.22);
-  border-radius: 50%;
-}
-
-.orbit-one { inset: 0; }
-.orbit-two { inset: 12.65%; }
-.orbit-three { inset: 27%; }
-.orbit-four { inset: 40%; }
-
 .orbit-icon {
   position: absolute;
   left: 50%;
   top: 50%;
   z-index: 6;
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: clamp(40px, 4.2vw, 62px);
   aspect-ratio: 1;
-  place-items: center;
-  border-radius: 8px;
   color: #ffffff;
-  background: var(--bg-nav);
-  box-shadow:
-    0 12px 18px rgba(0, 0, 0, 0.24),
-    0 0 18px rgba(73, 223, 223, 0.2);
   font-size: clamp(9px, 0.8vw, 12px);
   font-weight: 800;
-  transition: filter 220ms ease, box-shadow 220ms ease;
-  transform: rotate(var(--angle)) translateX(min(29vw, 410px)) rotate(calc(-1 * var(--angle)));
   will-change: transform;
+  pointer-events: auto;
 }
 
-.orbit-icon:hover {
-  filter: brightness(1.18);
-  box-shadow:
-    0 16px 22px rgba(0, 0, 0, 0.25),
-    0 0 26px rgba(73, 223, 223, 0.48);
+.orbit-icon-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.3s ease;
 }
 
-.tech-0 { background: #f2672e; }
-.tech-1 { background: #2277ef; }
-.tech-2 { color: #111111; background: #f7df1e; }
-.tech-3 { color: #061819; background: #61dafb; }
-.tech-4 { background: #72b942; }
-.tech-5 { color: #111111; background: #ffd43b; }
-.tech-6,
-.tech-7,
-.tech-9 { background: var(--bg-nav-solid); }
-.tech-8 { background: transparent; box-shadow: none; }
+.orbit-icon-inner:hover {
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 16px var(--glow-color, #ffffff)) brightness(1.25);
+}
+
+.orbit-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tech-0 svg { fill: #f2672e; }
+.tech-1 svg { fill: #2277ef; }
+.tech-2 svg { fill: #f7df1e; }
+.tech-3 svg { fill: #61dafb; }
+.tech-4 svg { fill: #72b942; }
+.tech-5 svg { fill: #ffd43b; }
+.tech-6 svg { fill: #ffffff; }
+.tech-7 svg { fill: #ffffff; }
+.tech-8 svg { fill: #ffffff; }
+.tech-9 svg { fill: #ffffff; }
+.tech-10 svg { fill: #4CAF50; }
+.tech-11 svg { fill: #FF5722; }
+.tech-12 svg { fill: #00BCD4; }
+.tech-13 svg { fill: #9C27B0; }
+.tech-14 svg { fill: #FFA726; }
+.tech-15 svg { fill: #FFC107; }
+.tech-16 svg { fill: #0077B5; }
+.tech-17 svg { fill: #E91E63; }
 
 .figma-mark {
   position: relative;
@@ -522,7 +588,7 @@ svg {
 }
 
 .bolt-right {
-  right: -4.7vw;
+  right: -1.5vw;
   top: 15.8vh;
   width: min(15vw, 215px);
   transform: rotate(-6deg);
