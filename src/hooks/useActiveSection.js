@@ -1,29 +1,53 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export function useActiveSection(ids) {
   const [active, setActive] = useState(ids[0]);
+  const activeRef = useRef(active);
+
+  // Keep activeRef in sync with state
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
+
+  const idsKey = ids.join(",");
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visible?.target?.id) {
-          setActive(visible.target.id);
+    const handleScroll = () => {
+      // Check if we are at the bottom of the page
+      const isBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+      if (isBottom) {
+        const lastId = ids[ids.length - 1];
+        if (activeRef.current !== lastId) {
+          setActive(lastId);
         }
-      },
-      { rootMargin: "-20% 0px -55% 0px", threshold: [0.18, 0.35, 0.5] }
-    );
+        return;
+      }
 
-    ids.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
-    });
+      const centerY = window.innerHeight / 3;
+      let currentSection = activeRef.current;
 
-    return () => observer.disconnect();
-  }, [ids]);
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= centerY && rect.bottom >= centerY) {
+          currentSection = id;
+          break;
+        }
+      }
+
+      if (currentSection !== activeRef.current) {
+        setActive(currentSection);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Run once initially to set the correct active section
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [idsKey]);
 
   return active;
 }

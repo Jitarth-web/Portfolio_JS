@@ -74,8 +74,6 @@ export default function Hero() {
             </a>
           </div>
         </div>
-
-        <div className="card-line" />
         <aside className="testimonial-card">
           <p className="card-title">Education</p>
           <div className="testimonial-person">

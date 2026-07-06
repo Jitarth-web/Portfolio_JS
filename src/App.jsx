@@ -39,7 +39,7 @@ export default function App() {
         .from(".avatar-shadow", { opacity: 0, scaleX: 0.55, duration: 0.55 }, "-=0.35")
         .from(".orbit", { opacity: 0, scale: 0.92, duration: 0.7, stagger: 0.08 }, "-=0.2")
         .from(".orbit-icon", { opacity: 0, scale: 0, duration: 0.42, stagger: 0.08, ease: "back.out(1.9)" }, "-=0.18")
-        .from(".bolt", { opacity: 0, scale: 0.9, duration: 0.55, stagger: 0.12 }, "-=0.15");
+        .from(".bolt", { opacity: 0, scale: 0.9, duration: 0.55, stagger: 0.12 }, 0);
 
       gsap.to(".figma-spin", { rotate: -360, duration: 12, repeat: -1, ease: "none" });
       gsap.to(".avatar-main", {
