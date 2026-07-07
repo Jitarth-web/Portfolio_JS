@@ -288,7 +288,7 @@ const App = () => {
     const activeItem = useMemo(() => items.find(item => item.id === activeId), [activeId])
 
     const activeRadius = isMobile ? 2.1 : radius
-    const activeHeight = isMobile ? 1.4 : height
+    const activeHeight = isMobile ? 1.6 : height
 
     return (
         <div className="circular-app-root" style={{ width: '100%', height: '100%', position: 'relative' }}>
