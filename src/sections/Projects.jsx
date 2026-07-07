@@ -8,7 +8,7 @@ export default function Projects() {
     <section id="projects" className="content-section">
       <div className="section-inner">
         <SectionHeading label="Projects" title="Real-World Builds with Clean Presentation." />
-        <div style={{ position: 'relative', width: '100%', height: '600px', margin: '2.5rem 0', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.05)' }} className="reveal">
+        <div style={{ position: 'relative', width: '100%', margin: '2.5rem 0', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.05)' }} className="reveal h-[450px] md:h-[600px]">
           <CircularShowcase />
         </div>
         <div className="projects-grid">

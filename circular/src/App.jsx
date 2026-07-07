@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, Suspense } from 'react'
+import React, { useState, useEffect, useRef, useMemo, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useTexture, Loader } from '@react-three/drei'
 import * as THREE from 'three'
@@ -15,56 +15,55 @@ import imgPerspective from './assets/ChatGPT Image Jul 2, 2026, 08_29_15 PM.png'
 
 // Showcase items with custom titles, descriptions, theme colors, and local imported images
 const items = [
-    {
-        id: 1,
-        title: "Buttonmax Studio",
-        desc: "A premium interactive button lab demonstrating physical simulation, fluid spring dynamics, and custom CSS micro-interactions.",
-        color: "#ffdd00", // Yellow glow
-        url: imgButtonmax,
-        link: "https://github.com"
-    },
-    {
-        id: 2,
-        title: "Spatial Perspective Lab",
-        desc: "A design workspace illustrating responsive grid systems, layered CSS variables, and modern visual typography layouts.",
-        color: "#ff3333", // Red glow
-        url: imgPerspective,
-        link: "https://github.com"
-    },
-    {
-        id: 3,
-        title: "Agrisort AI Classifier",
-        desc: "An automated fruit and agricultural sorting interface powered by computer vision. Recognizes quality, size, and sorting paths in real-time.",
-        color: "#00d2ff", // Cyan/blue glow
-        url: imgAgrisort,
-        link: "https://github.com"
-    },
-    {
-        id: 4,
-        title: "IoT Smart Waste Portal",
-        desc: "An IoT administrative panel tracking fill levels of garbage containers dynamically. Displays geographic maps and optimal collection schedules.",
-        color: "#00ffcc", // Mint glow
-        url: imgWaste,
-        link: "https://github.com"
-    },
-    {
-        id: 5,
-        title: "Soundwave AI Hub",
-        desc: "A next-generation browser-based sound synthesizer and voice cloning workspace powered by transformer-based audio synthesis.",
-        color: "#ff007f", // Neon pink glow
-        url: imgSoundwave,
-        link: "https://github.com"
-    },
-    {
-        id: 6,
-        title: "EduManage Portal",
-        desc: "A secure, robust administrative suite managing courses, schedules, enrollment ratios, and records through a unified react database console.",
-        color: "#ff5e00", // Orange glow
-        url: imgStudent,
-        link: "https://github.com"
-    }
-]
-
+  {
+    id: 1,
+    title: "Shagun Fashions",
+    desc: "A premium tailoring and garment manufacturing platform featuring cinematic animations, responsive layouts, and an elegant shopping experience for school uniforms and custom apparel.",
+    color: "#ffdd00",
+    url: imgButtonmax,
+    link: "https://shagun-fashion.vercel.app/"
+  },
+  {
+    id: 2,
+    title: "Domiq AI",
+    desc: "An AI-powered platform that analyzes floor plans, recommends personalized interiors, estimates construction costs, and generates immersive 3D visualizations using Gemini AI.",
+    color: "#ff007f",
+    url: imgPerspective,
+    link: "https://github.com/"
+  },
+  {
+    id: 3,
+    title: "AgriSort",
+    desc: "An intelligent agriculture platform providing real-time crop prices, market trends, and AI-assisted insights to help farmers make informed decisions.",
+    color: "#00d2ff",
+    url: imgAgrisort,
+    link: "https://github.com/"
+  },
+  {
+    id: 4,
+    title: "SwachhCity",
+    desc: "A smart waste management platform enabling citizens to report waste issues, monitor collection status, and support cleaner urban environments through digital reporting.",
+    color: "#00ffcc",
+    url: imgWaste,
+    link: "https://swachh-city-16db.vercel.app/"
+  },
+  {
+    id: 5,
+    title: "SoundWave AI",
+    desc: "An AI-powered music recommendation platform that analyzes listening habits to generate personalized playlists with a modern interactive interface.",
+    color: "#ff007f",
+    url: imgSoundwave,
+    link: "https://soundwave-ai-ioik.vercel.app"
+  },
+  {
+    id: 6,
+    title: "Student Management System",
+    desc: "A comprehensive student management platform with attendance tracking, social dashboard, academic notes sharing, and streamlined campus management.",
+    color: "#ff3333",
+    url: imgStudent,
+    link: "https://github.com/Jitarth-web/ClassClan"
+  }
+];
 // Glowing background particle system to create space and depth
 const SpaceParticles = ({ count = 250 }) => {
     const pointsRef = useRef()
@@ -274,15 +273,28 @@ const App = () => {
     const [bloomIntensity, setBloomIntensity] = useState(1.5) // Soft, readable bloom glow
     const [emissiveBase, setEmissiveBase] = useState(1.6) // Balanced self-illumination for crisp text
     const [activeId, setActiveId] = useState(null)
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
 
     // Find active project metadata
     const activeItem = useMemo(() => items.find(item => item.id === activeId), [activeId])
+
+    const activeRadius = isMobile ? 2.5 : radius
+    const activeHeight = isMobile ? 1.6 : height
 
     return (
         <div className="circular-app-root" style={{ width: '100%', height: '100%', position: 'relative' }}>
             {/* 3D WebGL Canvas */}
             <Canvas
-                camera={{ position: [0, 0, 7.5], fov: 50 }}
+                camera={{ position: [0, 0, isMobile ? 8.0 : 7.5], fov: 50 }}
                 gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
             >
 
@@ -293,8 +305,8 @@ const App = () => {
 
                 <Suspense fallback={null}>
                     <CylinderCarousel
-                        radius={radius}
-                        height={height}
+                        radius={activeRadius}
+                        height={activeHeight}
                         speed={speed}
                         activeId={activeId}
                         setActiveId={setActiveId}
@@ -306,8 +318,8 @@ const App = () => {
                 <OrbitControls
                     enableZoom={false}
                     enablePan={false}
-                    minDistance={4}
-                    maxDistance={12}
+                    minDistance={isMobile ? 3 : 4}
+                    maxDistance={isMobile ? 10 : 12}
                     enableDamping={true}
                     dampingFactor={0.05}
                     makeDefault
