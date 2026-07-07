@@ -287,14 +287,14 @@ const App = () => {
     // Find active project metadata
     const activeItem = useMemo(() => items.find(item => item.id === activeId), [activeId])
 
-    const activeRadius = isMobile ? 2.5 : radius
-    const activeHeight = isMobile ? 1.6 : height
+    const activeRadius = isMobile ? 1.8 : radius
+    const activeHeight = isMobile ? 1.2 : height
 
     return (
         <div className="circular-app-root" style={{ width: '100%', height: '100%', position: 'relative' }}>
             {/* 3D WebGL Canvas */}
             <Canvas
-                camera={{ position: [0, 0, isMobile ? 8.0 : 7.5], fov: 50 }}
+                camera={{ position: [0, 0, isMobile ? 9.0 : 7.5], fov: 50 }}
                 gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
             >
 
