@@ -29,7 +29,7 @@ const items = [
     desc: "An AI-powered platform that analyzes floor plans, recommends personalized interiors, estimates construction costs, and generates immersive 3D visualizations using Gemini AI.",
     color: "#ff007f",
     url: imgPerspective,
-    link: "https://github.com/"
+    link: "https://domiq-ai-seven.vercel.app/"
   },
   {
     id: 3,
