@@ -107,7 +107,7 @@ export const projects = [
     description:
       "A modern AI-powered platform that analyzes floor plans, recommends personalized interior designs, generates smart room layouts, estimates construction costs, and creates immersive 3D visualizations using Gemini AI.",
     tech: ["React.JS", "Node.JS", "MongoDB", "Gemini AI"],
-    github: "https://github.com/",
+    github: "https://github.com/Jitarth-web/DOMIQ-AI",
     live: "https://domiq-ai-seven.vercel.app/"
   },
 ];
