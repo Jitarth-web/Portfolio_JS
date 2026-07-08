@@ -535,24 +535,59 @@ svg {
   height: 100%;
 }
 
-.tech-0 svg { fill: #f2672e; }
-.tech-1 svg { fill: #2277ef; }
-.tech-2 svg { fill: #f7df1e; }
-.tech-3 svg { fill: #61dafb; }
-.tech-4 svg { fill: #72b942; }
-.tech-5 svg { fill: #ffd43b; }
-.tech-6 svg { fill: #ffffff; }
-.tech-7 svg { fill: #ffffff; }
-.tech-8 svg { fill: #ffffff; }
-.tech-9 svg { fill: #ffffff; }
-.tech-10 svg { fill: #4CAF50; }
-.tech-11 svg { fill: #FF5722; }
-.tech-12 svg { fill: #00BCD4; }
-.tech-13 svg { fill: #9C27B0; }
-.tech-14 svg { fill: #FFA726; }
-.tech-15 svg { fill: #FFC107; }
-.tech-16 svg { fill: #0077B5; }
-.tech-17 svg { fill: #E91E63; }
+/* HTML */
+.tech-0 svg { fill: #E34F26; }
+
+/* CSS */
+.tech-1 svg { fill: #1572B6; }
+
+/* JavaScript */
+.tech-2 svg { fill: #F7DF1E; }
+
+/* React */
+.tech-3 svg { fill: #61DAFB; }
+
+/* Node.js */
+.tech-4 svg { fill: #339933; }
+
+/* Three.js */
+.tech-5 svg { fill: #FFFFFF; }
+
+/* GSAP */
+.tech-6 svg { fill: #88CE02; }
+
+/* MongoDB */
+.tech-7 svg { fill: #47A248; }
+
+/* SQL */
+.tech-8 svg { fill: #336791; }
+
+/* C++ */
+.tech-9 svg { fill: #00599C; }
+
+/* LeetCode */
+.tech-10 svg { fill: #FFA116; }
+
+/* Python */
+.tech-11 svg { fill: #3776AB; }
+
+/* GitHub */
+.tech-12 svg { fill: #FFFFFF; }
+
+/* Git */
+.tech-13 svg { fill: #F05032; }
+
+/* Figma */
+.tech-14 svg { fill: #F24E1E; }
+
+/* VS Code */
+.tech-15 svg { fill: #007ACC; }
+
+/* LinkedIn */
+.tech-16 svg { fill: #0A66C2; }
+
+/* Mail */
+.tech-17 svg { fill: #EA4335; }
 
 .figma-mark {
   position: relative;

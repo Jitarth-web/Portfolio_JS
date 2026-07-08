@@ -37,7 +37,7 @@ const GLOW_COLOR_MAP = {
   "GitHub": "#ffffff",
   "Git": "#f05032",
   "Figma": "#f24e1e",
-  "VS Code": "#007acc",
+  "VS Code": "#038be6",
   "LinkedIn": "#0a66c2",
   "Mail": "#ff6a21"
 };
