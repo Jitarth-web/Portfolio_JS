@@ -11,7 +11,7 @@ export default function Certifications() {
   return (
     <section id="certifications" className="content-section">
       <div className="section-inner">
-        <SectionHeading label="Credentials" title="{Certifications}" />
+        <SectionHeading label="Credentials" title="Cert{ifica}tions" />
       </div>
       
       <div className="cert-slider-wrapper">
