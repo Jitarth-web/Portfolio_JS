@@ -328,7 +328,7 @@ export default function PortfolioDog({ booting = false }) {
 
   const handleDoubleClick = (e) => {
     e.stopPropagation();
-    triggerSpin();
+    triggerAngry();
   };
 
   const handlePointerDown = (e) => {
@@ -583,7 +583,7 @@ export default function PortfolioDog({ booting = false }) {
 
     const handleGlobalDblClick = (e) => {
       if (isCoordOverDog(e.clientX, e.clientY)) {
-        triggerSpin();
+        triggerAngry();
       }
     };
 

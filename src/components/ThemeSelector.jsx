@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Palette } from 'lucide-react';
 
 const themes = [
-  { name: 'green', color: '#43a047' },
   { name: 'red', color: '#e53935' },
+  { name: 'green', color: '#43a047' },
   { name: 'blue', color: '#085ece' },
   { name: 'orange', color: '#ff6a21' },
   { name: 'purple', color: '#8e44ad' },
@@ -17,7 +17,7 @@ const themes = [
 ];
 
 export default function ThemeSelector() {
-  const [currentTheme, setCurrentTheme] = useState('green');
+  const [currentTheme, setCurrentTheme] = useState('red');
   const [isOpen, setIsOpen] = useState(false);
   const [isHouseHovered, setIsHouseHovered] = useState(false);
   const [isBoneHovered, setIsBoneHovered] = useState(false);
