@@ -12,6 +12,7 @@ const PNK = "#ff6b8b"; // Light tongue/blush
 const COL = "#e11d48"; // Collar / deep tongue
 const BLUSH = "#ffb3c6"; // Blush cheeks
 const EYE_GRN = "#5a8a3a"; // Dog pupil color (greenish)
+const EYE_RED = "#ff1a1a"; // Dog pupil color (angry red)
 
 // --- Physics Constants ---
 const MAX_SPEED = 300; // max pixels per second
@@ -91,7 +92,7 @@ const drawPixelZ = (ctx, ox, oy, ps, alpha) => {
   ctx.fillRect(ox0 - pad, oy0 - pad, 6 * p + pad * 2, 5 * p + pad * 2);
   ctx.strokeStyle = BLK;
   ctx.lineWidth = Math.max(1, Math.round(p * 0.4));
-  ctx.strokeRect(ctx, ox0 - pad, oy0 - pad, 6 * p + pad * 2, 5 * p + pad * 2);
+  ctx.strokeRect(ox0 - pad, oy0 - pad, 6 * p + pad * 2, 5 * p + pad * 2);
   ctx.fillStyle = BLK;
   for (let row = 0; row < Z_PATTERN.length; row++) {
     for (let col = 0; col < Z_PATTERN[row].length; col++) {
@@ -138,6 +139,32 @@ const drawPixelSparkle = (ctx, cx, cy, size, alpha, rot) => {
   ctx.restore();
 };
 
+const drawPixelAnger = (ctx, cx, cy, size, alpha) => {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  const s = Math.max(1, Math.round(size * 0.8));
+  const r = Math.round;
+  const mark = [
+    [1, 1, 0, 0, 1, 1],
+    [1, 0, 0, 0, 0, 1],
+    [0, 0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0, 0],
+    [1, 0, 0, 0, 0, 1],
+    [1, 1, 0, 0, 1, 1],
+  ];
+  const col = "#ef4444";
+  const ox = r(cx - 3 * s), oy = r(cy - 3 * s);
+  ctx.fillStyle = col;
+  for (let row = 0; row < mark.length; row++) {
+    for (let c = 0; c < mark[row].length; c++) {
+      if (mark[row][c]) {
+        rect(ctx, ox + c * s, oy + row * s, s, s, col);
+      }
+    }
+  }
+  ctx.restore();
+};
+
 export default function PortfolioDog({ booting = false }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -147,6 +174,14 @@ export default function PortfolioDog({ booting = false }) {
   const [pawPrints, setPawPrints] = useState([]);
   const [isSpinning, setIsSpinning] = useState(false);
   const isHoveredRef = useRef(false);
+
+  const [cursorMode, setCursorMode] = useState("dog");
+  const [activeBone, setActiveBone] = useState(null);
+  const [isSleepingInHouse, setIsSleepingInHouse] = useState(false);
+  const isSleepingInHouseRef = useRef(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const boneRef = useRef(null);
+  const cursorDotRef = useRef(null);
 
   // --- Animation Refs (avoid triggers of render loops) ---
   const stateRef = useRef({
@@ -198,15 +233,16 @@ export default function PortfolioDog({ booting = false }) {
 
   // Spawns canvas-based local particles
   const spawnCanvasParticle = (x, y, type) => {
+    const isSpecial = type === "heart" || type === "anger";
     stateRef.current.particles.push({
       x,
       y,
       type,
-      vx: (Math.random() - 0.5) * (type === "heart" ? 1.5 : 2.5),
-      vy: type === "heart" ? -1.2 - Math.random() * 1.5 : -0.4 - Math.random() * 1.0,
+      vx: (Math.random() - 0.5) * (isSpecial ? 1.5 : 2.5),
+      vy: isSpecial ? -1.2 - Math.random() * 1.5 : -0.4 - Math.random() * 1.0,
       life: 1.0,
-      maxLife: type === "heart" ? 1.8 : type === "dust" ? 0.7 : 1.2,
-      size: type === "heart" ? 4 + Math.random() * 2 : type === "sparkle" ? 2 + Math.random() * 2 : 2.5 + Math.random() * 2,
+      maxLife: isSpecial ? 1.8 : type === "dust" ? 0.7 : 1.2,
+      size: isSpecial ? 4 + Math.random() * 2 : type === "sparkle" ? 2 + Math.random() * 2 : 2.5 + Math.random() * 2,
       rot: Math.random() * Math.PI * 2,
       rotSpd: (Math.random() - 0.5) * 2
     });
@@ -223,10 +259,13 @@ export default function PortfolioDog({ booting = false }) {
 
   // Trigger random dog barks
   const bark = () => {
-    const barks = ["WOOF!", "WUF!", "BORK!", "WEF!", "🐾 WOOF 🐾", "RUFF!"];
+    const dog = stateRef.current;
+    if (dog.state === "HOUSE_SLEEP" || dog.state === "EATING") return;
+
+    const barks = ["WOOF!", "WUF!", "BORK!", "WEF!", "🐾 WOOF 🐾", "RUFF!", "BO-BO!!"];
     showSpeechBubble(barks[Math.floor(Math.random() * barks.length)]);
-    stateRef.current.state = "HAPPY";
-    stateRef.current.idleT = 0;
+    dog.state = "HAPPY";
+    dog.idleT = 0;
     
     // Spawn hearts on barks
     for (let i = 0; i < 4; i++) {
@@ -239,6 +278,30 @@ export default function PortfolioDog({ booting = false }) {
         stateRef.current.idleT = 0;
       }
     }, 1200);
+  };
+
+  // Trigger angry state
+  const triggerAngry = () => {
+    const dog = stateRef.current;
+    if (dog.state === "HOUSE_SLEEP" || dog.state === "EATING") return;
+
+    dog.state = "ANGRY";
+    dog.idleT = 0;
+
+    const angryBarks = ["BO-BO!! 💢", "GRRR! BO-BO!! 😡", "BORK BORK! 💢", "BO-BO!!!"];
+    showSpeechBubble(angryBarks[Math.floor(Math.random() * angryBarks.length)], 2.2);
+
+    for (let i = 0; i < 5; i++) {
+      spawnCanvasParticle(80 + (Math.random() - 0.5) * 30, 80 + (Math.random() - 0.5) * 15, "anger");
+      spawnCanvasParticle(80 + (Math.random() - 0.5) * 30, 80 + (Math.random() - 0.5) * 15, "heart");
+    }
+
+    setTimeout(() => {
+      if (stateRef.current.state === "ANGRY") {
+        stateRef.current.state = "IDLE";
+        stateRef.current.idleT = 0;
+      }
+    }, 2000);
   };
 
   // Trigger dog spin
@@ -328,6 +391,97 @@ export default function PortfolioDog({ booting = false }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [booting]);
 
+
+
+  // --- Drop Bone Listener ---
+  useEffect(() => {
+    const handleDropBone = (e) => {
+      if (booting) return;
+      const dog = stateRef.current;
+
+      // If already eating, click bone again to cancel (dog plays happy eating finish bark)
+      if (boneRef.current) {
+        boneRef.current = null;
+        setActiveBone(null);
+        dog.state = "HAPPY";
+        dog.idleT = 0;
+        setCursorMode("dog");
+        showSpeechBubble("WOOF! Thank you! 🐾", 2.0);
+        for (let i = 0; i < 6; i++) {
+          spawnCanvasParticle(dog.x + (Math.random() - 0.5) * 30, dog.y + (Math.random() - 0.5) * 15, "heart");
+        }
+        return;
+      }
+
+      const { x, y } = e.detail || { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+      const pageX = x + window.scrollX;
+      const pageY = y + window.scrollY;
+      boneRef.current = { x: pageX, y: pageY };
+      setActiveBone({ x: pageX, y: pageY });
+      setIsSleepingInHouse(false);
+      isSleepingInHouseRef.current = false;
+
+      dog.state = "WALKING";
+      dog.tx = pageX - window.scrollX;
+      dog.ty = pageY - window.scrollY;
+
+      setCursorMode("dot");
+      showSpeechBubble("OOH, A BONE! 🦴", 1.8);
+
+      for (let i = 0; i < 5; i++) {
+        spawnCanvasParticle(pageX - window.scrollX, pageY - window.scrollY, "sparkle");
+      }
+    };
+
+    window.addEventListener("drop-bone", handleDropBone);
+    return () => window.removeEventListener("drop-bone", handleDropBone);
+  }, [booting]);
+
+  // --- Toggle Sleep House Listener ---
+  useEffect(() => {
+    const handleToggleHouse = () => {
+      if (booting) return;
+      const dog = stateRef.current;
+
+      // If eating, clicking house cancels eating first
+      if (boneRef.current) {
+        boneRef.current = null;
+        setActiveBone(null);
+        setIsSleepingInHouse(false);
+        isSleepingInHouseRef.current = false;
+        dog.state = "WALKING";
+        dog.tx = mouseRef.current.x;
+        dog.ty = mouseRef.current.y + 30;
+        setCursorMode("dog");
+        showSpeechBubble("Coming! 🐾", 1.5);
+        return;
+      }
+
+      if (dog.state === "HOUSE_SLEEP" || isSleepingInHouseRef.current) {
+        // Wake up
+        setIsSleepingInHouse(false);
+        isSleepingInHouseRef.current = false;
+        dog.state = "WALKING";
+        dog.tx = mouseRef.current.x;
+        dog.ty = mouseRef.current.y + 30;
+        setCursorMode("dog");
+        showSpeechBubble("YAWN! Hello! 🐾", 2.2);
+      } else {
+        // Sleep beside the brand logo text at the top-left of header (responsive to viewport width)
+        setIsSleepingInHouse(true);
+        isSleepingInHouseRef.current = true;
+        dog.state = "WALKING";
+        const isMobileWidth = window.innerWidth < 768;
+        dog.tx = isMobileWidth ? 42 : 60;
+        dog.ty = isMobileWidth ? 42 : 52;
+        showSpeechBubble("Going to sleep... 💤", 2.0);
+      }
+    };
+
+    window.addEventListener("toggle-house", handleToggleHouse);
+    return () => window.removeEventListener("toggle-house", handleToggleHouse);
+  }, [booting]);
+
   // --- Scroll Section Tracker ---
   useEffect(() => {
     if (booting) return;
@@ -337,6 +491,7 @@ export default function PortfolioDog({ booting = false }) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           activeSectionRef.current = entry.target.id;
+          setActiveSection(entry.target.id);
         }
       });
     };
@@ -378,6 +533,13 @@ export default function PortfolioDog({ booting = false }) {
 
     const updateCoords = (clientX, clientY) => {
       const dog = stateRef.current;
+      
+      mouseRef.current = { x: clientX, y: clientY };
+
+      if (dog.state === "HOUSE_SLEEP" || dog.state === "EATING") {
+        return;
+      }
+
       const dx = clientX - dog.x;
       const dy = (clientY + 30) - dog.y;
       const distance = Math.hypot(dx, dy);
@@ -388,9 +550,8 @@ export default function PortfolioDog({ booting = false }) {
       if (distance > significantThreshold) {
         isMouseActiveRef.current = true;
         lastMouseMoveTimeRef.current = Date.now();
-        mouseRef.current = { x: clientX, y: clientY };
 
-        if (dog.state !== "WALKING" && !easterEggActiveRef.current) {
+        if (dog.state !== "WALKING" && !easterEggActiveRef.current && !isSleepingInHouseRef.current && !boneRef.current) {
           dog.state = "WALKING";
           dog.idleT = 0;
           dog.continuousWag = false;
@@ -426,6 +587,13 @@ export default function PortfolioDog({ booting = false }) {
       }
     };
 
+    const handleGlobalContextMenu = (e) => {
+      if (isCoordOverDog(e.clientX, e.clientY)) {
+        e.preventDefault();
+        triggerAngry();
+      }
+    };
+
     const handleGlobalPointerDown = (e) => {
       if (isCoordOverDog(e.clientX, e.clientY)) {
         longPressTimeoutRef.current = setTimeout(() => {
@@ -449,6 +617,7 @@ export default function PortfolioDog({ booting = false }) {
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("click", handleGlobalClick);
     window.addEventListener("dblclick", handleGlobalDblClick);
+    window.addEventListener("contextmenu", handleGlobalContextMenu);
     window.addEventListener("pointerdown", handleGlobalPointerDown);
     window.addEventListener("pointerup", handleGlobalPointerUp);
     window.addEventListener("pointercancel", handleGlobalPointerUp);
@@ -458,6 +627,7 @@ export default function PortfolioDog({ booting = false }) {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("click", handleGlobalClick);
       window.removeEventListener("dblclick", handleGlobalDblClick);
+      window.removeEventListener("contextmenu", handleGlobalContextMenu);
       window.removeEventListener("pointerdown", handleGlobalPointerDown);
       window.removeEventListener("pointerup", handleGlobalPointerUp);
       window.removeEventListener("pointercancel", handleGlobalPointerUp);
@@ -544,8 +714,14 @@ export default function PortfolioDog({ booting = false }) {
       let targetX = mouseRef.current.x;
       let targetY = mouseRef.current.y + 30; // Standard cursor bottom-offset
 
-      // Autoplay target coordinates resolver
-      if (isAutoplay && !isMouseActiveRef.current) {
+      if (boneRef.current) {
+        targetX = boneRef.current.x - window.scrollX;
+        targetY = boneRef.current.y - window.scrollY;
+      } else if (dog.state === "HOUSE_SLEEP" || isSleepingInHouseRef.current) {
+        const isMobileWidth = window.innerWidth < 768;
+        targetX = isMobileWidth ? 42 : 60;
+        targetY = isMobileWidth ? 42 : 52;
+      } else if (isAutoplay && !isMouseActiveRef.current) {
         const ap = autoplayRef.current;
         if (ap.targetEl) {
           const rect = ap.targetEl.getBoundingClientRect();
@@ -577,14 +753,30 @@ export default function PortfolioDog({ booting = false }) {
 
       // --- STATE MACHINE UPDATE ---
       if (dog.state === "WALKING") {
-        if (dist <= 5) {
+        if (dist <= 8) {
           // 1. Clamping destination directly and zeroing velocity to completely eliminate jitter
           dog.x = dog.tx;
           dog.y = dog.ty;
           dog.vx = 0;
           dog.vy = 0;
-          dog.state = "IDLE";
-          dog.idleT = 0;
+          
+          if (boneRef.current) {
+            dog.state = "EATING";
+            dog.idleT = 0;
+            showSpeechBubble("Nom nom nom... 👅🦴", 3.5);
+          } else if (isSleepingInHouseRef.current) {
+            dog.state = "HOUSE_SLEEP";
+            dog.dir = 1; // Face right towards name text
+            dog.idleT = 0;
+            setCursorMode("dot");
+            showSpeechBubble("Zzz... 💤", 3.0);
+            for (let i = 0; i < 4; i++) {
+              spawnCanvasParticle(80 + (Math.random() - 0.5) * 20, 80 + (Math.random() - 0.5) * 15, "sparkle");
+            }
+          } else {
+            dog.state = "IDLE";
+            dog.idleT = 0;
+          }
 
           // Autoplay arrivals execution
           if (isAutoplay && !isMouseActiveRef.current) {
@@ -645,8 +837,20 @@ export default function PortfolioDog({ booting = false }) {
             dog.y = dog.ty;
             dog.vx = 0;
             dog.vy = 0;
-            dog.state = "IDLE";
-            dog.idleT = 0;
+            if (boneRef.current) {
+              dog.state = "EATING";
+              dog.idleT = 0;
+              showSpeechBubble("Nom nom nom... ❤️🦴", 3.5);
+            } else if (isSleepingInHouseRef.current) {
+              dog.state = "HOUSE_SLEEP";
+              dog.dir = 1; // Face right
+              dog.idleT = 0;
+              setCursorMode("dot");
+              showSpeechBubble("Zzz... 💤", 3.0);
+            } else {
+              dog.state = "IDLE";
+              dog.idleT = 0;
+            }
           } else {
             dog.x += stepX;
             dog.y += stepY;
@@ -688,6 +892,10 @@ export default function PortfolioDog({ booting = false }) {
         dog.vy = 0;
         dog.idleT += dt;
 
+        if (dog.state === "HOUSE_SLEEP") {
+          dog.dir = 1; // Force face right
+        }
+
         if (dog.state === "IDLE") {
           // Transition standing IDLE to SITTING after 2 seconds
           if (dog.idleT >= 2.0) {
@@ -699,6 +907,10 @@ export default function PortfolioDog({ booting = false }) {
           if (dog.idleT >= 5.0 && !dog.continuousWag) {
             dog.state = "LYING";
             dog.idleT = 0;
+          }
+        } else if (dog.state === "EATING") {
+          if (Math.random() < 0.15) {
+            spawnCanvasParticle(80 + (Math.random() - 0.5) * 15, 120, Math.random() < 0.5 ? "sparkle" : "heart");
           }
         }
       }
@@ -728,7 +940,7 @@ export default function PortfolioDog({ booting = false }) {
         p.x += p.vx * dt * 60;
         p.y += p.vy * dt * 60;
         
-        if (p.type === "heart") {
+        if (p.type === "heart" || p.type === "anger") {
           p.vy -= 0.012 * dt * 60;
         } else {
           p.vy += 0.02 * dt * 60;
@@ -745,6 +957,8 @@ export default function PortfolioDog({ booting = false }) {
         const alpha = Math.max(0, p.life);
         if (p.type === "heart") {
           drawPixelHeart(ctx, p.x, p.y, p.size, alpha * 0.9);
+        } else if (p.type === "anger") {
+          drawPixelAnger(ctx, p.x, p.y, p.size, alpha * 0.95);
         } else if (p.type === "sparkle") {
           drawPixelSparkle(ctx, p.x, p.y, p.size, alpha, p.rot);
         } else if (p.type === "dust") {
@@ -759,22 +973,24 @@ export default function PortfolioDog({ booting = false }) {
 
     const drawZzz = (ctx) => {
       const t = performance.now() * 0.001;
-      const cx = 80;
-      const cy = 60;
+      const isHouseSleep = stateRef.current.state === "HOUSE_SLEEP";
+      const cx = isHouseSleep ? 100 : 80;
+      const cy = isHouseSleep ? 110 : 60;
       const configs = [
         { delay: 0.0, maxSize: 3, offsetX: 10 },
-        { delay: 1.0, maxSize: 3.5, offsetX: 22 },
-        { delay: 2.0, maxSize: 4, offsetX: 35 },
+        { delay: 1.0, maxSize: 3.5, offsetX: 20 },
+        { delay: 2.0, maxSize: 4, offsetX: 30 },
       ];
       const cycle = 3.0;
       for (const cfg of configs) {
         const phase = ((t + cfg.delay * (cycle / configs.length)) % cycle) / cycle;
         if (phase < 0.04) continue;
         const eased = 1 - Math.pow(1 - phase, 2);
-        const floatY = -eased * 45;
+        const floatX = isHouseSleep ? eased * 35 : 0;
+        const floatY = isHouseSleep ? -eased * 18 : -eased * 45;
         const alpha = Math.sin(phase * Math.PI);
         const ps = cfg.maxSize * (0.7 + eased * 0.6);
-        drawPixelZ(ctx, cx + cfg.offsetX, cy + floatY, ps, alpha * 0.95);
+        drawPixelZ(ctx, cx + cfg.offsetX + floatX, cy + floatY, ps, alpha * 0.95);
       }
     };
 
@@ -802,8 +1018,8 @@ export default function PortfolioDog({ booting = false }) {
       
       // Strict mappings to original drawing states:
       const isMoving = dog.state === "WALKING";
-      const isSitting = dog.state === "SITTING";
-      const isSleeping = dog.state === "LYING"; // sleeping curled-up pose
+      const isSitting = dog.state === "SITTING" || dog.state === "EATING";
+      const isSleeping = dog.state === "LYING" || dog.state === "HOUSE_SLEEP"; // sleeping curled-up pose
       const isResting = false;
       const isHappy = dog.state === "HAPPY";
       const isScratching = dog.state === "scratching";
@@ -825,9 +1041,9 @@ export default function PortfolioDog({ booting = false }) {
         pawLL = lL * lL * (0.16 + gaitStr * 0.2) * dog.size;
         pawLR = lR * lR * (0.16 + gaitStr * 0.2) * dog.size;
         dog.earWiggle = Math.abs(s) * 0.3;
-      } else if (isHappy) {
+      } else if (isHappy || dog.state === "EATING") {
         bodyBob = Math.abs(Math.sin(time * 7.0)) * 0.35 * dog.size;
-        tailWag = Math.sin(time * 10) * 0.42;
+        tailWag = Math.sin(time * (dog.state === "EATING" ? 15 : 10)) * 0.42;
         dog.earWiggle = Math.abs(Math.sin(time * 8)) * 0.4;
       } else if (isSleeping) {
         bodyBob = Math.sin(time * 1.3) * 0.04 * dog.size;
@@ -852,7 +1068,9 @@ export default function PortfolioDog({ booting = false }) {
       bodyBob = Math.round(bodyBob);
       headBob = Math.round(headBob);
 
-      if (isMoving || isHappy) {
+      if (dog.state === "EATING") {
+        dog.tongueOut = 0.5 + Math.abs(Math.sin(time * 15.0)) * 0.5; // lick animation
+      } else if (isMoving || isHappy) {
         dog.tongueOut = Math.min(1, dog.tongueOut + 0.05);
       } else {
         dog.tongueOut = Math.max(0, dog.tongueOut - 0.02);
@@ -868,7 +1086,13 @@ export default function PortfolioDog({ booting = false }) {
       dog.lookY += (Math.sign(lookDy) * Math.min(1, Math.abs(lookDy) / 100) - dog.lookY) * 0.08;
 
       ctx.save();
-      ctx.translate(80, 120);
+      let shakeX = 0;
+      let shakeY = 0;
+      if (dog.state === "ANGRY") {
+        shakeX = (Math.random() - 0.5) * 3;
+        shakeY = (Math.random() - 0.5) * 3;
+      }
+      ctx.translate(80 + shakeX, 120 + shakeY);
 
       if (dog.dir === -1) {
         ctx.scale(-1, 1);
@@ -909,8 +1133,9 @@ export default function PortfolioDog({ booting = false }) {
         rect(ctx, (hx + 4.7) * S, (hy + 2.1) * S, 1.3 * S, 1.0 * S, BLK);
 
         // Eyes
+        const eyeColor = dog.state === "ANGRY" ? EYE_RED : EYE_GRN;
         rect(ctx, (hx + 0.6) * S, (hy + 1.9) * S, 1.8 * S, 1.8 * S, "#111");
-        rect(ctx, (hx + 0.6) * S, (hy + 1.9) * S, 0.75 * S, 0.75 * S, EYE_GRN);
+        rect(ctx, (hx + 0.6) * S, (hy + 1.9) * S, 0.75 * S, 0.75 * S, eyeColor);
         rect(ctx, (hx + 0.6) * S, (hy + 1.9) * S, 0.4 * S, 0.4 * S, WHT);
 
         const earOff = dog.earWiggle * S * 1.5;
@@ -1033,10 +1258,11 @@ export default function PortfolioDog({ booting = false }) {
             rect(ctx, left + 4.8 * S, top + 8.2 * S - bb - hb, 3.2 * S, 0.7 * S, BLK);
             rect(ctx, left + 13.0 * S, top + 8.2 * S - bb - hb, 3.2 * S, 0.7 * S, BLK);
           } else {
+            const eyeColor = dog.state === "ANGRY" ? EYE_RED : EYE_GRN;
             ph(4.8, 7.2, 3.4, 3.4, BLK);
             ph(12.8, 7.2, 3.4, 3.4, BLK);
-            rect(ctx, left + (5.2 + lookOffX) * S, top + (7.6 + lookOffY) * S - bb - hb, 1.1 * S, 1.1 * S, EYE_GRN);
-            rect(ctx, left + (13.2 + lookOffX) * S, top + (7.6 + lookOffY) * S - bb - hb, 1.1 * S, 1.1 * S, EYE_GRN);
+            rect(ctx, left + (5.2 + lookOffX) * S, top + (7.6 + lookOffY) * S - bb - hb, 1.1 * S, 1.1 * S, eyeColor);
+            rect(ctx, left + (13.2 + lookOffX) * S, top + (7.6 + lookOffY) * S - bb - hb, 1.1 * S, 1.1 * S, eyeColor);
             rect(ctx, left + (5.2 + lookOffX) * S, top + (7.6 + lookOffY) * S - bb - hb, 0.5 * S, 0.5 * S, WHT);
             rect(ctx, left + (13.2 + lookOffX) * S, top + (7.6 + lookOffY) * S - bb - hb, 0.5 * S, 0.5 * S, WHT);
           }
@@ -1068,13 +1294,18 @@ export default function PortfolioDog({ booting = false }) {
 
       ctx.restore();
 
-      if (dog.state === "LYING") {
+      if (dog.state === "LYING" || dog.state === "HOUSE_SLEEP") {
         drawZzz(ctx);
       }
 
       if (containerRef.current) {
         containerRef.current.style.left = `${dog.x - 80}px`;
         containerRef.current.style.top = `${dog.y - 120}px`;
+      }
+
+      if (cursorDotRef.current) {
+        cursorDotRef.current.style.left = `${mouseRef.current.x}px`;
+        cursorDotRef.current.style.top = `${mouseRef.current.y}px`;
       }
 
       animId = requestAnimationFrame(loop);
@@ -1092,6 +1323,39 @@ export default function PortfolioDog({ booting = false }) {
 
   return (
     <>
+      {/* Glowing cursor dot always active to highlight exact cursor position (desktop only) */}
+      {window.innerWidth >= 768 && (
+        <div
+          ref={cursorDotRef}
+          className={styles.glowingCursorDot}
+        />
+      )}
+
+      {/* Active Bone on screen (page-absolute so it scrolls away naturally) */}
+      {activeBone && (
+        <div
+          className={styles.pixelBone}
+          style={{
+            position: "absolute",
+            left: activeBone.x - 14,
+            top: activeBone.y - 8,
+          }}
+        >
+          <svg width="28" height="16" viewBox="0 0 14 8" style={{ imageRendering: "pixelated" }}>
+            <rect x="3" y="3" width="8" height="2" fill="#ffffff" />
+            <rect x="1" y="2" width="2" height="2" fill="#ffffff" />
+            <rect x="2" y="1" width="1" height="1" fill="#ffffff" />
+            <rect x="1" y="4" width="2" height="2" fill="#ffffff" />
+            <rect x="2" y="6" width="1" height="1" fill="#ffffff" />
+            <rect x="11" y="2" width="2" height="2" fill="#ffffff" />
+            <rect x="11" y="1" width="1" height="1" fill="#ffffff" />
+            <rect x="11" y="4" width="2" height="2" fill="#ffffff" />
+            <rect x="11" y="6" width="1" height="1" fill="#ffffff" />
+            <rect x="3" y="2" width="8" height="1" fill="#e5e5e5" />
+            <rect x="3" y="5" width="8" height="1" fill="#d4d4d4" />
+          </svg>
+        </div>
+      )}
 
       {/* Page-anchored Paw Print Particles */}
       {pawPrints.map((paw) => (

@@ -34,50 +34,44 @@
   border-radius: 12px;
 }
 
-/* Retro pixel speech bubble */
+/* Glassmorphic speech bubble */
 .speechBubble {
   position: absolute;
   bottom: 125px; /* Position above the dog's head */
   left: 50%;
   transform: translateX(-50%);
-  background-color: #04171a;
-  border: 3px solid #ff6a21;
+  background: var(--bg-nav);
+  backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
-  padding: 6px 12px;
-  font-family: "Courier New", Courier, monospace;
-  font-weight: 900;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-weight: 600;
   font-size: 13px;
-  text-transform: uppercase;
   white-space: nowrap;
-  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.05);
   pointer-events: none;
   z-index: 20;
-  border-radius: 4px;
+  border-radius: 999px; /* Pill shape like ThemeSelector */
   display: flex;
   align-items: center;
   gap: 4px;
+  transition: all 0.2s ease;
 }
 
-/* Pixel-art style arrow for the speech bubble */
+/* Glassmorphic arrow */
 .speechBubble::after {
   content: "";
   position: absolute;
-  bottom: -11px;
+  bottom: -6px;
   left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: #ff6a21;
-}
-
-.speechBubble::before {
-  content: "";
-  position: absolute;
-  bottom: -7px;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: #04171a;
-  z-index: 1;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: var(--bg-nav);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: -1;
 }
 
 /* Shadows under the dog */
@@ -111,12 +105,10 @@
   position: absolute;
   pointer-events: none;
   z-index: 2;
-  color: rgba(73, 223, 223, 0.35); /* Styled in soft cyan to match the theme */
+  color: var(--paw-color);
   transform-origin: center;
   transition: opacity 0.5s ease;
 }
-
-
 
 /* Simple keyframe animations */
 @keyframes spinDog {
@@ -130,4 +122,59 @@
 
 .spinAnimation {
   animation: spinDog 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom glowing dot cursor */
+.glowingCursorDot {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--theme-color);
+  box-shadow: 0 0 10px var(--theme-color), 0 0 20px var(--theme-color);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.1s, height 0.1s;
+}
+
+/* Pixel art bone floating container */
+.pixelBone {
+  position: fixed;
+  width: 28px;
+  height: 16px;
+  z-index: 1000;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* Interactive dog house */
+.dogHouse {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+  z-index: 1000;
+  background: var(--bg-nav);
+  backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.dogHouse:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.5), 0 0 15px var(--theme-color);
+  border-color: var(--theme-color);
+}
+
+.dogHouseActive {
+  border-color: var(--theme-color);
+  box-shadow: 0 0 20px var(--theme-color);
 }

@@ -19,6 +19,8 @@ const themes = [
 export default function ThemeSelector() {
   const [currentTheme, setCurrentTheme] = useState('green');
   const [isOpen, setIsOpen] = useState(false);
+  const [isHouseHovered, setIsHouseHovered] = useState(false);
+  const [isBoneHovered, setIsBoneHovered] = useState(false);
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -26,6 +28,8 @@ export default function ThemeSelector() {
     setCurrentTheme(savedTheme);
     document.documentElement.className = `theme-${savedTheme}`;
   }, []);
+
+  const activeThemeColor = themes.find(t => t.name === currentTheme)?.color || '#43a047';
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -96,6 +100,70 @@ export default function ThemeSelector() {
           ))}
         </div>
       )}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          window.dispatchEvent(new CustomEvent("toggle-house"));
+        }}
+        onMouseEnter={() => setIsHouseHovered(true)}
+        onMouseLeave={() => setIsHouseHovered(false)}
+        style={{
+          width: '48px',
+          height: '48px',
+          borderRadius: '50%',
+          background: 'var(--bg-nav)',
+          backdropFilter: 'blur(24px)',
+          border: `1px solid ${isHouseHovered ? activeThemeColor : 'rgba(255, 255, 255, 0.24)'}`,
+          boxShadow: isHouseHovered ? `0 0 20px ${activeThemeColor}80` : 'none',
+          transform: isHouseHovered ? 'translateY(-3px)' : 'none',
+          display: 'grid',
+          placeItems: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          fontSize: '20px',
+          color: 'white',
+        }}
+        title="Send Bo Bo to Sleep / Wake Up 🏚️"
+        aria-label="Toggle Dog House"
+      >
+        🏚️
+      </button>
+
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          // Drop bone at the bottom-left corner of the first page (Hero)
+          window.dispatchEvent(new CustomEvent("drop-bone", {
+            detail: {
+              x: Math.max(80, window.innerWidth * 0.05),
+              y: window.innerHeight * 0.7
+            }
+          }));
+        }}
+        onMouseEnter={() => setIsBoneHovered(true)}
+        onMouseLeave={() => setIsBoneHovered(false)}
+        style={{
+          width: '48px',
+          height: '48px',
+          borderRadius: '50%',
+          background: 'var(--bg-nav)',
+          backdropFilter: 'blur(24px)',
+          border: `1px solid ${isBoneHovered ? activeThemeColor : 'rgba(255, 255, 255, 0.24)'}`,
+          boxShadow: isBoneHovered ? `0 0 20px ${activeThemeColor}80` : 'none',
+          transform: isBoneHovered ? 'translateY(-3px)' : 'none',
+          display: 'grid',
+          placeItems: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          fontSize: '20px',
+          color: 'white',
+        }}
+        title="Feed Bone to Bo Bo 🦴"
+        aria-label="Feed Bone"
+      >
+        🦴
+      </button>
+
       <button
         onClick={() => setIsOpen(!isOpen)}
         style={{

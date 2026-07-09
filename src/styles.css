@@ -17,6 +17,8 @@
   --bg-panel-3: rgba(0, 29, 32, 0.96);
   --bg-nav: rgba(4, 23, 26, 0.72);
   --bg-nav-solid: rgba(4, 23, 26, 0.92);
+  --theme-color: #077e7e;
+  --paw-color: rgba(7, 126, 126, 0.4);
 }
 
 .theme-blue {
@@ -29,6 +31,8 @@
   --bg-panel-3: rgba(0, 18, 32, 0.96);
   --bg-nav: rgba(4, 15, 26, 0.72);
   --bg-nav-solid: rgba(4, 15, 26, 0.92);
+  --theme-color: #085ece;
+  --paw-color: rgba(8, 94, 206, 0.4);
 }
 
 .theme-red {
@@ -41,6 +45,8 @@
   --bg-panel-3: rgba(32, 0, 0, 0.96);
   --bg-nav: rgba(26, 4, 4, 0.72);
   --bg-nav-solid: rgba(26, 4, 4, 0.92);
+  --theme-color: #e53935;
+  --paw-color: rgba(229, 57, 53, 0.4);
 }
 
 .theme-orange {
@@ -53,6 +59,8 @@
   --bg-panel-3: rgba(32, 14, 0, 0.96);
   --bg-nav: rgba(26, 12, 4, 0.72);
   --bg-nav-solid: rgba(26, 12, 4, 0.92);
+  --theme-color: #ff6a21;
+  --paw-color: rgba(255, 106, 33, 0.4);
 }
 
 .theme-green {
@@ -65,7 +73,10 @@
   --bg-panel-3: rgba(0, 32, 8, 0.96);
   --bg-nav: rgba(4, 26, 10, 0.72);
   --bg-nav-solid: rgba(4, 26, 10, 0.92);
+  --theme-color: #43a047;
+  --paw-color: rgba(67, 160, 71, 0.4);
 }
+
 .theme-purple {
   --bg-color-1: #1a0619;
   --bg-color-2: #150415;
@@ -76,6 +87,8 @@
   --bg-panel-3: rgba(32, 0, 32, 0.96);
   --bg-nav: rgba(26, 4, 26, 0.72);
   --bg-nav-solid: rgba(26, 4, 26, 0.92);
+  --theme-color: #8e44ad;
+  --paw-color: rgba(142, 68, 173, 0.4);
 }
 
 .theme-pink {
@@ -88,36 +101,38 @@
   --bg-panel-3: rgba(32, 0, 16, 0.96);
   --bg-nav: rgba(26, 4, 12, 0.72);
   --bg-nav-solid: rgba(26, 4, 12, 0.92);
+  --theme-color: #e83e8c;
+  --paw-color: rgba(232, 62, 140, 0.4);
 }
 
 .theme-yellow {
   --bg-color-1: #1a1400;
   --bg-color-2: #2b2100;
-
-  --bg-grad-1: rgba(255, 255, 0, 0.60);   /* Pure Yellow */
-  --bg-grad-2: rgba(255, 215, 0, 0.45);   /* Gold */
-
+  --bg-grad-1: rgba(255, 255, 0, 0.60);
+  --bg-grad-2: rgba(255, 215, 0, 0.45);
   --bg-panel-1: rgba(255, 255, 0, 0.30);
   --bg-panel-2: rgba(255, 230, 0, 0.45);
   --bg-panel-3: rgba(40, 32, 0, 0.96);
-
   --bg-nav: rgba(35, 28, 0, 0.80);
   --bg-nav-solid: rgba(35, 28, 0, 0.96);
+  --theme-color: #f1c40f;
+  --paw-color: rgba(241, 196, 15, 0.4);
 }
+
 .theme-indigo {
   --bg-color-1: #0b1026;
   --bg-color-2: #16113f;
-
-  --bg-grad-1: rgba(79, 70, 229, 0.35);   /* Indigo */
-  --bg-grad-2: rgba(99, 102, 241, 0.18);   /* Light Indigo */
-
+  --bg-grad-1: rgba(79, 70, 229, 0.35);
+  --bg-grad-2: rgba(99, 102, 241, 0.18);
   --bg-panel-1: rgba(79, 70, 229, 0.20);
   --bg-panel-2: rgba(55, 48, 163, 0.32);
   --bg-panel-3: rgba(15, 23, 42, 0.96);
-
   --bg-nav: rgba(17, 24, 39, 0.72);
   --bg-nav-solid: rgba(17, 24, 39, 0.94);
+  --theme-color: #4b0082;
+  --paw-color: rgba(75, 0, 130, 0.4);
 }
+
 .theme-black {
   --bg-color-1: #000000;
   --bg-color-2: #000000;
@@ -128,6 +143,13 @@
   --bg-panel-3: rgba(0, 0, 0, 0.96);
   --bg-nav: rgba(0, 0, 0, 0.72);
   --bg-nav-solid: rgba(0, 0, 0, 0.92);
+  --theme-color: #ffffff;
+  --paw-color: rgba(255, 255, 255, 0.2);
+}
+
+.hide-default-cursor,
+.hide-default-cursor * {
+  cursor: none !important;
 }
 html {
   scroll-behavior: smooth;
