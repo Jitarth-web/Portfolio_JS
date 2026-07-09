@@ -10,22 +10,22 @@ import { profile } from "../data/portfolio";
 
 export default function Hero() {
   const titles = [
-    "FULL STACK DEVELOPER",
-    "AI ENGINEER",
-    "MACHINE LEARNING ENTHUSIAST",
-    "SOFTWARE DEVELOPER",
-    "PROBLEM SOLVER",
-    "OPEN SOURCE CONTRIBUTOR",
-    "CSE STUDENT @ NIT DELHI"
+    "FULL STACK {DEVELOPER}",
+    "AI {ENGINEER}",
+    "MACHINE LEARNING {ENTHUSIAST}",
+    "SOFTWARE {DEVELOPER}",
+    "PROBLEM {SOLVER}",
+    "OPEN SOURCE {CONTRIBUTOR}",
+    "CSE STUDENT @ {NIT DELHI}"
   ];
 
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [currentText, setCurrentText] = useState(titles[0]);
+  const [currentText, setCurrentText] = useState("FULL STACK DEVELOPER");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     let timer;
-    const fullWord = titles[currentIdx];
+    const fullWord = titles[currentIdx].replace(/[{}]/g, "");
 
     if (!isDeleting) {
       if (currentText !== fullWord) {
@@ -51,6 +51,76 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, [currentText, isDeleting, currentIdx]);
 
+  const parseSegments = (str) => {
+    const regex = /\{([^{}]+)\}/g;
+    const segments = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(str)) !== null) {
+      if (match.index > lastIndex) {
+        segments.push({
+          text: str.substring(lastIndex, match.index),
+          highlight: false,
+        });
+      }
+      segments.push({
+        text: match[1],
+        highlight: true,
+      });
+      lastIndex = regex.lastIndex;
+    }
+
+    if (lastIndex < str.length) {
+      segments.push({
+        text: str.substring(lastIndex),
+        highlight: false,
+      });
+    }
+
+    if (segments.length === 0) {
+      segments.push({ text: str, highlight: false });
+    }
+
+    return segments;
+  };
+
+  const renderTypedTitle = () => {
+    const fullWordWithMarkup = titles[currentIdx];
+    const segments = parseSegments(fullWordWithMarkup);
+    const elements = [];
+    let remaining = currentText.length;
+
+    for (let i = 0; i < segments.length; i++) {
+      const seg = segments[i];
+      if (remaining <= 0) break;
+
+      if (seg.text.length <= remaining) {
+        elements.push(
+          <span 
+            key={i} 
+            style={seg.highlight ? { color: "var(--theme-color)" } : {}}
+          >
+            {seg.text}
+          </span>
+        );
+        remaining -= seg.text.length;
+      } else {
+        elements.push(
+          <span 
+            key={i} 
+            style={seg.highlight ? { color: "var(--theme-color)" } : {}}
+          >
+            {seg.text.substring(0, remaining)}
+          </span>
+        );
+        remaining = 0;
+      }
+    }
+
+    return elements;
+  };
+
   return (
     <section id="home" className="figma-hero section-panel">
       <span className="particle p1" />
@@ -63,7 +133,7 @@ export default function Hero() {
         <div className="hero-copy">
           <p className="eyebrow">Hey, I am <span className="hero-name">{profile.name}</span></p>
           <h1>
-            {currentText}
+            {renderTypedTitle()}
             <span className="typewriter-cursor">|</span>
           </h1>
           <p className="desc">{profile.description}</p>

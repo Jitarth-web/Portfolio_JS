@@ -7,7 +7,7 @@ export default function Footer() {
         
         <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left z-20 pl-0 md:pl-28">
           <p className="text-gray-400 text-sm tracking-wide">
-            Made with love by <span className="text-[#ff6a21] font-semibold">Jitarth Singh</span>. All rights reserved 2026.
+            Made with love by <span className="text-[var(--theme-color)] font-semibold">Jitarth Singh</span>. All rights reserved 2026.
           </p>
         </div>
 

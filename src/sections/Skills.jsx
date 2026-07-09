@@ -49,7 +49,7 @@ export default function Skills() {
 
         {/* Left Column: Heading and Image */}
         <div className="w-full lg:w-[45%] flex flex-col justify-center relative reveal">
-          <SectionHeading label="Skills" title="Crafting beautiful interfaces and powerful backends." />
+          <SectionHeading label="Skills" title="Crafting {beautiful interfaces} and powerful backends." />
           <div className="mt-12 flex justify-center lg:justify-start float-anim-2 w-full">
             <div className="relative w-[80%] max-w-[350px] lg:max-w-[400px] mix-blend-screen" style={{ mixBlendMode: 'screen' }}>
               {/* Eye backing patches to restore eye colors lost to transparency blend */}
@@ -78,7 +78,7 @@ export default function Skills() {
         <div className="w-full lg:w-[50%] flex justify-end reveal">
           <div className="glass-card w-full p-8 lg:p-12 shadow-2xl" style={{
             background: "rgba(10, 25, 15, 0.45)",
-            border: "1px solid rgba(255, 106, 33, 0.2)",
+            border: "1px solid color-mix(in srgb, var(--theme-color) 20%, transparent)",
             borderRadius: "24px"
           }}>
             <div className="flex flex-col gap-10">
@@ -88,7 +88,7 @@ export default function Skills() {
                     <div className="p-2 rounded-lg" style={{ background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
                       {getIcon(group.group)}
                     </div>
-                    <h3 className="text-2xl font-bold tracking-wide" style={{ textTransform: "uppercase" }}>
+                    <h3 className="text-2xl font-bold tracking-wide text-[var(--theme-color)]" style={{ textTransform: "uppercase" }}>
                       {group.group}
                     </h3>
                   </div>

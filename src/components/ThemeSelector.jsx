@@ -21,7 +21,14 @@ export default function ThemeSelector() {
   const [isOpen, setIsOpen] = useState(false);
   const [isHouseHovered, setIsHouseHovered] = useState(false);
   const [isBoneHovered, setIsBoneHovered] = useState(false);
+  const [hasBeenClicked, setHasBeenClicked] = useState(false);
   const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setHasBeenClicked(true);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('portfolio-theme') || 'green';
@@ -165,18 +172,22 @@ export default function ThemeSelector() {
       </button>
 
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          setHasBeenClicked(true);
+        }}
+        className={(!hasBeenClicked || isOpen) ? "theme-selector-btn-glowing" : ""}
         style={{
           width: '48px',
           height: '48px',
           borderRadius: '50%',
-          background: themes.find(t => t.name === currentTheme)?.color || '#43a047',
+          background: activeThemeColor,
           border: '2px solid rgba(255, 255, 255, 0.3)',
-          boxShadow: `0 0 20px ${themes.find(t => t.name === currentTheme)?.color || '#43a047'}40`,
           display: 'grid',
           placeItems: 'center',
           cursor: 'pointer',
           transition: 'all 0.2s ease',
+          '--active-theme-color': activeThemeColor,
         }}
         aria-label="Toggle theme palette"
       >

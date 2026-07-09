@@ -253,7 +253,7 @@ export default function About() {
   return (
     <section id="about" className="content-section" ref={containerRef}>
       <div className="section-inner">
-        <SectionHeading label="About" title="CSE Student Building Modern Digital Experiences." />
+        <SectionHeading label="About" title="CSE Student {Building Modern} Digital Experiences." />
         
         {/* Unified Bento Grid Layout */}
         <div className="about-bento-grid">
@@ -290,7 +290,7 @@ export default function About() {
 
               <div className="about-profile-meta-grid">
                 <div className="about-meta-item">
-                  <MapPin className="w-4 h-4 text-[#ff6a21]" />
+                  <MapPin className="w-4 h-4 text-[var(--theme-color)]" />
                   <span>Delhi, India</span>
                 </div>
                 <div className="about-meta-item">
@@ -377,9 +377,9 @@ export default function About() {
                     <div className="about-timeline-item">
                       <div className="flex justify-between items-start mb-0.5">
                         <span className="text-[13px] font-bold text-white flex items-center gap-1.5">
-                          <GraduationCap className="w-4 h-4 text-[#ff6a21]" /> B.Tech CSE - NIT Delhi
+                          <GraduationCap className="w-4 h-4 text-[var(--theme-color)]" /> B.Tech CSE - NIT Delhi
                         </span>
-                        <span className="text-[10px] text-[#ff6a21] font-bold uppercase">2024 - 2028</span>
+                        <span className="text-[10px] text-[var(--theme-color)] font-bold uppercase">2024 - 2028</span>
                       </div>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Pursuing Computer Science and Engineering. Focusing on advanced algorithms, systems architecture, and database engineering.
@@ -389,7 +389,7 @@ export default function About() {
                     <div className="about-timeline-item mt-2 pt-2 border-t border-white/5">
                       <div className="flex justify-between items-start mb-0.5">
                         <span className="text-[13px] font-bold text-white flex items-center gap-1.5">
-                          <GraduationCap className="w-4 h-4 text-[#ff6a21]" /> Vivekanand International School
+                          <GraduationCap className="w-4 h-4 text-[var(--theme-color)]" /> Vivekanand International School
                         </span>
                         <span className="text-[10px] text-gray-500 font-semibold uppercase">Class 12 | 2024</span>
                       </div>
@@ -401,7 +401,7 @@ export default function About() {
                     <div className="about-timeline-item mt-2 pt-2 border-t border-white/5">
                       <div className="flex justify-between items-start mb-0.5">
                         <span className="text-[13px] font-bold text-white flex items-center gap-1.5">
-                          <GraduationCap className="w-4 h-4 text-[#ff6a21]" /> Vivekanand International School
+                          <GraduationCap className="w-4 h-4 text-[var(--theme-color)]" /> Vivekanand International School
                         </span>
                         <span className="text-[10px] text-gray-500 font-semibold uppercase">Class 10 | 2022</span>
                       </div>
@@ -417,7 +417,7 @@ export default function About() {
                   <div className="about-timeline-feed">
                     <div className="about-timeline-item">
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
-                        <Brain className="w-4 h-4 text-[#ff6a21]" /> AI Tinkering & LLMs
+                        <Brain className="w-4 h-4 text-[var(--theme-color)]" /> AI Tinkering & LLMs
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Experimenting with neural networking, open-source model fine-tuning, smart agent logic, and RAG.
@@ -425,7 +425,7 @@ export default function About() {
                     </div>
                     <div className="about-timeline-item mt-2.5 pt-2.5 border-t border-white/5">
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
-                        <Code className="w-4 h-4 text-[#ff6a21]" /> Creative Frontends
+                        <Code className="w-4 h-4 text-[var(--theme-color)]" /> Creative Frontends
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Building gorgeous interfaces using GSAP timelines, responsive layout constraints, and vector canvases.
@@ -433,7 +433,7 @@ export default function About() {
                     </div>
                     <div className="about-timeline-item mt-2.5 pt-2.5 border-t border-white/5">
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
-                        <Target className="w-4 h-4 text-[#ff6a21]" /> Competitive Programming
+                        <Target className="w-4 h-4 text-[var(--theme-color)]" /> Competitive Programming
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Solving complex algorithmic math challenges on platforms like LeetCode (400+ problems completed).
@@ -447,7 +447,7 @@ export default function About() {
                   <div className="about-timeline-feed">
                     <div className="about-timeline-item">
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
-                        <Target className="w-4 h-4 text-[#ff6a21]" /> Hackathon Engineering
+                        <Target className="w-4 h-4 text-[var(--theme-color)]" /> Hackathon Engineering
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Developing smart full-stack products within tight execution windows to address actual user problems.
@@ -455,7 +455,7 @@ export default function About() {
                     </div>
                     <div className="about-timeline-item mt-2.5 pt-2.5 border-t border-white/5">
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
-                        <Code className="w-4 h-4 text-[#ff6a21]" /> Open-Source Contributions
+                        <Code className="w-4 h-4 text-[var(--theme-color)]" /> Open-Source Contributions
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Contributing active pull requests to public developer packages, visual modules, and UI utilities.
@@ -463,7 +463,7 @@ export default function About() {
                     </div>
                     <div className="about-timeline-item mt-2.5 pt-2.5 border-t border-white/5">
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
-                        <Sparkles className="w-4 h-4 text-[#ff6a21]" /> 3D WebGL Interactions
+                        <Sparkles className="w-4 h-4 text-[var(--theme-color)]" /> 3D WebGL Interactions
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Mastering shader coordinate maths, WebGL canvas integrations, and rich 3D graphics rendering.
@@ -477,7 +477,7 @@ export default function About() {
                   <div className="about-timeline-feed">
                     <div className="about-timeline-item">
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
-                        <Sparkles className="w-4 h-4 text-[#ff6a21]" /> Harmonizing AI & Design
+                        <Sparkles className="w-4 h-4 text-[var(--theme-color)]" /> Harmonizing AI & Design
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Coupling state-of-the-art neural models with gorgeous, responsive user design frameworks.
@@ -485,7 +485,7 @@ export default function About() {
                     </div>
                     <div className="about-timeline-item mt-2.5 pt-2.5 border-t border-white/5">
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
-                        <Target className="w-4 h-4 text-[#ff6a21]" /> User-First Focus
+                        <Target className="w-4 h-4 text-[var(--theme-color)]" /> User-First Focus
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Constructing fast, accessible web solutions that deliver immediate utility and value to active users.
@@ -493,7 +493,7 @@ export default function About() {
                     </div>
                     <div className="about-timeline-item mt-2.5 pt-2.5 border-t border-white/5">
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
-                        <Brain className="w-4 h-4 text-[#ff6a21]" /> Continuous Prototyping
+                        <Brain className="w-4 h-4 text-[var(--theme-color)]" /> Continuous Prototyping
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
                         Gathering user feedback rapidly, learning through deployment, and iterating constantly.
@@ -515,7 +515,7 @@ export default function About() {
                   {quotes[currentQuoteIdx].text}
                 </p>
                 <p className={`about-quote-author transition-all duration-500 ${quoteFade === "in" ? "opacity-90" : "opacity-0"}`}>
-                  — <span className="text-[#ff6a21] font-semibold">{quotes[currentQuoteIdx].author}</span>
+                  — <span className="text-[var(--theme-color)] font-semibold">{quotes[currentQuoteIdx].author}</span>
                 </p>
               </div>
               <div className="about-quote-image-wrapper float-anim-1">
@@ -526,7 +526,7 @@ export default function About() {
 
           {/* Card 6: Skill Radar (Rotating Web SVG) */}
           <div className="about-bento-card about-card-radar about-parallax-card flex flex-col justify-between">
-            <h4 className="text-xs text-[#ff6a21] font-semibold tracking-wider uppercase mb-2">Core Dimensions</h4>
+            <h4 className="text-xs text-[var(--theme-color)] font-semibold tracking-wider uppercase mb-2">Core Dimensions</h4>
             <div className="about-radar-container">
               <svg className="about-radar-svg" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="40" stroke="rgba(255, 106, 33, 0.15)" strokeWidth="0.5" fill="none" />
@@ -545,23 +545,23 @@ export default function About() {
                 <text x="10" y="72" textAnchor="end" fontSize="3.5" fill="rgba(255, 255, 255, 0.5)" fontWeight="bold">BACKEND</text>
                 <text x="10" y="32" textAnchor="end" fontSize="3.5" fill="rgba(255, 255, 255, 0.5)" fontWeight="bold">TOOLS / GIT</text>
 
-                <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" stroke="rgba(255, 106, 33, 0.25)" strokeWidth="0.5" fill="none" />
+                <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" stroke="color-mix(in srgb, var(--theme-color) 25%, transparent)" strokeWidth="0.5" fill="none" />
                 <polygon points="50,12 81.5,35 78.7,66 50,80 20.2,67.5 20.8,33.5" 
-                         stroke="#ff6a21" strokeWidth="1" fill="rgba(255, 106, 33, 0.15)" />
+                         stroke="var(--theme-color)" strokeWidth="1" fill="color-mix(in srgb, var(--theme-color) 15%, transparent)" />
                 
-                <circle cx="50" cy="12" r="1.5" fill="#ff6a21" />
-                <circle cx="81.5" cy="35" r="1.5" fill="#ff6a21" />
-                <circle cx="78.7" cy="66" r="1.5" fill="#ff6a21" />
-                <circle cx="50" cy="80" r="1.5" fill="#ff6a21" />
-                <circle cx="20.2" cy="67.5" r="1.5" fill="#ff6a21" />
-                <circle cx="20.8" cy="33.5" r="1.5" fill="#ff6a21" />
+                <circle cx="50" cy="12" r="1.5" fill="var(--theme-color)" />
+                <circle cx="81.5" cy="35" r="1.5" fill="var(--theme-color)" />
+                <circle cx="78.7" cy="66" r="1.5" fill="var(--theme-color)" />
+                <circle cx="50" cy="80" r="1.5" fill="var(--theme-color)" />
+                <circle cx="20.2" cy="67.5" r="1.5" fill="var(--theme-color)" />
+                <circle cx="20.8" cy="33.5" r="1.5" fill="var(--theme-color)" />
               </svg>
             </div>
           </div>
 
           {/* Card 7: Interactive Journey Path */}
           <div className="about-bento-card about-card-journey about-parallax-card">
-            <h4 className="text-xs text-[#ff6a21] font-semibold tracking-wider uppercase mb-3">Interactive Journey Path</h4>
+            <h4 className="text-xs text-[var(--theme-color)] font-semibold tracking-wider uppercase mb-3">Interactive Journey Path</h4>
             <div className="about-journey-container">
               <div className="about-journey-nodes">
                 {journeySteps.map((step, idx) => (
@@ -585,13 +585,13 @@ export default function About() {
 
           {/* Card 8: Achievement Chips */}
           <div className="about-bento-card about-card-chips about-parallax-card">
-            <h4 className="text-xs text-[#ff6a21] font-semibold tracking-wider uppercase mb-3">Core Identity Tags</h4>
+            <h4 className="text-xs text-[var(--theme-color)] font-semibold tracking-wider uppercase mb-3">Core Identity Tags</h4>
             <div className="about-chips-container">
-              <span className="about-chip"><Brain className="w-3.5 h-3.5 text-[#ff6a21]" /> AI Enthusiast</span>
-              <span className="about-chip"><Code className="w-3.5 h-3.5 text-[#ff6a21]" /> Problem Solver</span>
-              <span className="about-chip"><Activity className="w-3.5 h-3.5 text-[#ff6a21]" /> Fast Learner</span>
-              <span className="about-chip"><Sparkles className="w-3.5 h-3.5 text-[#ff6a21]" /> UI/UX Lover</span>
-              <span className="about-chip"><Terminal className="w-3.5 h-3.5 text-[#ff6a21]" /> Terminal Geek</span>
+              <span className="about-chip"><Brain className="w-3.5 h-3.5 text-[var(--theme-color)]" /> AI Enthusiast</span>
+              <span className="about-chip"><Code className="w-3.5 h-3.5 text-[var(--theme-color)]" /> Problem Solver</span>
+              <span className="about-chip"><Activity className="w-3.5 h-3.5 text-[var(--theme-color)]" /> Fast Learner</span>
+              <span className="about-chip"><Sparkles className="w-3.5 h-3.5 text-[var(--theme-color)]" /> UI/UX Lover</span>
+              <span className="about-chip"><Terminal className="w-3.5 h-3.5 text-[var(--theme-color)]" /> Terminal Geek</span>
             </div>
           </div>
 
@@ -612,7 +612,7 @@ export default function About() {
 
             <div className="about-ticker-layout">
               <div className="about-ticker-left">
-                <h4 className="text-xs text-[#ff6a21] font-semibold tracking-wider uppercase flex items-center gap-1.5">
+                <h4 className="text-xs text-[var(--theme-color)] font-semibold tracking-wider uppercase flex items-center gap-1.5">
                   <Hourglass className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "4s" }} /> Time on Earth
                 </h4>
                 <p className="text-[10px] text-gray-500 font-mono mt-1">Present on this planet since:</p>
@@ -644,8 +644,8 @@ export default function About() {
                   <span className="about-ticker-label">secs</span>
                 </div>
                 <div className="about-ticker-unit highlight">
-                  <span className="about-ticker-num text-[#ff6a21]">{pad(age.milliseconds, 2)}</span>
-                  <span className="about-ticker-label text-[#ff6a21]">ms</span>
+                  <span className="about-ticker-num text-[var(--theme-color)]">{pad(age.milliseconds, 2)}</span>
+                  <span className="about-ticker-label text-[var(--theme-color)]">ms</span>
                 </div>
               </div>
             </div>

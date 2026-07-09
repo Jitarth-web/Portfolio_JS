@@ -40,7 +40,7 @@ export default function Contact() {
 
       <div className="section-inner two-column relative z-10">
         <div>
-          <SectionHeading label="Contact" title="Let us Connect and Build something useful." />
+          <SectionHeading label="Contact" title="Let us Connect and {Build something} useful." />
           <div className="contact-links reveal">
             <a href={profile.github}>GitHub</a>
             <a href={profile.linkedin}>LinkedIn</a>
@@ -52,7 +52,7 @@ export default function Contact() {
         <div>
           {status === "success" ? (
             <div className="glass-card contact-form reveal" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '3rem' }}>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#ff6a21' }}>Thank You!</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--theme-color)' }}>Thank You!</h3>
               <p style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Thank you for showing your interest. I will reach you shortly.</p>
               <button type="button" style={{ marginTop: '2rem' }} onClick={() => setStatus("idle")}>Send Another Message</button>
             </div>
