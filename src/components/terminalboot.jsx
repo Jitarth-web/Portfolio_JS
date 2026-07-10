@@ -7,8 +7,6 @@ import {
     startTransition,
 } from "react"
 
-// User request: Update BootTypingLog to include full-screen background video, dark overlay, and matching boot text overlay while keeping exact BOOT_LINES and typing behavior; expose props for className, style, videoSrc, typingSpeed, startDelay, overlayOpacity, fontSize, leftOffset, textWidth, and onComplete in a single copyable JSX file.
-
 const BOOT_LINES = [
     { text: "JITARTH BIOS v2.0.26", instant: true },
     {
@@ -44,7 +42,7 @@ export default function BootTypingLog(props) {
         videoSrc = "https://framerusercontent.com/assets/DQdJ9GP6oi2AQep6lGlVZFGM.mp4",
         typingSpeed = 32,
         startDelay = 0,
-        overlayOpacity = 0.45,
+        overlayOpacity = 0.3,
         fontSize = 20,
         leftOffset = "6%",
         textWidth = "62%",
@@ -223,6 +221,7 @@ export default function BootTypingLog(props) {
         height: "100%",
         objectFit: "cover",
         zIndex: 0,
+        filter: "brightness(1.3) contrast(1.15) saturate(1.1)",
     }
 
     const overlayStyle = {
