@@ -246,7 +246,7 @@ const CylinderCarousel = ({
         <group
             ref={groupRef}
             rotation={[0.22, 0, -0.12]} // Applied tilt to match the user's screenshot
-            position={[0, 0.4, 0]} // Shifted slightly higher to prevent bottom cutoff
+            position={[0, 0.1, 0]} // Shifted slightly higher to prevent bottom cutoff
         >
             {items.map((item, index) => (
                 <CylinderPanel
