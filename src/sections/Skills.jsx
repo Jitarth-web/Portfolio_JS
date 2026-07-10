@@ -1,8 +1,91 @@
+import { useState, useRef, useEffect } from "react";
 import SectionHeading from "../components/SectionHeading";
 import { skills } from "../data/portfolio";
 import image41 from "../assets/figma/image 41.png";
+import gsap from "gsap";
+
+function SkillPill({ item, category }) {
+  const pillRef = useRef(null);
+
+  const getGlowColor = (cat) => {
+    switch (cat) {
+      case "Frontend": return "rgba(34, 211, 238, 0.4)";
+      case "Backend": return "rgba(249, 115, 22, 0.4)";
+      case "AI": return "rgba(16, 185, 129, 0.4)";
+      case "Tools": return "rgba(168, 85, 247, 0.4)";
+      default: return "rgba(255, 255, 255, 0.2)";
+    }
+  };
+
+  const getBorderColor = (cat) => {
+    switch (cat) {
+      case "Frontend": return "rgba(34, 211, 238, 0.6)";
+      case "Backend": return "rgba(249, 115, 22, 0.6)";
+      case "AI": return "rgba(16, 185, 129, 0.6)";
+      case "Tools": return "rgba(168, 85, 247, 0.6)";
+      default: return "rgba(255, 255, 255, 0.35)";
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    const el = pillRef.current;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    gsap.to(el, {
+      x: x * 0.35,
+      y: y * 0.35,
+      scale: 1.08,
+      borderColor: getBorderColor(category),
+      boxShadow: `0 0 16px ${getGlowColor(category)}`,
+      backgroundColor: "rgba(255, 255, 255, 0.12)",
+      duration: 0.2,
+      ease: "power2.out"
+    });
+  };
+
+  const handleMouseLeave = () => {
+    const el = pillRef.current;
+    if (!el) return;
+
+    gsap.to(el, {
+      x: 0,
+      y: 0,
+      scale: 1,
+      borderColor: "rgba(255, 255, 255, 0.15)",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+      backgroundColor: "rgba(255, 255, 255, 0.05)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  };
+
+  return (
+    <span
+      ref={pillRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="px-5 py-2.5 rounded-full text-sm font-medium transition-transform duration-300 inline-block cursor-pointer select-none relative z-10"
+      style={{
+        background: "rgba(255, 255, 255, 0.05)",
+        border: "1px solid rgba(255, 255, 255, 0.15)",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+      }}
+    >
+      {item}
+    </span>
+  );
+}
 
 export default function Skills() {
+  const [activeCategory, setActiveCategory] = useState(null);
+  const cardRef = useRef(null);
+  const blobRef = useRef(null);
+  const trailerRef = useRef(null);
+
   const getIcon = (group) => {
     switch (group) {
       case "Frontend": return <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>;
@@ -43,6 +126,98 @@ export default function Skills() {
     }
   };
 
+  const handleCardMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    if (blobRef.current) {
+      gsap.to(blobRef.current, {
+        x: x,
+        y: y,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+    }
+
+    if (trailerRef.current) {
+      trailerRef.current.style.left = `${x}px`;
+      trailerRef.current.style.top = `${y}px`;
+    }
+  };
+
+  const handleCardMouseEnter = () => {
+    document.body.classList.add("hide-global-cursor");
+    if (blobRef.current) {
+      gsap.to(blobRef.current, { opacity: 1, duration: 0.35 });
+    }
+    if (trailerRef.current) {
+      gsap.to(trailerRef.current, { opacity: 1, scale: 1, duration: 0.2 });
+    }
+  };
+
+  const handleCardMouseLeave = () => {
+    document.body.classList.remove("hide-global-cursor");
+    setActiveCategory(null);
+    if (blobRef.current) {
+      gsap.to(blobRef.current, { opacity: 0, duration: 0.5 });
+    }
+    if (trailerRef.current) {
+      gsap.to(trailerRef.current, { opacity: 0, scale: 0, duration: 0.3 });
+    }
+  };
+
+  useEffect(() => {
+    if (!blobRef.current) return;
+
+    let color = "rgba(7, 126, 126, 0.25)";
+    let colorSecondary = "rgba(7, 126, 126, 0.03)";
+    let trailerBg = "var(--theme-color)";
+    let trailerShadow = "var(--theme-color)";
+
+    if (activeCategory === "Frontend") {
+      color = "rgba(34, 211, 238, 0.3)";
+      colorSecondary = "rgba(34, 211, 238, 0.03)";
+      trailerBg = "#22d3ee";
+      trailerShadow = "rgba(34, 211, 238, 0.6)";
+    } else if (activeCategory === "Backend") {
+      color = "rgba(249, 115, 22, 0.3)";
+      colorSecondary = "rgba(249, 115, 22, 0.03)";
+      trailerBg = "#f97316";
+      trailerShadow = "rgba(249, 115, 22, 0.6)";
+    } else if (activeCategory === "AI") {
+      color = "rgba(16, 185, 129, 0.3)";
+      colorSecondary = "rgba(16, 185, 129, 0.03)";
+      trailerBg = "#10b981";
+      trailerShadow = "rgba(16, 185, 129, 0.6)";
+    } else if (activeCategory === "Tools") {
+      color = "rgba(168, 85, 247, 0.3)";
+      colorSecondary = "rgba(168, 85, 247, 0.03)";
+      trailerBg = "#a855f7";
+      trailerShadow = "rgba(168, 85, 247, 0.6)";
+    }
+
+    gsap.to(blobRef.current, {
+      background: `radial-gradient(circle, ${color} 0%, ${colorSecondary} 60%, transparent 100%)`,
+      duration: 0.45
+    });
+
+    if (trailerRef.current) {
+      gsap.to(trailerRef.current, {
+        backgroundColor: trailerBg,
+        boxShadow: `0 0 10px ${trailerShadow}, 0 0 20px ${trailerShadow}`,
+        duration: 0.3
+      });
+    }
+  }, [activeCategory]);
+
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove("hide-global-cursor");
+    };
+  }, []);
+
   return (
     <section id="skills" className="content-section">
       <div className="section-inner relative z-10 flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16">
@@ -76,14 +251,53 @@ export default function Skills() {
 
         {/* Right Column: Skills Panel */}
         <div className="w-full lg:w-[50%] flex justify-end reveal">
-          <div className="glass-card w-full p-8 lg:p-12 shadow-2xl" style={{
-            background: "rgba(10, 25, 15, 0.45)",
-            border: "1px solid color-mix(in srgb, var(--theme-color) 20%, transparent)",
-            borderRadius: "24px"
-          }}>
-            <div className="flex flex-col gap-10">
+          <div
+            ref={cardRef}
+            onMouseMove={handleCardMouseMove}
+            onMouseEnter={handleCardMouseEnter}
+            onMouseLeave={handleCardMouseLeave}
+            className="glass-card w-full p-8 lg:p-12 shadow-2xl relative overflow-hidden hide-default-cursor"
+            style={{
+              background: "rgba(10, 25, 15, 0.45)",
+              border: "1px solid color-mix(in srgb, var(--theme-color) 20%, transparent)",
+              borderRadius: "24px"
+            }}
+          >
+            {/* Ambient Spotlight Blob */}
+            <div
+              ref={blobRef}
+              className="absolute w-[350px] h-[350px] rounded-full pointer-events-none opacity-0 blur-[60px] z-0"
+              style={{
+                background: "radial-gradient(circle, rgba(7, 126, 126, 0.25) 0%, rgba(7, 126, 126, 0.03) 60%, transparent 100%)",
+                transform: "translate(-50%, -50%)",
+                left: 0,
+                top: 0,
+                willChange: "transform"
+              }}
+            />
+
+            {/* Custom Cursor Trailer Dot */}
+            <div
+              ref={trailerRef}
+              className="absolute w-3.5 h-3.5 rounded-full pointer-events-none opacity-0 z-20"
+              style={{
+                backgroundColor: "var(--theme-color)",
+                boxShadow: "0 0 10px var(--theme-color)",
+                transform: "translate(-50%, -50%)",
+                left: 0,
+                top: 0,
+                willChange: "transform",
+                border: "2px solid #ffffff"
+              }}
+            />
+
+            <div className="flex flex-col gap-10 relative z-10">
               {skills.map((group) => (
-                <div key={group.group} className="flex flex-col gap-4">
+                <div
+                  key={group.group}
+                  className="flex flex-col gap-4 relative z-10"
+                  onMouseEnter={() => setActiveCategory(group.group)}
+                >
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-lg" style={{ background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
                       {getIcon(group.group)}
@@ -94,17 +308,7 @@ export default function Skills() {
                   </div>
                   <div className="flex flex-wrap gap-3 mt-2">
                     {group.items.map((item) => (
-                      <span
-                        key={item}
-                        className="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105"
-                        style={{
-                          background: "rgba(255, 255, 255, 0.05)",
-                          border: "1px solid rgba(255, 255, 255, 0.15)",
-                          boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-                        }}
-                      >
-                        {item}
-                      </span>
+                      <SkillPill key={item} item={item} category={group.group} />
                     ))}
                   </div>
                 </div>

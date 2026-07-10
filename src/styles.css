@@ -722,9 +722,9 @@ svg {
 }
 
 .glass-card {
-  border: 1px solid color-mix(in srgb, var(--theme-color) 30%, rgba(255, 255, 255, 0.1));
+  border: 1px solid color-mix(in srgb, var(--theme-color) 20%, rgba(255, 255, 255, 0.08));
   border-radius: 30px;
-  background: rgba(116, 159, 164, 0.2);
+  background: var(--bg-nav);
   backdrop-filter: blur(24px) saturate(135%);
 }
 
@@ -739,7 +739,7 @@ svg {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
   padding: 8px 12px;
-  color: #ffb48a;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 700;
 }

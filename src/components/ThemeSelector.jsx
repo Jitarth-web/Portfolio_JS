@@ -2,12 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { Palette } from 'lucide-react';
 
 const themes = [
+  { name: 'pink', color: '#e83e8c' },
   { name: 'red', color: '#e53935' },
   { name: 'green', color: '#43a047' },
   { name: 'blue', color: '#085ece' },
   { name: 'orange', color: '#ff6a21' },
   { name: 'purple', color: '#8e44ad' },
-  { name: 'pink', color: '#e83e8c' },
   { name: 'teal', color: '#077e7e' },
   { name: 'yellow', color: '#f1c40f' },
   { name: 'indigo', color: '#4b0082' },
@@ -17,7 +17,7 @@ const themes = [
 ];
 
 export default function ThemeSelector() {
-  const [currentTheme, setCurrentTheme] = useState('red');
+  const [currentTheme, setCurrentTheme] = useState('pink');
   const [isOpen, setIsOpen] = useState(false);
   const [isHouseHovered, setIsHouseHovered] = useState(false);
   const [isBoneHovered, setIsBoneHovered] = useState(false);
@@ -31,12 +31,12 @@ export default function ThemeSelector() {
   }, [isOpen]);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme') || 'green';
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'pink';
     setCurrentTheme(savedTheme);
     document.documentElement.className = `theme-${savedTheme}`;
   }, []);
 
-  const activeThemeColor = themes.find(t => t.name === currentTheme)?.color || '#43a047';
+  const activeThemeColor = themes.find(t => t.name === currentTheme)?.color || '#e83e8c';
 
   useEffect(() => {
     const handleClickOutside = (event) => {

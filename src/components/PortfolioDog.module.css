@@ -135,7 +135,13 @@
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: width 0.1s, height 0.1s;
+  transition: width 0.1s, height 0.1s, opacity 0.2s, transform 0.2s;
+}
+
+:global(.hide-global-cursor) .glowingCursorDot {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  pointer-events: none !important;
 }
 
 /* Pixel art bone floating container */
