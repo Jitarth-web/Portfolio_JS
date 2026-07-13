@@ -470,6 +470,24 @@ public:
     );
   };
 
+  // Calculate LeetCode streak dynamically.
+  // Baseline: 15 days on July 13, 2026.
+  // Increments by 1 day every day at 12:00 AM local time.
+  const getStreakDays = () => {
+    const baselineDate = new Date("2026-07-13T00:00:00");
+    const baselineStreak = 15;
+    const today = new Date();
+    
+    // Normalize to midnight in local time to calculate day difference
+    const startMidnight = new Date(baselineDate.getFullYear(), baselineDate.getMonth(), baselineDate.getDate());
+    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    
+    const diffTime = todayMidnight.getTime() - startMidnight.getTime();
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+    
+    return baselineStreak + diffDays;
+  };
+
   const lines = editorText.split("\n");
   const lineCount = Math.max(16, lines.length); // Adjusted min-height for headers
   const lineNumbers = Array.from({ length: lineCount }, (_, i) => i + 1);
@@ -485,7 +503,7 @@ public:
         <div className="window-title">Jitarth@CSE-Terminal</div>
         <div className="leetcode-streak" style={{ marginRight: "4px" }}>
           <span style={{ color: "#ffa116", fontWeight: "bold", fontSize: "11px", display: "flex", alignItems: "center", gap: "4px" }}>
-            🔥 365 Days Streak
+            🔥 {getStreakDays()} Days Streak
           </span>
         </div>
       </div>
