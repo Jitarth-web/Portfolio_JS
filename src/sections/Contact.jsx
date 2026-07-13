@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import SectionHeading from "../components/SectionHeading";
 import { profile } from "../data/portfolio";
 import ringImg from "../assets/figma/image 163.png";
@@ -6,13 +6,121 @@ import womanImg from "../assets/figma/3d-rendering-cartoon-like-woman-working-co
 
 export default function Contact() {
   const [status, setStatus] = useState("idle");
+  const [turnstileToken, setTurnstileToken] = useState(null);
+  const [validationError, setValidationError] = useState("");
+  const [cooldown, setCooldown] = useState(0);
+
+  const turnstileRef = useRef(null);
+  const widgetIdRef = useRef(null);
+
+  // Check rate limit cooldown on mount
+  useEffect(() => {
+    const lastSubmit = localStorage.getItem("last_contact_submission");
+    if (lastSubmit) {
+      const elapsed = (Date.now() - parseInt(lastSubmit, 10)) / 1000;
+      if (elapsed < 60) {
+        setCooldown(Math.ceil(60 - elapsed));
+      }
+    }
+  }, []);
+
+  // Cooldown timer countdown
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const timer = setTimeout(() => {
+      setCooldown((c) => c - 1);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [cooldown]);
+
+  // Load and render Cloudflare Turnstile widget dynamically
+  useEffect(() => {
+    const scriptId = "cloudflare-turnstile-script";
+    let script = document.getElementById(scriptId);
+    if (!script) {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+
+    const renderWidget = () => {
+      if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
+        try {
+          widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+            sitekey: import.meta.env.VITE_TURNSTILE_SITEKEY || "1x00000000000000000000AA",
+            theme: "dark",
+            callback: (token) => {
+              setTurnstileToken(token);
+              setValidationError("");
+            },
+            "expired-callback": () => {
+              setTurnstileToken(null);
+            },
+            "error-callback": () => {
+              setTurnstileToken(null);
+            },
+          });
+        } catch (e) {
+          console.error("Error rendering Turnstile:", e);
+        }
+      }
+    };
+
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      script.addEventListener("load", renderWidget);
+    }
+
+    return () => {
+      if (window.turnstile && widgetIdRef.current) {
+        try {
+          window.turnstile.remove(widgetIdRef.current);
+          widgetIdRef.current = null;
+        } catch (e) {
+          console.error("Error removing Turnstile:", e);
+        }
+      }
+      if (script) {
+        script.removeEventListener("load", renderWidget);
+      }
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("submitting");
+    setValidationError("");
+
+    // 1. Rate Limit check
+    if (cooldown > 0) {
+      setValidationError(`Please wait ${cooldown}s before submitting another message.`);
+      return;
+    }
 
     const form = e.target;
     const formData = new FormData(form);
+    const email = formData.get("email");
+
+    // 2. Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setValidationError("Please enter a valid email address.");
+      return;
+    }
+
+    // 3. Turnstile check
+    if (!turnstileToken) {
+      setValidationError("Please complete the Turnstile bot verification.");
+      return;
+    }
+
+    setStatus("submitting");
+
+    // Append Turnstile response to form data
+    formData.append("cf-turnstile-response", turnstileToken);
 
     try {
       const response = await fetch("https://formsubmit.co/ajax/jitarthgpt@gmail.com", {
@@ -22,12 +130,27 @@ export default function Contact() {
 
       if (response.ok) {
         setStatus("success");
+        // Start cooldown
+        localStorage.setItem("last_contact_submission", Date.now().toString());
+        setCooldown(60);
+        setTurnstileToken(null);
+        if (window.turnstile && widgetIdRef.current) {
+          window.turnstile.reset(widgetIdRef.current);
+        }
         form.reset();
       } else {
         setStatus("error");
+        if (window.turnstile && widgetIdRef.current) {
+          window.turnstile.reset(widgetIdRef.current);
+        }
+        setTurnstileToken(null);
       }
     } catch (error) {
       setStatus("error");
+      if (window.turnstile && widgetIdRef.current) {
+        window.turnstile.reset(widgetIdRef.current);
+      }
+      setTurnstileToken(null);
     }
   };
 
@@ -62,8 +185,37 @@ export default function Contact() {
               <input type="text" name="name" placeholder="Name" aria-label="Name" />
               <input type="email" name="email" placeholder="Email" aria-label="Email" required />
               <textarea name="message" placeholder="Message" aria-label="Message" required />
-              <button type="submit" disabled={status === "submitting"}>
-                {status === "submitting" ? "Sending..." : "Send Message"}
+              
+              {/* Cloudflare Turnstile widget container */}
+              <div 
+                ref={turnstileRef} 
+                style={{ 
+                  margin: "6px 0", 
+                  minHeight: "65px", 
+                  display: "flex", 
+                  justifyContent: "flex-start" 
+                }}
+              />
+
+              {validationError && (
+                <p style={{ color: "#ff4444", fontSize: "0.9rem", marginTop: "0.2rem", textAlign: "left" }}>
+                  {validationError}
+                </p>
+              )}
+
+              <button 
+                type="submit" 
+                disabled={status === "submitting" || cooldown > 0}
+                style={{
+                  opacity: (status === "submitting" || cooldown > 0) ? 0.6 : 1,
+                  cursor: (status === "submitting" || cooldown > 0) ? "not-allowed" : "pointer"
+                }}
+              >
+                {status === "submitting" 
+                  ? "Sending..." 
+                  : cooldown > 0 
+                    ? `Wait ${cooldown}s` 
+                    : "Send Message"}
               </button>
               {status === "error" && <p style={{ color: '#ff4444', marginTop: '1rem', fontSize: '0.9rem', textAlign: 'center' }}>Oops! Something went wrong. Please try again.</p>}
             </form>

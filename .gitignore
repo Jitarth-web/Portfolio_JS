@@ -10,3 +10,8 @@ dist/
 # Design files and archives
 *.zip
 work/
+
+# Environment files
+.env
+.env.*
+
