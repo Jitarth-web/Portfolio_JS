@@ -165,7 +165,7 @@ export default function About() {
         hours,
         minutes,
         seconds,
-        milliseconds: Math.floor(milliseconds / 10) // 2-digit representation
+        milliseconds // 3-digit representation
       });
     };
 
@@ -292,7 +292,7 @@ export default function About() {
                 <p>Projects</p>
               </div>
               <div className="about-stat-item">
-                <h4 className="about-stat-number" data-val="400">0+</h4>
+                <h4 className="about-stat-number" data-val="300">0+</h4>
                 <p>LeetCode</p>
               </div>
               <div className="about-stat-item">
@@ -403,7 +403,7 @@ export default function About() {
                         <Target className="w-4 h-4 text-[var(--theme-color)]" /> Competitive Programming
                       </h5>
                       <p className="text-[12px] text-gray-400 leading-normal">
-                        Solving complex algorithmic math challenges on platforms like LeetCode (400+ problems completed).
+                        Solving complex algorithmic math challenges on platforms like LeetCode (300+ problems completed).
                       </p>
                     </div>
                   </div>
@@ -611,7 +611,7 @@ export default function About() {
                   <span className="about-ticker-label">secs</span>
                 </div>
                 <div className="about-ticker-unit highlight">
-                  <span className="about-ticker-num text-[var(--theme-color)]">{pad(age.milliseconds, 2)}</span>
+                  <span className="about-ticker-num text-[var(--theme-color)]">{pad(age.milliseconds, 3)}</span>
                   <span className="about-ticker-label text-[var(--theme-color)]">ms</span>
                 </div>
               </div>

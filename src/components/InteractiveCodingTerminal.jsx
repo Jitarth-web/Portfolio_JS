@@ -482,7 +482,7 @@ public:
           <span className="window-dot yellow" />
           <span className="window-dot green" />
         </div>
-        <div className="window-title">LeetCode Simulator - bash & nvim</div>
+        <div className="window-title">Jitarth@CSE-Terminal</div>
         <div className="leetcode-streak" style={{ marginRight: "4px" }}>
           <span style={{ color: "#ffa116", fontWeight: "bold", fontSize: "11px", display: "flex", alignItems: "center", gap: "4px" }}>
             🔥 365 Days Streak
