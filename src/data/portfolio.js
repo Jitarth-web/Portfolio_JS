@@ -54,10 +54,10 @@ export const orbitGroups = [
 ];
 
 export const skills = [
-  { group: "Frontend", items: ["HTML", "CSS", "JavaScript", "React","Shery.JS","GSAP"] },
-  { group: "Backend", items: ["Python", "Flask", "Node.js","FastAPI"] },
+  { group: "Frontend", items: ["HTML", "CSS", "JavaScript", "React", "Three.js", "Tailwind CSS", "React Native", "Shery.JS", "GSAP"] },
+  { group: "Backend", items: ["Node.js", "MongoDB", "SQL", "Docker", "Python", "Flask", "FastAPI"] },
   { group: "AI", items: ["Prompt Engineering", "LLMs", "Machine Learning", "Data Analysis"] },
-  { group: "Tools", items: ["Git", "GitHub", "VS Code", "Figma","Cursor","Devin"] }
+  { group: "Tools", items: ["Git", "GitHub", "VS Code", "Figma", "Cursor", "Antigravity", "Framer", "ChatGPT", "Vercel", "Railway", "Render"] }
 ];
 
 export const projects = [

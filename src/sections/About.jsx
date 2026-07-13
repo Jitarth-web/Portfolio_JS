@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeading from "../components/SectionHeading";
+import InteractiveCodingTerminal from "../components/InteractiveCodingTerminal";
 import { profile } from "../data/portfolio";
 import avatarMain from "../assets/figma/image 30.png";
 import ringImg from "../assets/figma/image 4.png";
@@ -30,7 +31,6 @@ export default function About() {
   const containerRef = useRef(null);
   const [activeJourney, setActiveJourney] = useState(1); // 0-indexed: JEE, NITD, Dev, AI, Build
   const [activeTab, setActiveTab] = useState("education"); // education, interests, goals, mission
-  const [consoleText, setConsoleText] = useState("");
 
   // Actual inspiring technology and design quotes
   const quotes = [
@@ -110,29 +110,7 @@ export default function About() {
     return () => clearInterval(timer);
   }, []);
 
-  // Typing effect for Console
-  useEffect(() => {
-    const fullText = [
-      "> Initializing developer core...",
-      "> System status: Online",
-      `> Identity: ${profile.name.toUpperCase()}`,
-      `> Education: B.TECH CSE @ NIT DELHI`,
-      "> Passion level: [||||||||||] 100%",
-      "> Curiosity: Infinite Loop",
-      "> Loop>>Skills: Ready to build amazing things"
-    ].join("\n");
 
-    let idx = 0;
-    const timer = setInterval(() => {
-      setConsoleText((prev) => prev + fullText[idx]);
-      idx++;
-      if (idx >= fullText.length) {
-        clearInterval(timer);
-      }
-    }, 25);
-
-    return () => clearInterval(timer);
-  }, []);
 
   // Age Ticker Logic with high speed milliseconds (DOB: 01/10/2006)
   const [age, setAge] = useState({
@@ -303,18 +281,7 @@ export default function About() {
 
           {/* Card 2: Command Console */}
           <div className="about-bento-card about-card-terminal about-parallax-card">
-            <div className="about-console">
-              <div className="about-console-header">
-                <span className="about-console-dot red"></span>
-                <span className="about-console-dot yellow"></span>
-                <span className="about-console-dot green"></span>
-                <span className="text-xs text-gray-500 font-mono ml-2">jitarth@terminal</span>
-              </div>
-              <div className="about-console-body font-mono text-[11px] leading-tight text-[#a8ffb2]">
-                {consoleText}
-                <span className="animate-pulse">|</span>
-              </div>
-            </div>
+            <InteractiveCodingTerminal />
           </div>
 
           {/* Card 3: Stats Dashboard */}

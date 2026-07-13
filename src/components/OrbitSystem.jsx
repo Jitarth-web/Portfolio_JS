@@ -17,7 +17,13 @@ import {
   CppIcon,
   LeetcodeIcon,
   LinkedinIcon,
-  MailIcon
+  MailIcon,
+  NextJsIcon,
+  TypeScriptIcon,
+  TailwindCssIcon,
+  FlaskIcon,
+  FastApiIcon,
+  PyTorchIcon
 } from "./Icons";
 
 // Tech brand glows color map
@@ -39,7 +45,13 @@ const GLOW_COLOR_MAP = {
   "Figma": "#f24e1e",
   "VS Code": "#038be6",
   "LinkedIn": "#0a66c2",
-  "Mail": "#ff6a21"
+  "Mail": "#ff6a21",
+  "Next.js": "#ffffff",
+  "TypeScript": "#3178c6",
+  "Tailwind CSS": "#38bdf8",
+  "Flask": "#ffffff",
+  "FastAPI": "#009688",
+  "PyTorch": "#ee4c2c"
 };
 
 const iconMap = {
@@ -60,7 +72,13 @@ const iconMap = {
   "Figma": <FigmaMark />,
   "VS Code": <VsCodeIcon />,
   "LinkedIn": <LinkedinIcon />,
-  "Mail": <MailIcon />
+  "Mail": <MailIcon />,
+  "Next.js": <NextJsIcon />,
+  "TypeScript": <TypeScriptIcon />,
+  "Tailwind CSS": <TailwindCssIcon />,
+  "Flask": <FlaskIcon />,
+  "FastAPI": <FastApiIcon />,
+  "PyTorch": <PyTorchIcon />
 };
 
 // 5 expanded orbits configuration (Rx, Ry, Tilt, Speed, Direction)
@@ -72,35 +90,41 @@ const ORBITS_CONFIG = [
   { rx: 280, ry: 540, tilt: -12, speed: 46, direction: 1, rotSpeed: 70, rotDir: 1, strokeWidth: 0.5, baseOpacity: 0.06 }   // Orbit 5: Tall vertical ellipse
 ];
 
-// 18 skills distributed across 5 orbits
+// 24 skills distributed across 5 orbits
 const ICONS_CONFIG = [
-  // Orbit 1 (3 icons)
-  { name: "React", orbitIndex: 0, startAngle: (0 / 3) * 2 * Math.PI, globalIndex: 3 },
-  { name: "GSAP", orbitIndex: 0, startAngle: (1 / 3) * 2 * Math.PI, globalIndex: 6 },
-  { name: "Three.js", orbitIndex: 0, startAngle: (2 / 3) * 2 * Math.PI, globalIndex: 5 },
+  // Orbit 1 (4 icons)
+  { name: "React", orbitIndex: 0, startAngle: (0 / 4) * 2 * Math.PI, globalIndex: 3 },
+  { name: "Next.js", orbitIndex: 0, startAngle: (1 / 4) * 2 * Math.PI, globalIndex: 18 },
+  { name: "GSAP", orbitIndex: 0, startAngle: (2 / 4) * 2 * Math.PI, globalIndex: 6 },
+  { name: "Three.js", orbitIndex: 0, startAngle: (3 / 4) * 2 * Math.PI, globalIndex: 5 },
   
-  // Orbit 2 (4 icons)
-  { name: "JavaScript", orbitIndex: 1, startAngle: (0 / 4) * 2 * Math.PI, globalIndex: 2 },
-  { name: "HTML", orbitIndex: 1, startAngle: (1 / 4) * 2 * Math.PI, globalIndex: 0 },
-  { name: "CSS", orbitIndex: 1, startAngle: (2 / 4) * 2 * Math.PI, globalIndex: 1 },
-  { name: "Node.js", orbitIndex: 1, startAngle: (3 / 4) * 2 * Math.PI, globalIndex: 4 },
+  // Orbit 2 (5 icons)
+  { name: "JavaScript", orbitIndex: 1, startAngle: (0 / 5) * 2 * Math.PI, globalIndex: 2 },
+  { name: "TypeScript", orbitIndex: 1, startAngle: (1 / 5) * 2 * Math.PI, globalIndex: 19 },
+  { name: "HTML", orbitIndex: 1, startAngle: (2 / 5) * 2 * Math.PI, globalIndex: 0 },
+  { name: "CSS", orbitIndex: 1, startAngle: (3 / 5) * 2 * Math.PI, globalIndex: 1 },
+  { name: "Node.js", orbitIndex: 1, startAngle: (4 / 5) * 2 * Math.PI, globalIndex: 4 },
   
-  // Orbit 3 (4 icons)
-  { name: "C++", orbitIndex: 2, startAngle: (0 / 4) * 2 * Math.PI, globalIndex: 9 },
-  { name: "Python", orbitIndex: 2, startAngle: (1 / 4) * 2 * Math.PI, globalIndex: 11 },
-  { name: "SQL", orbitIndex: 2, startAngle: (2 / 4) * 2 * Math.PI, globalIndex: 8 },
-  { name: "MongoDB", orbitIndex: 2, startAngle: (3 / 4) * 2 * Math.PI, globalIndex: 7 },
+  // Orbit 3 (5 icons)
+  { name: "C++", orbitIndex: 2, startAngle: (0 / 5) * 2 * Math.PI, globalIndex: 9 },
+  { name: "Python", orbitIndex: 2, startAngle: (1 / 5) * 2 * Math.PI, globalIndex: 11 },
+  { name: "SQL", orbitIndex: 2, startAngle: (2 / 5) * 2 * Math.PI, globalIndex: 8 },
+  { name: "MongoDB", orbitIndex: 2, startAngle: (3 / 5) * 2 * Math.PI, globalIndex: 7 },
+  { name: "Tailwind CSS", orbitIndex: 2, startAngle: (4 / 5) * 2 * Math.PI, globalIndex: 20 },
   
-  // Orbit 4 (4 icons)
-  { name: "Git", orbitIndex: 3, startAngle: (0 / 4) * 2 * Math.PI, globalIndex: 13 },
-  { name: "GitHub", orbitIndex: 3, startAngle: (1 / 4) * 2 * Math.PI, globalIndex: 12 },
-  { name: "VS Code", orbitIndex: 3, startAngle: (2 / 4) * 2 * Math.PI, globalIndex: 15 },
-  { name: "LeetCode", orbitIndex: 3, startAngle: (3 / 4) * 2 * Math.PI, globalIndex: 10 },
+  // Orbit 4 (5 icons)
+  { name: "Git", orbitIndex: 3, startAngle: (0 / 5) * 2 * Math.PI, globalIndex: 13 },
+  { name: "LeetCode", orbitIndex: 3, startAngle: (1 / 5) * 2 * Math.PI, globalIndex: 10 },
+  { name: "Flask", orbitIndex: 3, startAngle: (2 / 5) * 2 * Math.PI, globalIndex: 21 },
+  { name: "FastAPI", orbitIndex: 3, startAngle: (3 / 5) * 2 * Math.PI, globalIndex: 22 },
+  { name: "PyTorch", orbitIndex: 3, startAngle: (4 / 5) * 2 * Math.PI, globalIndex: 23 },
   
-  // Orbit 5 (3 icons)
-  { name: "Figma", orbitIndex: 4, startAngle: (0 / 3) * 2 * Math.PI, globalIndex: 14 },
-  { name: "LinkedIn", orbitIndex: 4, startAngle: (1 / 3) * 2 * Math.PI, globalIndex: 16 },
-  { name: "Mail", orbitIndex: 4, startAngle: (2 / 3) * 2 * Math.PI, globalIndex: 17 }
+  // Orbit 5 (5 icons)
+  { name: "Figma", orbitIndex: 4, startAngle: (0 / 5) * 2 * Math.PI, globalIndex: 14 },
+  { name: "GitHub", orbitIndex: 4, startAngle: (1 / 5) * 2 * Math.PI, globalIndex: 12 },
+  { name: "VS Code", orbitIndex: 4, startAngle: (2 / 5) * 2 * Math.PI, globalIndex: 15 },
+  { name: "LinkedIn", orbitIndex: 4, startAngle: (3 / 5) * 2 * Math.PI, globalIndex: 16 },
+  { name: "Mail", orbitIndex: 4, startAngle: (4 / 5) * 2 * Math.PI, globalIndex: 17 }
 ];
 
 export default function OrbitSystem() {

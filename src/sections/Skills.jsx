@@ -3,6 +3,77 @@ import SectionHeading from "../components/SectionHeading";
 import { skills } from "../data/portfolio";
 import image41 from "../assets/figma/image 41.png";
 import gsap from "gsap";
+import {
+  HtmlIcon, CssIcon, JsIcon, ReactIcon, ThreeJsIcon, TailwindCssIcon,
+  NodeIcon, MongodbIcon, SqlIcon, DockerIcon, PythonIcon, FlaskIcon, FastApiIcon,
+  GitIcon, GithubIcon, VsCodeIcon, FigmaMark, CursorIcon, AntigravityIcon,
+  FramerIcon, ChatGptIcon, VercelIcon, RailwayIcon, RenderIcon, GsapIcon
+} from "../components/Icons";
+
+const getSkillIcon = (item) => {
+  const iconStyle = {
+    width: "16px",
+    height: "16px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0
+  };
+
+  switch (item) {
+    // Frontend
+    case "HTML": return <span style={iconStyle} className="text-[#e34f26]"><HtmlIcon /></span>;
+    case "CSS": return <span style={iconStyle} className="text-[#1572b6]"><CssIcon /></span>;
+    case "JavaScript": return <span style={iconStyle} className="text-[#f7df1e]"><JsIcon /></span>;
+    case "React":
+    case "React Native": return <span style={iconStyle} className="text-[#61dafb]"><ReactIcon /></span>;
+    case "Three.js": return <span style={iconStyle} className="text-[#ffffff]"><ThreeJsIcon /></span>;
+    case "Tailwind CSS": return <span style={iconStyle} className="text-[#06b6d4]"><TailwindCssIcon /></span>;
+    case "GSAP": return <span style={iconStyle} className="text-[#88ce02]"><GsapIcon /></span>;
+    
+    // Backend
+    case "Node.js": return <span style={iconStyle} className="text-[#339933]"><NodeIcon /></span>;
+    case "MongoDB": return <span style={iconStyle} className="text-[#47a248]"><MongodbIcon /></span>;
+    case "SQL": return <span style={iconStyle} className="text-[#00758f]"><SqlIcon /></span>;
+    case "Docker": return <span style={iconStyle} className="text-[#2496ed]"><DockerIcon /></span>;
+    case "Python": return <span style={iconStyle} className="text-[#3776ab]"><PythonIcon /></span>;
+    case "Flask": return <span style={iconStyle} className="text-[#ffffff]"><FlaskIcon /></span>;
+    case "FastAPI": return <span style={iconStyle} className="text-[#009688]"><FastApiIcon /></span>;
+
+    // Tools
+    case "Git": return <span style={iconStyle} className="text-[#f05032]"><GitIcon /></span>;
+    case "GitHub": return <span style={iconStyle} className="text-[#ffffff]"><GithubIcon /></span>;
+    case "VS Code": return <span style={iconStyle} className="text-[#007acc]"><VsCodeIcon /></span>;
+    case "Figma": return <span style={iconStyle} className="text-[#f24e1e]"><FigmaMark /></span>;
+    case "Cursor": return <span style={iconStyle} className="text-[#55ffc0]"><CursorIcon /></span>;
+    case "Antigravity": return <span style={iconStyle} className="text-[#00f5ff]"><AntigravityIcon /></span>;
+    case "Framer": return <span style={iconStyle} className="text-[#0055ff]"><FramerIcon /></span>;
+    case "ChatGPT": return <span style={iconStyle} className="text-[#10a37f]"><ChatGptIcon /></span>;
+    case "Vercel": return <span style={iconStyle} className="text-[#ffffff]"><VercelIcon /></span>;
+    case "Railway": return <span style={iconStyle} className="text-[#fd4f96]"><RailwayIcon /></span>;
+    case "Render": return <span style={iconStyle} className="text-[#46e3b7]"><RenderIcon /></span>;
+
+    // Fallbacks or AI/Other
+    case "Prompt Engineering":
+    case "LLMs":
+    case "Machine Learning":
+    case "Data Analysis":
+      return (
+        <svg style={iconStyle} className="text-[#10b981]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4" />
+        </svg>
+      );
+
+    default:
+      return (
+        <svg style={iconStyle} className="text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+      );
+  }
+};
 
 function SkillPill({ item, category }) {
   const pillRef = useRef(null);
@@ -68,14 +139,15 @@ function SkillPill({ item, category }) {
       ref={pillRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="px-5 py-2.5 rounded-full text-sm font-medium transition-transform duration-300 inline-block cursor-pointer select-none relative z-10"
+      className="px-5 py-2.5 rounded-full text-sm font-medium transition-transform duration-300 inline-flex items-center gap-2.5 cursor-pointer select-none relative z-10"
       style={{
         background: "rgba(255, 255, 255, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.15)",
         boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
       }}
     >
-      {item}
+      {getSkillIcon(item)}
+      <span>{item}</span>
     </span>
   );
 }

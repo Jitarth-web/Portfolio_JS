@@ -570,13 +570,14 @@ svg {
 .tech-2 svg { fill: #F7DF1E; }
 
 /* React */
-.tech-3 svg { fill: #61DAFB; }
+.tech-3 svg { fill: none; stroke: #61DAFB; }
+.tech-3 svg circle { fill: #61DAFB; }
 
 /* Node.js */
-.tech-4 svg { fill: #339933; }
+.tech-4 svg { fill: #72B942; }
 
 /* Three.js */
-.tech-5 svg { fill: #FFFFFF; }
+.tech-5 svg { fill: none; stroke: #FFFFFF; }
 
 /* GSAP */
 .tech-6 svg { fill: #88CE02; }
@@ -613,6 +614,24 @@ svg {
 
 /* Mail */
 .tech-17 svg { fill: #EA4335; }
+
+/* Next.js */
+.tech-18 svg { fill: #FFFFFF; }
+
+/* TypeScript */
+.tech-19 svg { fill: #3178C6; }
+
+/* Tailwind CSS */
+.tech-20 svg { fill: #38BDF8; }
+
+/* Flask */
+.tech-21 svg { fill: #FFFFFF; }
+
+/* FastAPI */
+.tech-22 svg { fill: #009688; }
+
+/* PyTorch */
+.tech-23 svg { fill: #EE4C2C; }
 
 .figma-mark {
   position: relative;
@@ -797,6 +816,7 @@ svg {
 .about-card-terminal {
   grid-column: span 8;
   grid-row: span 2;
+  padding: 0 !important;
 }
 
 .about-card-stats {
@@ -2699,4 +2719,207 @@ select {
   50% {
     box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5), 0 0 var(--glow-radius-2) color-mix(in srgb, var(--theme-color) var(--glow-opacity-2), transparent);
   }
+}
+
+/* Coding Simulator Container */
+.coding-terminal-container {
+  display: flex;
+  flex-direction: column;
+  background: #0b0b0e;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  font-family: Consolas, "Fira Code", Monaco, "Courier New", Courier, monospace;
+}
+
+/* Header bar resembling macOS window */
+.coding-terminal-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #111115;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.window-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.window-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.window-dot.red { background: #ff5f56; }
+.window-dot.yellow { background: #ffbd2e; }
+.window-dot.green { background: #27c93f; }
+
+.window-title {
+  color: #6c6c70;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Split Pane Layout */
+.coding-terminal-split {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+}
+
+@media (max-width: 640px) {
+  .coding-terminal-split {
+    flex-direction: column;
+  }
+}
+
+/* Editor Panel */
+.editor-panel {
+  flex: 1.35;
+  display: flex;
+  flex-direction: column;
+  background: #141418;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  min-height: 150px;
+}
+
+.editor-tab-bar {
+  display: flex;
+  background: #0d0d10;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  height: 32px;
+  align-items: center;
+}
+
+.editor-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  background: #141418;
+  color: #e1e1e6;
+  font-size: 11px;
+  height: 100%;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.tab-icon-cpp {
+  color: #00599c;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.unsaved-dot {
+  width: 6px;
+  height: 6px;
+  background: #569cd6;
+  border-radius: 50%;
+}
+
+.saved-check {
+  font-size: 9px;
+  color: #27c93f;
+}
+
+.editor-content-area {
+  flex: 1;
+  display: flex;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #d4d4d4;
+  height: 100%;
+}
+
+.line-numbers {
+  text-align: right;
+  color: #555;
+  padding-right: 12px;
+  user-select: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.code-display {
+  padding-left: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  flex: 1;
+}
+
+/* Code syntax coloring */
+.code-token-keyword { color: #569cd6; font-weight: 500; }
+.code-token-type { color: #4ec9b0; }
+.code-token-number { color: #b5cea8; }
+.code-token-function { color: #dcdcaa; }
+.code-token-string { color: #ce9178; }
+.code-token-comment { color: #6a9955; font-style: italic; }
+.code-token-include { color: #ce9178; }
+.code-token-identifier { color: #9cdcfe; }
+.code-token-symbol { color: #d4d4d4; }
+.code-token-plain { color: #d4d4d4; }
+
+/* Terminal Panel */
+.terminal-panel {
+  flex: 0.9;
+  display: flex;
+  flex-direction: column;
+  background: #08080b;
+  padding: 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #e1e1e6;
+  overflow-y: auto;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
+  min-height: 120px;
+}
+
+.terminal-history {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.terminal-line-item {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* Colors in terminal */
+.term-prompt {
+  color: #0acf83;
+}
+.term-command {
+  color: #ffffff;
+}
+.term-output-accepted {
+  color: #27c93f;
+  font-weight: bold;
+}
+.term-output-meta {
+  color: #febc2e;
+}
+.term-input-line {
+  display: flex;
+  align-items: center;
+}
+.term-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  background: #0acf83;
+  margin-left: 2px;
+  animation: term-blink 1s step-end infinite;
+}
+
+@keyframes term-blink {
+  from, to { background-color: transparent }
+  50% { background-color: #0acf83 }
 }
