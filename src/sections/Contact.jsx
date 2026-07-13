@@ -35,6 +35,8 @@ export default function Contact() {
 
   // Load and render Cloudflare Turnstile widget dynamically
   useEffect(() => {
+    if (status === "success") return;
+
     const scriptId = "cloudflare-turnstile-script";
     let script = document.getElementById(scriptId);
     if (!script) {
@@ -48,9 +50,17 @@ export default function Contact() {
 
     const renderWidget = () => {
       if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
+        const sitekey = import.meta.env.VITE_TURNSTILE_SITEKEY;
+        if (!sitekey) {
+          const errorMsg = "Cloudflare Turnstile Error: VITE_TURNSTILE_SITEKEY is not defined in the environment variables.";
+          console.error(errorMsg);
+          setValidationError("Contact form configuration error: Turnstile Site Key is missing.");
+          throw new Error(errorMsg);
+        }
+
         try {
           widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-            sitekey: import.meta.env.VITE_TURNSTILE_SITEKEY || "1x00000000000000000000AA",
+            sitekey: sitekey,
             theme: "dark",
             callback: (token) => {
               setTurnstileToken(token);
@@ -79,16 +89,19 @@ export default function Contact() {
       if (window.turnstile && widgetIdRef.current) {
         try {
           window.turnstile.remove(widgetIdRef.current);
-          widgetIdRef.current = null;
         } catch (e) {
           console.error("Error removing Turnstile:", e);
         }
+        widgetIdRef.current = null;
       }
       if (script) {
         script.removeEventListener("load", renderWidget);
       }
+      if (turnstileRef.current) {
+        turnstileRef.current.innerHTML = "";
+      }
     };
-  }, []);
+  }, [status]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
