@@ -2923,3 +2923,8 @@ select {
   from, to { background-color: transparent }
   50% { background-color: #0acf83 }
 }
+
+.skill-icon-spin {
+  display: inline-flex;
+  transform-origin: center;
+}

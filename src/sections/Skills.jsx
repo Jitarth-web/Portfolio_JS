@@ -135,7 +135,7 @@ function SkillPill({ item, category }) {
   };
 
   return (
-    <span
+    <div
       ref={pillRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -146,9 +146,11 @@ function SkillPill({ item, category }) {
         boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
       }}
     >
-      {getSkillIcon(item)}
+      <div className={item !== "Figma" ? "skill-icon-spin inline-flex items-center justify-center" : "inline-flex items-center justify-center"} style={{ width: "16px", height: "16px", flexShrink: 0 }}>
+        {getSkillIcon(item)}
+      </div>
       <span>{item}</span>
-    </span>
+    </div>
   );
 }
 
