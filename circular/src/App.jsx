@@ -40,10 +40,18 @@ const items = [
     link: "https://github.com/"
   },
   {
+    id: 6,
+    title: "Student Management System",
+    desc: "A comprehensive student management platform with attendance tracking, social dashboard, academic notes sharing, and streamlined campus management.",
+    color: "#ff3333",
+    url: imgStudent,
+    link: "https://github.com/Jitarth-web/ClassClan"
+  },
+  {
     id: 4,
     title: "SwachhCity",
     desc: "A smart waste management platform enabling citizens to report waste issues, monitor collection status, and support cleaner urban environments through digital reporting.",
-    color: "#00ffcc",
+    color: "green",
     url: imgWaste,
     link: "https://swachh-city-16db.vercel.app/"
   },
@@ -51,17 +59,9 @@ const items = [
     id: 5,
     title: "SoundWave AI",
     desc: "An AI-powered music recommendation platform that analyzes listening habits to generate personalized playlists with a modern interactive interface.",
-    color: "#ff007f",
+    color: "#00d2ff",
     url: imgSoundwave,
     link: "https://soundwave-ai-ioik.vercel.app"
-  },
-  {
-    id: 6,
-    title: "Student Management System",
-    desc: "A comprehensive student management platform with attendance tracking, social dashboard, academic notes sharing, and streamlined campus management.",
-    color: "#ff3333",
-    url: imgStudent,
-    link: "https://github.com/Jitarth-web/ClassClan"
   }
 ];
 // Glowing background particle system to create space and depth

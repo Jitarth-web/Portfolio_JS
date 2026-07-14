@@ -62,6 +62,22 @@ export const skills = [
 
 export const projects = [
   {
+    title: "Domiq AI",
+    description:
+      "A modern AI-powered platform that analyzes floor plans, recommends personalized interior designs, generates smart room layouts, estimates construction costs, and creates immersive 3D visualizations using Gemini AI.",
+    tech: ["React.JS", "Node.JS", "MongoDB", "Gemini AI"],
+    github: "https://github.com/Jitarth-web/DOMIQ-AI",
+    live: "https://domiq-ai-seven.vercel.app/"
+  },
+  {
+    title: "SoundWave-AI",
+    description:
+      "An AI-powered music recommendation system that analyzes user preferences and generates personalized playlists.",
+    tech: ["React.JS","Node.JS","MongoDB"],
+    github: "https://github.com/ka0-0/Soundwave_AI",
+    live: "https://soundwave-ai-ioik.vercel.app"
+  },
+  {
     title: "Shagun Fashions",
     description:
       "A modern and premium tailoring website for school uniforms, custom stitching, and bulk garment manufacturing. Features a cinematic UI, responsive design, smooth animations, and an elegant user experience.",
@@ -93,22 +109,6 @@ export const projects = [
     tech: ["Python Flask", "React.JS","SQL-Persistent","Fast-API","Docker"],
     github: "https://github.com/Jitarth-web/SwachhCity",
     live: "https://swachh-city-16db.vercel.app/"
-  },
-  {
-    title: "SoundWave-AI",
-    description:
-      "An AI-powered music recommendation system that analyzes user preferences and generates personalized playlists.",
-    tech: ["React.JS","Node.JS","MongoDB"],
-    github: "https://github.com/ka0-0/Soundwave_AI",
-    live: "https://soundwave-ai-ioik.vercel.app"
-  },
-  {
-    title: "Domiq AI",
-    description:
-      "A modern AI-powered platform that analyzes floor plans, recommends personalized interior designs, generates smart room layouts, estimates construction costs, and creates immersive 3D visualizations using Gemini AI.",
-    tech: ["React.JS", "Node.JS", "MongoDB", "Gemini AI"],
-    github: "https://github.com/Jitarth-web/DOMIQ-AI",
-    live: "https://domiq-ai-seven.vercel.app/"
   },
 ];
 

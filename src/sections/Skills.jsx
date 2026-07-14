@@ -332,7 +332,7 @@ export default function Skills() {
             onMouseLeave={handleCardMouseLeave}
             className="glass-card w-full p-8 lg:p-12 shadow-2xl relative overflow-hidden hide-default-cursor"
             style={{
-              background: "rgba(10, 25, 15, 0.45)",
+              background: "var(--bg-nav)",
               border: "1px solid color-mix(in srgb, var(--theme-color) 20%, transparent)",
               borderRadius: "24px"
             }}

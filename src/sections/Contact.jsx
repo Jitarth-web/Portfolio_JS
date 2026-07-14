@@ -62,6 +62,7 @@ export default function Contact() {
           widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
             sitekey: sitekey,
             theme: "dark",
+            size: window.innerWidth < 385 ? "compact" : "normal",
             callback: (token) => {
               setTurnstileToken(token);
               setValidationError("");

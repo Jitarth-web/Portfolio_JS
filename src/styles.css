@@ -1749,7 +1749,11 @@ svg {
   .topbar {
     left: 24px;
     right: 24px;
-    grid-template-columns: 130px 1fr 170px 44px;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: none !important;
+    gap: 16px;
   }
 
   .menu-btn {
@@ -1901,18 +1905,18 @@ svg {
     position: absolute;
     left: 50%;
     right: auto;
-    margin-left: -200px; /* half of 400px */
+    transform: translateX(-50%);
     bottom: 0;
-    width: 400px;
+    width: min(400px, 90vw);
   }
 
   .avatar-shadow {
     position: absolute;
     left: 50%;
     right: auto;
-    margin-left: -130px; /* half of 260px */
+    transform: translateX(-50%);
     bottom: 15px;
-    width: 260px;
+    width: min(260px, 60vw);
     height: 40px;
   }
 
@@ -1920,10 +1924,10 @@ svg {
     position: absolute;
     left: 50%;
     right: auto;
-    margin-left: -280px; /* half of 560px */
+    transform: translateX(-50%);
     bottom: -30px;
-    width: 560px;
-    height: 560px;
+    width: min(560px, 100vw);
+    height: min(560px, 100vw);
   }
 
   .orbit-icon {
@@ -1946,7 +1950,10 @@ svg {
     left: 16px;
     right: 16px;
     height: 58px;
-    grid-template-columns: 1fr auto 42px;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: none !important;
     gap: 10px;
   }
 
@@ -2032,18 +2039,18 @@ svg {
     position: absolute;
     left: 50%;
     right: auto;
-    margin-left: -170px; /* half of 340px */
+    transform: translateX(-50%);
     bottom: 0;
-    width: 340px;
+    width: min(340px, 90vw);
   }
 
   .avatar-shadow {
     position: absolute;
     left: 50%;
     right: auto;
-    margin-left: -110px; /* half of 220px */
+    transform: translateX(-50%);
     bottom: 10px;
-    width: 220px;
+    width: min(220px, 60vw);
     height: 30px;
   }
 
@@ -2051,10 +2058,10 @@ svg {
     position: absolute;
     left: 50%;
     right: auto;
-    margin-left: -230px; /* half of 460px */
+    transform: translateX(-50%);
     bottom: -40px;
-    width: 460px;
-    height: 460px;
+    width: min(460px, 100vw);
+    height: min(460px, 100vw);
   }
 
   .orbit-icon {
@@ -2183,6 +2190,35 @@ svg {
     left: 1px;
     top: 28px;
   }
+
+  /* Responsive Theme Selector Palette wrapping */
+  .theme-palette-wrapper {
+    flex-wrap: wrap !important;
+    max-width: 180px !important;
+    justify-content: center !important;
+    border-radius: 16px !important;
+    padding: 10px !important;
+    gap: 8px !important;
+  }
+
+  /* Responsive Certifications Modal */
+  .cert-modal-content {
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+  .cert-modal-image {
+    padding: 15px !important;
+    min-height: 180px !important;
+  }
+  .cert-modal-image img {
+    max-height: 250px !important;
+  }
+  .cert-modal-details {
+    padding: 20px !important;
+  }
+  .cert-modal-details h2 {
+    font-size: 1.3rem !important;
+  }
 }
 
 @media (max-width: 430px) {
@@ -2228,18 +2264,18 @@ svg {
     position: absolute;
     left: 50%;
     right: auto;
-    margin-left: -150px; /* half of 300px */
+    transform: translateX(-50%);
     bottom: 0;
-    width: 300px;
+    width: min(300px, 90vw);
   }
 
   .avatar-shadow {
     position: absolute;
     left: 50%;
     right: auto;
-    margin-left: -100px; /* half of 200px */
+    transform: translateX(-50%);
     bottom: 10px;
-    width: 200px;
+    width: min(200px, 60vw);
     height: 25px;
   }
 
@@ -2247,10 +2283,10 @@ svg {
     position: absolute;
     left: 50%;
     right: auto;
-    margin-left: -205px; /* half of 410px */
+    transform: translateX(-50%);
     bottom: -40px;
-    width: 410px;
-    height: 410px;
+    width: min(410px, 100vw);
+    height: min(410px, 100vw);
   }
 
   .orbit-icon {

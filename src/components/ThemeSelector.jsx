@@ -76,6 +76,7 @@ export default function ThemeSelector() {
     >
       {isOpen && (
         <div
+          className="theme-palette-wrapper"
           style={{
             display: 'flex',
             gap: '10px',

@@ -5,12 +5,13 @@ import attendanceSystem from "../assets/figma/soundwave_ai.png";
 import shagunFashions from "../assets/figma/shaun.png";
 import domiqAi from "../assets/figma/domiq.png";
 const thumbnails = [
+  domiqAi,
+  attendanceSystem,
   shagunFashions,
   studentManagement,
   paymentGateway,
   blindStick,
   attendanceSystem,
-  domiqAi,
 ];
 
 export default function ProjectVisual({ index }) {

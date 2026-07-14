@@ -40,18 +40,19 @@ export default function Experience() {
                 <article className={`timeline-box relative w-full md:w-[45%] ${index % 2 === 0 ? 'md:ml-auto md:pl-12' : 'md:mr-auto md:pr-12 text-left md:text-right'} reveal-timeline`} key={item.title}>
                   
                   {/* Timeline Dot connecting to the line */}
-                  <div className={`absolute top-6 ${index % 2 === 0 ? 'left-[-40px] md:left-[-12px]' : 'left-[-40px] md:right-[-12px] md:left-auto'} w-6 h-6 rounded-full border-4 border-[#0a190f] z-20 hidden sm:block`}
+                  <div className={`absolute top-6 ${index % 2 === 0 ? 'left-[-40px] md:left-[-12px]' : 'left-[-40px] md:right-[-12px] md:left-auto'} w-6 h-6 rounded-full border-4 z-20 hidden sm:block`}
                        style={{
                          ...(index % 2 === 0 ? { transform: 'translateX(-50%)' } : { transform: 'translateX(50%)' }),
                          backgroundColor: 'var(--theme-color)',
-                         boxShadow: '0 0 15px var(--theme-color)'
+                         boxShadow: '0 0 15px var(--theme-color)',
+                         borderColor: 'var(--bg-color-1)'
                        }} />
 
                   {imgSrc && (
                     <img src={imgSrc} alt="Decorative" className={`${imgClass} ${floatClass} pointer-events-none`} style={{ filter: 'drop-shadow(0 15px 25px rgba(0,0,0,0.6))' }} />
                   )}
 
-                  <div className="glass-card p-8 rounded-2xl hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-300 relative overflow-hidden group z-10" style={{ background: "rgba(10, 25, 15, 0.45)", backdropFilter: "blur(12px)" }}>
+                  <div className="glass-card p-8 rounded-2xl hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-300 relative overflow-hidden group z-10" style={{ background: "var(--bg-nav)", backdropFilter: "blur(12px)" }}>
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundImage: 'linear-gradient(135deg, color-mix(in srgb, var(--theme-color) 10%, transparent), transparent)' }}></div>
                     <p className="font-semibold text-sm tracking-widest uppercase mb-2" style={{ color: 'var(--theme-color)' }}>{item.meta}</p>
                     <h3 className="text-2xl font-bold mb-4 text-white">{item.title}</h3>

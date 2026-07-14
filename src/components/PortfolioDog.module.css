@@ -184,3 +184,21 @@
   border-color: var(--theme-color);
   box-shadow: 0 0 20px var(--theme-color);
 }
+
+@media (max-width: 768px) {
+  .dogContainer {
+    width: 90px;
+    height: 90px;
+  }
+  .clickTarget {
+    left: 17px;
+    top: 25px;
+    width: 56px;
+    height: 48px;
+  }
+  .speechBubble {
+    bottom: 75px;
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
