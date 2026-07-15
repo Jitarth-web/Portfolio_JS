@@ -51,8 +51,11 @@ export default function Contact() {
 
     const renderWidget = () => {
       if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
-        const sitekey = import.meta.env.VITE_TURNSTILE_SITEKEY;
-        if (!sitekey) {
+        const sitekey = import.meta.env.DEV 
+          ? "1x00000000000000000000AA" 
+          : (import.meta.env.VITE_TURNSTILE_SITEKEY || "1x00000000000000000000AA");
+
+        if (!sitekey && !import.meta.env.DEV) {
           const errorMsg = "Cloudflare Turnstile Error: VITE_TURNSTILE_SITEKEY is not defined in the environment variables.";
           console.error(errorMsg);
           setValidationError("Contact form configuration error: Turnstile Site Key is missing.");
@@ -134,16 +137,30 @@ export default function Contact() {
 
     setStatus("submitting");
 
-    // Append Turnstile response to form data
-    formData.append("cf-turnstile-response", turnstileToken);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
+    // Convert FormData to a standard object and add Web3Forms configuration
+    const payload = Object.fromEntries(formData.entries());
+    payload["access_key"] = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    payload["subject"] = "New Message from Portfolio Contact Form";
+    payload["from_name"] = payload["name"] || "Portfolio visitor";
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/jitarthgpt@gmail.com", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         setStatus("success");
         // Start cooldown
         localStorage.setItem("last_contact_submission", Date.now().toString());
@@ -154,6 +171,8 @@ export default function Contact() {
         }
         form.reset();
       } else {
+        console.error("Web3Forms Error Response:", response);
+        console.error("Web3Forms Error Body:", result);
         setStatus("error");
         if (window.turnstile && widgetIdRef.current) {
           window.turnstile.reset(widgetIdRef.current);
@@ -161,6 +180,8 @@ export default function Contact() {
         setTurnstileToken(null);
       }
     } catch (error) {
+      clearTimeout(timeoutId);
+      console.error("Web3Forms Network/Execution Error:", error);
       setStatus("error");
       if (window.turnstile && widgetIdRef.current) {
         window.turnstile.reset(widgetIdRef.current);
