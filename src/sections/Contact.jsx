@@ -10,6 +10,7 @@ export default function Contact() {
   const [turnstileToken, setTurnstileToken] = useState(null);
   const [validationError, setValidationError] = useState("");
   const [cooldown, setCooldown] = useState(0);
+  const [submissionError, setSubmissionError] = useState("");
 
   const turnstileRef = useRef(null);
   const widgetIdRef = useRef(null);
@@ -111,6 +112,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setValidationError("");
+    setSubmissionError("");
 
     // 1. Rate Limit check
     if (cooldown > 0) {
@@ -173,6 +175,7 @@ export default function Contact() {
       } else {
         console.error("Web3Forms Error Response:", response);
         console.error("Web3Forms Error Body:", result);
+        setSubmissionError(result?.message || "Oops! Something went wrong. Please try again.");
         setStatus("error");
         if (window.turnstile && widgetIdRef.current) {
           window.turnstile.reset(widgetIdRef.current);
@@ -182,6 +185,7 @@ export default function Contact() {
     } catch (error) {
       clearTimeout(timeoutId);
       console.error("Web3Forms Network/Execution Error:", error);
+      setSubmissionError(error?.message || "Oops! Something went wrong. Please try again.");
       setStatus("error");
       if (window.turnstile && widgetIdRef.current) {
         window.turnstile.reset(widgetIdRef.current);
@@ -265,7 +269,7 @@ export default function Contact() {
                     ? `Wait ${cooldown}s` 
                     : "Send Message"}
               </button>
-              {status === "error" && <p style={{ color: '#ff4444', marginTop: '1rem', fontSize: '0.9rem', textAlign: 'center' }}>Oops! Something went wrong. Please try again.</p>}
+              {status === "error" && <p style={{ color: '#ff4444', marginTop: '1rem', fontSize: '0.9rem', textAlign: 'center' }}>{submissionError || "Oops! Something went wrong. Please try again."}</p>}
             </form>
           )}
           
