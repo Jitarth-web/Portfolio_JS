@@ -144,6 +144,8 @@ export default function Contact() {
 
     // Convert FormData to a standard object and add Web3Forms configuration
     const payload = Object.fromEntries(formData.entries());
+    // Remove the turnstile token from the payload sent to Web3Forms to prevent Pro upgrade errors
+    delete payload["cf-turnstile-response"];
     payload["access_key"] = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
     payload["subject"] = "New Message from Portfolio Contact Form";
     payload["from_name"] = payload["name"] || "Portfolio visitor";
