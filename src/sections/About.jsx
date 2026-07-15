@@ -6,7 +6,7 @@ import InteractiveCodingTerminal from "../components/InteractiveCodingTerminal";
 import { profile } from "../data/portfolio";
 import avatarMain from "../assets/figma/image 30.png";
 import ringImg from "../assets/figma/image 4.png";
-import { PythonIcon, ReactIcon, JsIcon } from "../components/Icons";
+import { PythonIcon, ReactIcon, JsIcon, LeetcodeIcon } from "../components/Icons";
 import { 
   Terminal, 
   Cpu, 
@@ -22,7 +22,8 @@ import {
   Compass,
   MapPin,
   Briefcase,
-  Hourglass
+  Hourglass,
+  Heart
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -205,19 +206,22 @@ export default function About() {
       statElements.forEach((el) => {
         const val = parseInt(el.getAttribute("data-val") || "0", 10);
         const obj = { val: 0 };
-        gsap.to(obj, {
-          val: val,
-          duration: 1.8,
-          ease: "power2.out",
-          snap: { val: 1 },
-          onUpdate: () => {
-            el.innerText = obj.val + "+";
-          },
-          scrollTrigger: {
-            trigger: el,
-            start: "top 92%"
+        gsap.fromTo(obj, 
+          { val: 0 },
+          {
+            val: val,
+            duration: 1.8,
+            ease: "power2.out",
+            snap: { val: 1 },
+            onUpdate: () => {
+              el.innerText = obj.val + "+";
+            },
+            scrollTrigger: {
+              trigger: el,
+              start: "top 95%"
+            }
           }
-        });
+        );
       });
 
       return () => {
@@ -288,19 +292,31 @@ export default function About() {
           <div className="about-bento-card about-card-stats about-parallax-card">
             <div className="about-stats-grid">
               <div className="about-stat-item">
-                <h4 className="about-stat-number" data-val="10">0+</h4>
+                <div className="about-stat-icon text-[var(--theme-color)]">
+                  <Briefcase className="w-5 h-5" />
+                </div>
+                <h4 className="about-stat-number" data-val="10">10+</h4>
                 <p>Projects</p>
               </div>
               <div className="about-stat-item">
-                <h4 className="about-stat-number" data-val="300">0+</h4>
+                <div className="about-stat-icon text-[#ffa116]">
+                  <LeetcodeIcon />
+                </div>
+                <h4 className="about-stat-number" data-val="300">300+</h4>
                 <p>LeetCode</p>
               </div>
               <div className="about-stat-item">
-                <h4 className="about-stat-number" data-val="5">0+</h4>
+                <div className="about-stat-icon text-[#facc15]">
+                  <Award className="w-5 h-5" />
+                </div>
+                <h4 className="about-stat-number" data-val="5">5+</h4>
                 <p>Hackathons</p>
               </div>
               <div className="about-stat-item">
-                <h4 className="about-stat-number" data-val="15">0+</h4>
+                <div className="about-stat-icon text-[#38bdf8]">
+                  <Cpu className="w-5 h-5" />
+                </div>
+                <h4 className="about-stat-number" data-val="15">15+</h4>
                 <p>Tech Stack</p>
               </div>
             </div>
@@ -581,6 +597,7 @@ export default function About() {
               <div className="about-ticker-left">
                 <h4 className="text-xs text-[var(--theme-color)] font-semibold tracking-wider uppercase flex items-center gap-1.5">
                   <Hourglass className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "4s" }} /> Time on Earth
+                  <Heart className="w-3.5 h-3.5 animate-heart-beat" />
                 </h4>
                 <p className="text-[10px] text-gray-500 font-mono mt-1">Present on this planet since:</p>
               </div>

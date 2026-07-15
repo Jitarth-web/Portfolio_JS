@@ -24,7 +24,8 @@ export default function App() {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       tl.from(".topbar", { y: -92, opacity: 0, duration: 0.85 })
-        .from(".hero-copy > *", { y: 30, opacity: 0, duration: 0.8, stagger: 0.13 }, "-=0.35")
+        .from(".hero-copy > *:not(.hero-desc-subheading)", { y: 30, opacity: 0, duration: 0.8, stagger: 0.13 }, "-=0.35")
+        .from(".hero-desc-subheading", { y: 20, opacity: 0, duration: 0.8 }, "-=0.45")
         .fromTo(
           ".avatar-main",
           { y: "120vh", opacity: 0, scale: 0.94 },
@@ -79,6 +80,43 @@ export default function App() {
           ease: "power3.out",
           scrollTrigger: { trigger: element, start: "top 86%" }
         });
+      });
+
+      gsap.utils.toArray(".premium-heading-container").forEach((element) => {
+        const outline = element.querySelector(".heading-outline");
+        const solid = element.querySelector(".heading-solid");
+        const subheading = element.querySelector(".premium-subheading");
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: element,
+            start: "top 88%",
+            toggleActions: "play none none none"
+          }
+        });
+        
+        if (outline) {
+          tl.fromTo(outline, 
+            { y: 35, opacity: 0 },
+            { y: 0, opacity: 0.9, duration: 0.8, ease: "power3.out" }
+          );
+        }
+        
+        if (solid) {
+          tl.fromTo(solid,
+            { scale: 0.95, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.8, ease: "power3.out" },
+            "-=0.58"
+          );
+        }
+        
+        if (subheading) {
+          tl.fromTo(subheading,
+            { y: 15, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
+            "-=0.45"
+          );
+        }
       });
 
       gsap.utils.toArray(".reveal-timeline").forEach((element) => {

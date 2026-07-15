@@ -472,8 +472,8 @@ export default function PortfolioDog({ booting = false }) {
         isSleepingInHouseRef.current = true;
         dog.state = "WALKING";
         const isMobileWidth = window.innerWidth < 768;
-        dog.tx = isMobileWidth ? 42 : 60;
-        dog.ty = isMobileWidth ? 42 : 52;
+        dog.tx = isMobileWidth ? 115 : 60;
+        dog.ty = isMobileWidth ? 45 : 52;
         showSpeechBubble("Going to sleep... 💤", 2.0);
       }
     };
@@ -513,7 +513,7 @@ export default function PortfolioDog({ booting = false }) {
     if (booting) return false;
     const dog = stateRef.current;
     const isMobile = window.innerWidth < 768;
-    const scale = isMobile ? 0.483 : 0.733;
+    const scale = isMobile ? 0.667 : 0.733;
     
     const halfW = 50 * scale;
     const topOffset = 75 * scale;
@@ -719,8 +719,8 @@ export default function PortfolioDog({ booting = false }) {
         targetY = boneRef.current.y - window.scrollY;
       } else if (dog.state === "HOUSE_SLEEP" || isSleepingInHouseRef.current) {
         const isMobileWidth = window.innerWidth < 768;
-        targetX = isMobileWidth ? 42 : 60;
-        targetY = isMobileWidth ? 42 : 52;
+        targetX = isMobileWidth ? 115 : 60;
+        targetY = isMobileWidth ? 45 : 52;
       } else if (isAutoplay && !isMouseActiveRef.current) {
         const ap = autoplayRef.current;
         if (ap.targetEl) {
@@ -749,7 +749,7 @@ export default function PortfolioDog({ booting = false }) {
       const dist = Math.hypot(dx, dy);
 
       const isMobile = window.innerWidth < 768;
-      const S = isMobile ? 1.45 : 2.2;
+      const S = isMobile ? 2.0 : 2.2;
 
       // --- STATE MACHINE UPDATE ---
       if (dog.state === "WALKING") {
@@ -1011,7 +1011,7 @@ export default function PortfolioDog({ booting = false }) {
 
       // Dog drawing properties mapping
       const isMobile = window.innerWidth < 768;
-      const S = isMobile ? 1.45 : 2.2;
+      const S = isMobile ? 2.0 : 2.2;
 
       const time = performance.now() * 0.001;
       const gaitStr = Math.min(1, dog.animSpeed / MAX_SPEED);
@@ -1299,8 +1299,11 @@ export default function PortfolioDog({ booting = false }) {
       }
 
       if (containerRef.current) {
-        containerRef.current.style.left = `${dog.x - 80}px`;
-        containerRef.current.style.top = `${dog.y - 120}px`;
+        const isMobileWidth = window.innerWidth < 768;
+        const subX = isMobileWidth ? 62.5 : 80;
+        const subY = isMobileWidth ? 93.75 : 120;
+        containerRef.current.style.left = `${dog.x - subX}px`;
+        containerRef.current.style.top = `${dog.y - subY}px`;
       }
 
       if (cursorDotRef.current) {

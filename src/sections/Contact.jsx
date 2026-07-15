@@ -3,6 +3,7 @@ import SectionHeading from "../components/SectionHeading";
 import { profile } from "../data/portfolio";
 import ringImg from "../assets/figma/image 163.png";
 import womanImg from "../assets/figma/3d-rendering-cartoon-like-woman-working-computer 2.png";
+import { GithubIcon, LinkedinIcon, MailIcon, DownloadIcon } from "../components/Icons";
 
 export default function Contact() {
   const [status, setStatus] = useState("idle");
@@ -179,10 +180,22 @@ export default function Contact() {
         <div>
           <SectionHeading label="Contact" title="Let us Connect and {Build something} useful." />
           <div className="contact-links reveal">
-            <a href={profile.github}>GitHub</a>
-            <a href={profile.linkedin}>LinkedIn</a>
-            <a href={`mailto:${profile.email}`}>Email</a>
-            <a href={profile.resume} download>Resume Download</a>
+            <a href={profile.github}>
+              <span className="w-4 h-4 inline-flex items-center justify-center"><GithubIcon /></span>
+              GitHub
+            </a>
+            <a href={profile.linkedin}>
+              <span className="w-4 h-4 inline-flex items-center justify-center"><LinkedinIcon /></span>
+              LinkedIn
+            </a>
+            <a href={`mailto:${profile.email}`}>
+              <span className="w-4 h-4 inline-flex items-center justify-center"><MailIcon /></span>
+              Email
+            </a>
+            <a href={profile.resume} download>
+              <span className="w-4 h-4 inline-flex items-center justify-center"><DownloadIcon /></span>
+              Resume Download
+            </a>
           </div>
         </div>
         

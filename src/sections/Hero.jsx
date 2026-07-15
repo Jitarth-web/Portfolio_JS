@@ -7,6 +7,7 @@ import dollLarge from "../assets/figma/doll-large.png";
 import OrbitSystem from "../components/OrbitSystem";
 import { MailIcon } from "../components/Icons";
 import { profile } from "../data/portfolio";
+import TypewriterHeading from "../components/TypewriterHeading";
 
 export default function Hero() {
   const titles = [
@@ -88,38 +89,38 @@ export default function Hero() {
   const renderTypedTitle = () => {
     const fullWordWithMarkup = titles[currentIdx];
     const segments = parseSegments(fullWordWithMarkup);
-    const elements = [];
     let remaining = currentText.length;
+
+    let outlineText = "";
+    let solidText = "";
 
     for (let i = 0; i < segments.length; i++) {
       const seg = segments[i];
       if (remaining <= 0) break;
 
-      if (seg.text.length <= remaining) {
-        elements.push(
-          <span 
-            key={i} 
-            style={seg.highlight ? { color: "var(--theme-color)" } : {}}
-          >
-            {seg.text}
-          </span>
-        );
-        remaining -= seg.text.length;
+      const chunk = seg.text.substring(0, remaining);
+      remaining -= seg.text.length;
+
+      if (seg.highlight) {
+        solidText += chunk;
       } else {
-        elements.push(
-          <span 
-            key={i} 
-            style={seg.highlight ? { color: "var(--theme-color)" } : {}}
-          >
-            {seg.text.substring(0, remaining)}
-          </span>
-        );
-        remaining = 0;
+        outlineText += chunk;
       }
     }
 
-    return elements;
+    return { outlineText, solidText };
   };
+
+  const typed = renderTypedTitle();
+
+  const fullOutlineWord = titles[currentIdx].split("{")[0].trim().replace(/[{}]/g, "");
+  const outlineLen = fullOutlineWord.length;
+  let heroSizeClass = "";
+  if (outlineLen > 12) {
+    heroSizeClass = "hero-xl";
+  } else if (outlineLen > 8) {
+    heroSizeClass = "hero-lg";
+  }
 
   return (
     <section id="home" className="figma-hero section-panel">
@@ -132,11 +133,18 @@ export default function Hero() {
       <div className="hero-content-wrapper">
         <div className="hero-copy">
           <p className="eyebrow">Hey, I am <span className="hero-name">{profile.name}</span></p>
-          <h1>
-            {renderTypedTitle()}
-            <span className="typewriter-cursor">|</span>
+          <h1 className={`hero-premium-title ${heroSizeClass}`}>
+            <span className={`hero-outline ${heroSizeClass}`} data-text={typed.outlineText || "\u00A0"}>
+              {typed.outlineText || "\u00A0"}
+            </span>
+            <span className={`hero-solid ${heroSizeClass}`}>
+              {typed.solidText || "\u00A0"}
+              <span className="typewriter-cursor">|</span>
+            </span>
           </h1>
-          <p className="desc">{profile.description}</p>
+          <h3 className="premium-subheading hero-desc-subheading">
+            <TypewriterHeading text="CSE student at {National Institute of Technology Delhi} passionate about {Web Development}, {Software Engineering}, {Artificial Intelligence}, and {Problem Solving}. I enjoy building {modern digital experiences} and solving {real-world problems} through technology." typingSpeed={15} />
+          </h3>
           <div className="hero-actions">
             <a className="hire-btn" href="#contact">Hire me</a>
             <a className="mail-btn" href={`mailto:${profile.email}`} aria-label="Contact by email">
