@@ -31,8 +31,8 @@ export default function App() {
           { y: "120vh", opacity: 0, scale: 0.94 },
           {
             keyframes: [
-              { y: -22, opacity: 1, scale: 1.03, duration: 1.15, ease: "power3.out" },
-              { y: 0, scale: 1, duration: 0.35, ease: "bounce.out" }
+              { y: -12, opacity: 1, scale: 1.02, duration: 1.15, ease: "power3.out" },
+              { y: 0, scale: 1, duration: 0.4, ease: "power2.out" }
             ]
           },
           "-=0.12"
@@ -44,7 +44,7 @@ export default function App() {
 
       gsap.to(".figma-spin, .skill-icon-spin", { rotate: -360, duration: 12, repeat: -1, ease: "none" });
       gsap.to(".avatar-main", {
-        y: -12,
+        y: -8,
         duration: 3.6,
         repeat: -1,
         yoyo: true,
@@ -53,14 +53,20 @@ export default function App() {
       });
       gsap.to(".bolt", {
         y: -18,
-        filter: "drop-shadow(0 0 40px rgba(255, 106, 33, 0.9)) brightness(1.32)",
         duration: 2.25,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
         stagger: 0.28
       });
-      gsap.to(".doll-large", { x: 12, y: -10, duration: 3.4, repeat: -1, yoyo: true, ease: "sine.inOut" });
+      gsap.to(".doll-large", { 
+        x: 12, 
+        y: -10, 
+        duration: 3.4, 
+        repeat: -1, 
+        yoyo: true, 
+        ease: "sine.inOut" 
+      });
       gsap.to(".particle", {
         x: "random(-36, 36)",
         y: "random(-42, 42)",

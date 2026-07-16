@@ -625,11 +625,12 @@ svg {
 .avatar-main {
   position: absolute;
   right: 5.8vw;
-  bottom: -0.5vh;
+  bottom: 2.5vh;
   z-index: 4;
   width: min(48vw, 730px);
   pointer-events: none;
   filter: drop-shadow(0 28px 38px rgba(0, 0, 0, 0.28));
+  animation: avatarGlow 3.6s ease-in-out infinite alternate;
 }
 
 .avatar-shadow {
@@ -794,8 +795,9 @@ svg {
   position: absolute;
   z-index: 2;
   pointer-events: none;
-  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--theme-color) 48%, transparent)) brightness(1.08);
+  filter: drop-shadow(0 0 14px rgba(229, 57, 53, 0.65)) brightness(1.08);
   will-change: transform, filter;
+  animation: boltGlow 2.25s ease-in-out infinite alternate;
 }
 
 .bolt-right {
@@ -819,6 +821,7 @@ svg {
   bottom: 0;
   width: 180px;
   z-index: 3;
+  animation: dollGlow 3.4s ease-in-out infinite alternate;
 }
 
 .particle {
@@ -3279,5 +3282,72 @@ select {
   .hero-solid {
     font-size: clamp(30px, 11vw, 44px);
     margin-top: -0.15em;
+  }
+}
+
+@keyframes bootFlicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.99;
+    filter: drop-shadow(0 0 1px #ffffff);
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0px transparent);
+  }
+}
+
+@keyframes avatarGlow {
+  0% {
+    filter: drop-shadow(0 28px 38px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 12px var(--theme-color)) brightness(1);
+  }
+  100% {
+    filter: drop-shadow(0 28px 38px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 45px var(--theme-color)) brightness(1.12);
+  }
+}
+
+@keyframes dollGlow {
+  0% {
+    filter: drop-shadow(0 0 10px var(--theme-color)) brightness(1);
+  }
+  100% {
+    filter: drop-shadow(0 0 35px var(--theme-color)) brightness(1.15);
+  }
+}
+
+@keyframes boltGlow {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(229, 57, 53, 0.55)) brightness(1.08);
+  }
+  100% {
+    filter: drop-shadow(0 0 26px rgba(229, 57, 53, 0.95)) drop-shadow(0 0 8px #e53935) brightness(1.24);
+  }
+}
+
+@media (max-width: 768px) {
+  @keyframes avatarGlow {
+    0% {
+      filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.22)) drop-shadow(0 0 8px var(--theme-color)) brightness(1);
+    }
+    100% {
+      filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.22)) drop-shadow(0 0 22px var(--theme-color)) brightness(1.08);
+    }
+  }
+
+  @keyframes dollGlow {
+    0% {
+      filter: drop-shadow(0 0 6px var(--theme-color)) brightness(1);
+    }
+    100% {
+      filter: drop-shadow(0 0 18px var(--theme-color)) brightness(1.1);
+    }
+  }
+
+  @keyframes boltGlow {
+    0% {
+      filter: drop-shadow(0 0 6px rgba(229, 57, 53, 0.45)) brightness(1.04);
+    }
+    100% {
+      filter: drop-shadow(0 0 14px rgba(229, 57, 53, 0.8)) brightness(1.15);
+    }
   }
 }

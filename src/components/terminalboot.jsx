@@ -11,24 +11,26 @@ const BOOT_LINES = [
     { text: "JITARTH BIOS v2.0.26", instant: true },
     {
         text: "Copyright (C) 2026 Jitarth Singh. All Rights Reserved.",
+        highlight: "Jitarth Singh",
         instant: true,
     },
-    { text: "NIT Delhi Systems Division", instant: true },
+    { text: "NIT Delhi Systems Division", highlight: "NIT Delhi", instant: true },
     {
         text: "--------------------------------------------------",
         instant: true,
     },
-    { text: "Initializing CPU: Full Stack AI Web Developer...", delay: 400 },
-    { text: "Checking memory bank... 16384MB OK", delay: 200 },
+    { text: "Initializing CPU: Full Stack AI Web Developer...", highlight: "Full Stack AI Web Developer", delay: 400 },
+    { text: "Checking memory bank... 16384MB OK", highlight: "OK", delay: 200 },
     {
         text: "Loading Core Modules: React, GSAP, CSS, Flask, Node...",
+        highlight: ["React", "GSAP", "CSS", "Flask", "Node"],
         delay: 500,
     },
-    { text: "Establishing secure link to portfolio assets...", delay: 350 },
-    { text: "Loading portfolio content...", delay: 300 },
-    { text: "Welcome to my portfolio!", delay: 200 },
-    { text: "Initializing responsive interface elements...", delay: 250 },
-    { text: "Boot completed. Redirecting to workspace...", delay: 500 },
+    { text: "Establishing secure link to portfolio assets...", highlight: "portfolio assets", delay: 350 },
+    { text: "Loading portfolio content...", highlight: "portfolio content", delay: 300 },
+    { text: "Welcome to my portfolio!", highlight: "portfolio", delay: 200 },
+    { text: "Initializing responsive interface elements...", highlight: "responsive", delay: 250 },
+    { text: "Boot completed. Redirecting to workspace...", highlight: "workspace", delay: 500 },
 ]
 
 /**
@@ -221,7 +223,7 @@ export default function BootTypingLog(props) {
         height: "100%",
         objectFit: "cover",
         zIndex: 0,
-        filter: "brightness(1.3) contrast(1.15) saturate(1.1)",
+        pointerEvents: "none",
     }
 
     const overlayStyle = {
@@ -233,21 +235,77 @@ export default function BootTypingLog(props) {
 
     const terminalStyle = {
         position: "absolute",
-        left: isMobile ? "5%" : leftOffset,
-        top: isMobile ? "40%" : "50%",
-        transform: "translateY(-50%)",
-        width: isMobile ? "90%" : textWidth,
-        color: "#FFFFFF",
+        left: isMobile ? "6%" : leftOffset,
+        top: isMobile ? "15%" : "50%",
+        transform: isMobile ? "none" : "translateY(-50%)",
+        width: isMobile ? "88%" : textWidth,
+        maxHeight: isMobile ? "80vh" : "none",
+        overflowY: isMobile ? "auto" : "visible",
+        color: "rgba(255, 255, 255, 0.75)",
         background: "transparent",
         fontFamily:
-            '"Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-        fontSize: isMobile ? Math.max(14, fontSize - 6) : fontSize,
-        lineHeight: 1.45,
+            "'Clash Display', sans-serif",
+        fontSize: isMobile ? Math.max(12, fontSize - 8) : fontSize,
+        lineHeight: 1.4,
         letterSpacing: "0.01em",
         whiteSpace: "pre-wrap",
         pointerEvents: "none",
         zIndex: 2,
         textShadow: "0 1px 2px rgba(0,0,0,0.55)",
+    }
+
+    const renderLineText = (lineText, lineObj) => {
+        if (!lineObj || !lineObj.highlight) {
+            return lineText
+        }
+
+        const highlights = Array.isArray(lineObj.highlight)
+            ? lineObj.highlight
+            : [lineObj.highlight]
+
+        let result = [lineText]
+
+        highlights.forEach((hl) => {
+            const newResult = []
+            result.forEach((part) => {
+                if (typeof part !== "string") {
+                    newResult.push(part)
+                    return
+                }
+
+                const index = part.indexOf(hl)
+                if (index !== -1) {
+                    newResult.push(part.substring(0, index))
+                    newResult.push(
+                        <span key={hl} style={{ color: "#ffffff", fontWeight: "700", textShadow: "0 0 8px rgba(255, 255, 255, 0.6)" }}>
+                            {hl}
+                        </span>
+                    )
+                    newResult.push(part.substring(index + hl.length))
+                } else {
+                    let partialFound = false
+                    for (let len = hl.length - 1; len > 0; len--) {
+                        const partialHl = hl.substring(0, len)
+                        if (part.endsWith(partialHl)) {
+                            newResult.push(part.substring(0, part.length - len))
+                            newResult.push(
+                                <span key={`${hl}-partial`} style={{ color: "#ffffff", fontWeight: "700", textShadow: "0 0 8px rgba(255, 255, 255, 0.6)" }}>
+                                    {partialHl}
+                                </span>
+                            )
+                            partialFound = true
+                            break
+                        }
+                    }
+                    if (!partialFound) {
+                        newResult.push(part)
+                    }
+                }
+            })
+            result = newResult
+        })
+
+        return result
     }
 
     return (
@@ -271,9 +329,54 @@ export default function BootTypingLog(props) {
                         currentLineIndex < BOOT_LINES.length &&
                         !BOOT_LINES[index]?.instant
 
+                    if (index === 0) {
+                        return (
+                            <div 
+                                key={index} 
+                                className="boot-header-container animate-pulse"
+                                style={{
+                                    marginBottom: "16px",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    lineHeight: 0.9,
+                                    animation: "bootFlicker 3s infinite",
+                                }}
+                            >
+                                <span 
+                                    className="heading-outline" 
+                                    style={{
+                                        fontSize: isMobile ? "28px" : "48px",
+                                        WebkitTextStroke: "1.2px #ffffff",
+                                        fontStyle: "italic",
+                                        letterSpacing: "-0.02em",
+                                        lineHeight: 1,
+                                        display: "inline-block",
+                                        textShadow: "0 0 10px rgba(0, 0, 0, 0.95), 0 0 5px rgba(0, 0, 0, 0.95)",
+                                    }}
+                                    data-text="JITARTH"
+                                >
+                                    JITARTH
+                                </span>
+                                <span 
+                                    className="heading-solid" 
+                                    style={{
+                                        fontSize: isMobile ? "24px" : "40px",
+                                        color: "rgba(255, 255, 255, 0.8)",
+                                        letterSpacing: "-0.01em",
+                                        marginTop: "-0.05em",
+                                        lineHeight: 1,
+                                        display: "inline-block",
+                                    }}
+                                >
+                                    BIOS v2.0.26
+                                </span>
+                            </div>
+                        )
+                    }
+
                     return (
-                        <div key={`${index}-${lineText.length}`}>
-                            {lineText}
+                        <div key={`${index}-${lineText.length}`} style={{ marginBottom: index === 3 ? "12px" : "4px" }}>
+                            {renderLineText(lineText, BOOT_LINES[index])}
                             {isCurrentLineTyping && cursorVisible ? "_" : ""}
                         </div>
                     )
