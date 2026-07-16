@@ -1203,7 +1203,7 @@ svg {
 
 .about-profile-title {
   font-size: 14px;
-  color: #ffb48a;
+  color: var(--theme-color);
   font-weight: 600;
   margin: 0;
 }
