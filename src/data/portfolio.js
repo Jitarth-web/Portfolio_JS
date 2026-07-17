@@ -9,6 +9,7 @@ import cert8 from "../pages/cert8.png";
 import cert9 from "../pages/cert9.png";
 import campus from "../pages/campus.png"
 import image from "./comingsoon.png";
+import video from "../assets/figma/nexa.mp4";
 
 export const profile = {
   name: "Jitarth Singh",
@@ -77,6 +78,22 @@ export const projects = [
     github: "https://github.com/ka0-0/Soundwave_AI",
     live: "https://soundwave-ai-ioik.vercel.app"
   },
+ {
+  title: "NEXA AI",
+  description:
+    "An intelligent voice-powered AI assistant that understands natural language, answers questions, automates everyday tasks, opens applications, performs web searches, manages files, and delivers real-time responses using advanced generative AI.",
+  tech: [
+    "Python",
+    "PySide6",
+    "Ollama (Qwen)",
+    "Speech Recognition",
+    "Text-to-Speech",
+    "PyAutoGUI",
+    "Playwright"
+  ],
+  github: "https://github.com/Jitarth-web/NEXA_AI",
+  live: video,
+},
   {
     title: "Shagun Fashions",
     description:

@@ -12,7 +12,7 @@ import imgSoundwave from './assets/soundwave_ai.png'
 import imgStudent from './assets/student_management_system.png'
 import imgButtonmax from './assets/ChatGPT Image Jun 27, 2026, 01_06_59 PM.png'
 import imgPerspective from './assets/ChatGPT Image Jul 2, 2026, 08_29_15 PM.png'
-
+import nexa from './assets/nexa_ai.png'
 // Showcase items with custom titles, descriptions, theme colors, and local imported images
 const items = [
   {
@@ -40,10 +40,18 @@ const items = [
     link: "https://github.com/"
   },
   {
-    id: 6,
+    id: 7,
+    title: "NEXA AI",
+    desc: "An intelligent voice-powered AI assistant that understands natural language, answers questions, automates everyday tasks, opens applications, performs web searches, manages files, and delivers real-time responses using advanced generative AI.",
+    color: "#00d9ffad",
+    url: nexa,
+    link: "https://github.com/Jitarth-web/NEXA_AI"
+  },
+  {
+    id: 8,
     title: "Student Management System",
     desc: "A comprehensive student management platform with attendance tracking, social dashboard, academic notes sharing, and streamlined campus management.",
-    color: "#ff3333",
+    color: "#ff8533",
     url: imgStudent,
     link: "https://github.com/Jitarth-web/ClassClan"
   },

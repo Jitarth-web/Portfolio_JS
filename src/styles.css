@@ -441,7 +441,7 @@ svg {
   top: 4px;
   color: transparent;
   -webkit-text-stroke-width: 1.5px !important;
-  -webkit-text-stroke-color: rgba(255, 255, 255, 0.72) !important;
+  -webkit-text-stroke-color: #ffffff !important;
   z-index: -1;
   pointer-events: none;
   font-style: italic;
@@ -903,7 +903,7 @@ svg {
   top: 4px;
   color: transparent;
   -webkit-text-stroke-width: 1.5px !important;
-  -webkit-text-stroke-color: rgba(255, 255, 255, 0.72) !important;
+  -webkit-text-stroke-color: #ffffff !important;
   z-index: -1;
   pointer-events: none;
   font-style: italic;

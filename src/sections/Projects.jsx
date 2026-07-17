@@ -8,7 +8,7 @@ import {
   NodeIcon, MongodbIcon, SqlIcon, DockerIcon, PythonIcon, FlaskIcon, FastApiIcon,
   GitIcon, GithubIcon, VsCodeIcon, FigmaMark, VercelIcon, FramerIcon, GsapIcon
 } from "../components/Icons";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Play } from "lucide-react";
 
 const getTechIcon = (tech) => {
   const iconStyle = {
@@ -64,6 +64,53 @@ const getTechIcon = (tech) => {
         </svg>
       </span>
     );
+    case "PySide6": return (
+      <span style={{ ...iconStyle, color: "#41cd52" }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+          <circle cx="12" cy="12" r="8" />
+          <line x1="17" y1="17" x2="20" y2="20" />
+        </svg>
+      </span>
+    );
+    case "Ollama (Qwen)": return (
+      <span style={{ ...iconStyle, color: "#ffffff" }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </span>
+    );
+    case "Speech Recognition": return (
+      <span style={{ ...iconStyle, color: "#ff6a21" }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>
+        </svg>
+      </span>
+    );
+    case "Text-to-Speech": return (
+      <span style={{ ...iconStyle, color: "#38bdf8" }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+      </span>
+    );
+    case "PyAutoGUI": return (
+      <span style={{ ...iconStyle, color: "#e83e8c" }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+          <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3zM13 13l6 6"/>
+        </svg>
+      </span>
+    );
+    case "Playwright": return (
+      <span style={{ ...iconStyle, color: "#2b9348" }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+          <line x1="2" y1="9" x2="22" y2="9"/>
+          <path d="M8 21h8M12 17v4"/>
+        </svg>
+      </span>
+    );
 
     default: return null;
   }
@@ -116,9 +163,18 @@ export default function Projects() {
                   <span className="w-4 h-4 inline-flex items-center justify-center"><GithubIcon /></span>
                   GitHub
                 </a>
-                <a href={project.live} className="project-btn">
-                  <ExternalLink className="w-4 h-4" />
-                  Live Demo
+                <a href={project.live} className={project.title === "NEXA AI" ? "project-btn demo-video-btn" : "project-btn"} target="_blank" rel="noopener noreferrer">
+                  {project.title === "NEXA AI" ? (
+                    <>
+                      <Play className="w-4 h-4" style={{ fill: "currentColor" }} />
+                      Demo Video
+                    </>
+                  ) : (
+                    <>
+                      <ExternalLink className="w-4 h-4" />
+                      Live Demo
+                    </>
+                  )}
                 </a>
               </div>
             </article>
