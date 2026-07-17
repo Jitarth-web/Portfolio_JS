@@ -8,6 +8,9 @@ import cert7 from "../pages/cert7.png";
 import cert8 from "../pages/cert8.png";
 import cert9 from "../pages/cert9.png";
 import campus from "../pages/campus.png"
+import cert10 from "../pages/cert10.png"
+import cert11 from "../pages/cert11.png"
+import cert12 from "../pages/cert12.png"
 import image from "./comingsoon.png";
 import video from "../assets/figma/nexa.mp4";
 
@@ -163,6 +166,27 @@ export const certifications = [
     issuer: "Deloitte × Forage",
     date: "Jul 2025",
     image: cert2,
+    credentialUrl: "#"
+  },
+   {
+    title: "Google Prompting Essentials",
+    issuer: "Google × Coursera",
+    date: "Jun 2026",
+    image: cert11,
+    credentialUrl: "#"
+  },
+  {
+    title: "Oracle Agentic AI",
+    issuer: "Oracle",
+    date: "Jul 2026",
+    image: cert12,
+    credentialUrl: "#"
+  },
+   {
+    title: "Google AI Essentials",
+    issuer: "Google × Coursera",
+    date: "Jun 2026",
+    image: cert10,
     credentialUrl: "#"
   },
   {
