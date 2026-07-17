@@ -1250,7 +1250,7 @@ svg {
   padding: 4px 10px;
   border-radius: 99px;
   font-size: 11px;
-  color: var(--theme-color);
+  color: "var(--theme-color)";
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -1259,12 +1259,11 @@ svg {
 .about-status-pulse {
   width: 6px;
   height: 6px;
-  background: var(--theme-color);
+  background: #22c55e; /* Green */
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--theme-color);
+  box-shadow: 0 0 8px #22c55e;
   animation: pulse-glow 1.5s infinite;
 }
-
 @keyframes float-avatar {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
