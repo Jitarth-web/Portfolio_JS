@@ -3391,8 +3391,22 @@ select {
   cursor: grab;
   user-select: none;
   box-sizing: border-box;
-  border: 3.5px solid #000000 !important;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+
+  /* Responsive variables: mobile default */
+  --sticker-border-width: 2px;
+  --sticker-shadow-offset: 3px;
+  --sticker-glow-blur: 10px;
+
+  border: var(--sticker-border-width) solid #000000 !important;
+}
+
+@media (min-width: 1024px) {
+  .sticker-body {
+    --sticker-border-width: 3.5px;
+    --sticker-shadow-offset: 5px;
+    --sticker-glow-blur: 20px;
+  }
 }
 
 .sticker-body:active {
@@ -3405,105 +3419,120 @@ select {
 }
 
 .sticker-size-sm {
-  padding: 6px 16px;
-  font-size: 1.05rem;
+  padding: 4px 10px;
+  font-size: 0.7rem;
   line-height: 1.25;
   border-radius: 9999px;
 }
 
 .sticker-size-md {
-  padding: 8px 24px;
-  font-size: 1.45rem;
+  padding: 5px 14px;
+  font-size: 0.8rem;
   line-height: 1.25;
   border-radius: 9999px;
 }
 
 .sticker-size-lg {
-  padding: 10px 32px;
-  font-size: 1.85rem;
+  padding: 6px 18px;
+  font-size: 0.95rem;
   line-height: 1.25;
   border-radius: 9999px;
+}
+
+@media (min-width: 1024px) {
+  .sticker-size-sm {
+    padding: 6px 16px;
+    font-size: 1.05rem;
+  }
+  .sticker-size-md {
+    padding: 8px 24px;
+    font-size: 1.25rem;
+  }
+  .sticker-size-lg {
+    padding: 10px 32px;
+    font-size: 1.85rem;
+  }
 }
 
 .sticker-theme-pink {
   background-color: #ff007f !important;
   color: #ffffff !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 0, 127, 0.65) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(255, 0, 127, 0.65) !important;
 }
 .sticker-theme-pink:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 0, 127, 0.85) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(255, 0, 127, 0.85) !important;
 }
 
 .sticker-theme-orange {
   background-color: #ff9f1c !important;
   color: #3d1a00 !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 159, 28, 0.65) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(255, 159, 28, 0.65) !important;
 }
 .sticker-theme-orange:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 159, 28, 0.85) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(255, 159, 28, 0.85) !important;
 }
 
 .sticker-theme-purple {
   background-color: #9b5de5 !important;
   color: #ffffff !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(155, 93, 229, 0.65) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(155, 93, 229, 0.65) !important;
 }
 .sticker-theme-purple:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(155, 93, 229, 0.85) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(155, 93, 229, 0.85) !important;
 }
 
 .sticker-theme-cyan {
   background-color: #00f0ff !important;
   color: #0a2040 !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(0, 240, 255, 0.65) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(0, 240, 255, 0.65) !important;
 }
 .sticker-theme-cyan:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(0, 240, 255, 0.85) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(0, 240, 255, 0.85) !important;
 }
 
 .sticker-theme-green {
   background-color: #788c24 !important;
   color: #ffffff !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(120, 140, 36, 0.65) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(120, 140, 36, 0.65) !important;
 }
 .sticker-theme-green:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(120, 140, 36, 0.85) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(120, 140, 36, 0.85) !important;
 }
 
 .sticker-theme-cyber-glass {
   background-color: #ffd32a !important;
   color: #3d2b00 !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 211, 42, 0.65) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(255, 211, 42, 0.65) !important;
 }
 .sticker-theme-cyber-glass:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 211, 42, 0.85) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(255, 211, 42, 0.85) !important;
 }
 
 .sticker-theme-red {
   background-color: #ff3838 !important;
   color: #ffffff !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 56, 56, 0.65) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(255, 56, 56, 0.65) !important;
 }
 .sticker-theme-red:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 56, 56, 0.85) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(255, 56, 56, 0.85) !important;
 }
 
 .sticker-theme-blue {
   background-color: #1b62ff !important;
   color: #ffffff !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(27, 98, 255, 0.65) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(27, 98, 255, 0.65) !important;
 }
 .sticker-theme-blue:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(27, 98, 255, 0.85) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(27, 98, 255, 0.85) !important;
 }
 
 .sticker-theme-lime {
   background-color: #adff2f !important;
   color: #000000 !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(173, 255, 47, 0.65) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(173, 255, 47, 0.65) !important;
 }
 .sticker-theme-lime:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(173, 255, 47, 0.85) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(173, 255, 47, 0.85) !important;
 }
 
 .sticker-heart-raw {
@@ -3527,8 +3556,8 @@ select {
 .sticker-theme-white {
   background-color: #ffffff !important;
   color: #000000 !important;
-  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 255, 255, 0.5) !important;
+  box-shadow: var(--sticker-shadow-offset) var(--sticker-shadow-offset) 0px #000000, 0 0 var(--sticker-glow-blur) rgba(255, 255, 255, 0.5) !important;
 }
 .sticker-theme-white:hover {
-  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 255, 255, 0.75) !important;
+  box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(255, 255, 255, 0.75) !important;
 }

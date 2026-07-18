@@ -147,29 +147,45 @@ export default function FloatingSticker({
         }
 
         // Update positions
-        x.current += vx.current;
-        y.current += vy.current;
+        // Update positions
+        if (minX >= maxX) {
+          x.current = minX;
+          vx.current = 0;
+        } else {
+          x.current += vx.current;
+        }
+
+        if (minY >= maxY) {
+          y.current = minY;
+          vy.current = 0;
+        } else {
+          y.current += vy.current;
+        }
 
         // Wall collisions
         let collided = false;
-        if (x.current < minX) {
-          x.current = minX;
-          vx.current = -vx.current * 0.9;
-          collided = true;
-        } else if (x.current > maxX) {
-          x.current = maxX;
-          vx.current = -vx.current * 0.9;
-          collided = true;
+        if (minX < maxX) {
+          if (x.current < minX) {
+            x.current = minX;
+            vx.current = -vx.current * 0.9;
+            collided = true;
+          } else if (x.current > maxX) {
+            x.current = maxX;
+            vx.current = -vx.current * 0.9;
+            collided = true;
+          }
         }
 
-        if (y.current < minY) {
-          y.current = minY;
-          vy.current = -vy.current * 0.9;
-          collided = true;
-        } else if (y.current > maxY) {
-          y.current = maxY;
-          vy.current = -vy.current * 0.9;
-          collided = true;
+        if (minY < maxY) {
+          if (y.current < minY) {
+            y.current = minY;
+            vy.current = -vy.current * 0.9;
+            collided = true;
+          } else if (y.current > maxY) {
+            y.current = maxY;
+            vy.current = -vy.current * 0.9;
+            collided = true;
+          }
         }
 
         // Sibling box-to-box collisions
@@ -346,10 +362,19 @@ export default function FloatingSticker({
       const minY = -initialTop.current;
       const maxY = parentH - initialTop.current - stickerH;
 
-      if (x.current < minX) x.current = minX;
-      if (x.current > maxX) x.current = maxX;
-      if (y.current < minY) y.current = minY;
-      if (y.current > maxY) y.current = maxY;
+      if (minX >= maxX) {
+        x.current = minX;
+      } else {
+        if (x.current < minX) x.current = minX;
+        if (x.current > maxX) x.current = maxX;
+      }
+
+      if (minY >= maxY) {
+        y.current = minY;
+      } else {
+        if (y.current < minY) y.current = minY;
+        if (y.current > maxY) y.current = maxY;
+      }
     }
 
     containerRef.current.style.transform = `translate3d(${x.current}px, ${y.current}px, 0)`;
