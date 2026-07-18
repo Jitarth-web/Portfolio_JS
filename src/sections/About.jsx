@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
+import FloatingSticker from "../components/FloatingSticker";
 
 export default function About() {
   const containerRef = useRef(null);
@@ -234,6 +235,11 @@ export default function About() {
 
   return (
     <section id="about" className="content-section" ref={containerRef}>
+      <FloatingSticker text="Keyboard Warrior" theme="pink" size="md" top="15%" left="2%" rotation={-6} />
+      <FloatingSticker text="Googled It." theme="orange" size="md" top="35%" right="3%" rotation={7} />
+      <FloatingSticker text="Coffee. Code. Regret." theme="red" size="md" top="58%" left="4%" rotation={-8} />
+      <FloatingSticker text="CSS is my passion" theme="blue" size="md" top="82%" right="2%" rotation={10} />
+      
       <div className="section-inner">
         <SectionHeading label="About" title="CSE Student {Building Modern} Digital Experiences." />
         

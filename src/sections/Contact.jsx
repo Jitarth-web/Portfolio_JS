@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import SectionHeading from "../components/SectionHeading";
+import FloatingSticker from "../components/FloatingSticker";
 import { profile } from "../data/portfolio";
 import ringImg from "../assets/figma/image 163.png";
 import womanImg from "../assets/figma/3d-rendering-cartoon-like-woman-working-computer 2.png";
@@ -198,6 +199,9 @@ export default function Contact() {
 
   return (
     <section id="contact" className="content-section contact-section relative overflow-hidden">
+      <FloatingSticker text="Human.exe" theme="orange" size="md" top="18%" left="4%" rotation={-7} />
+      <FloatingSticker text="Sleep is for the weak" theme="lime" size="md" top="48%" right="3%" rotation={9} />
+      <FloatingSticker text="git commit -m 'fixed'" theme="pink" size="md" top="78%" left="2%" rotation={-8} />
       
       {/* Background / Side elements */}
       <img src={ringImg} alt="Ring Element" className="absolute left-[-15%] top-[5%] w-[350px] md:w-[600px] opacity-40 pointer-events-none spin-anim z-0" />

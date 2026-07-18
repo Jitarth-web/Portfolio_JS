@@ -3,6 +3,7 @@ import SectionHeading from "../components/SectionHeading";
 import { skills } from "../data/portfolio";
 import image41 from "../assets/figma/image 41.png";
 import gsap from "gsap";
+import FloatingSticker from "../components/FloatingSticker";
 import {
   HtmlIcon, CssIcon, JsIcon, ReactIcon, ThreeJsIcon, TailwindCssIcon,
   NodeIcon, MongodbIcon, SqlIcon, DockerIcon, PythonIcon, FlaskIcon, FastApiIcon,
@@ -294,6 +295,13 @@ export default function Skills() {
 
   return (
     <section id="skills" className="content-section">
+      <FloatingSticker text="Still Centering Divs" theme="orange" size="md" top="15%" right="2%" rotation={11} />
+      <FloatingSticker text="StackOverflow Savior" theme="red" size="md" top="30%" left="4%" rotation={-6} className="hidden lg:block" />
+      <FloatingSticker text="Ctrl + S Addict" theme="green" size="md" top="45%" left="3%" rotation={-8} />
+      <FloatingSticker text="Keyboard Smash" theme="blue" size="sm" top="60%" right="2%" rotation={8} className="hidden lg:block" />
+      <FloatingSticker text="Not a bug, a feature" theme="purple" size="md" top="75%" right="4%" rotation={9} />
+      <FloatingSticker text="Console.log('help')" theme="lime" size="md" top="90%" left="2%" rotation={-5} />
+      
       <div className="section-inner relative z-10 flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16">
 
         {/* Left Column: Heading and Image */}

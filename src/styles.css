@@ -1,4 +1,5 @@
 @import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@300,400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -850,6 +851,25 @@ svg {
 .section-inner {
   width: min(1180px, 100%);
   margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.section-inner .glass-card,
+.section-inner .project-card,
+.section-inner .about-bento-card,
+.section-inner .experience-card,
+.section-inner .timeline-content,
+.section-inner .cert-card,
+.section-inner .section-heading,
+.section-inner .project-actions,
+.section-inner .tech-stack,
+.section-inner button,
+.section-inner a,
+.section-inner input,
+.section-inner textarea {
+  pointer-events: auto;
 }
 
 .two-column {
@@ -3349,4 +3369,166 @@ select {
       filter: drop-shadow(0 0 14px rgba(229, 57, 53, 0.8)) brightness(1.15);
     }
   }
+}
+
+/* ================= FLOATING STICKERS ================= */
+.sticker-container {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.sticker-floater {
+  pointer-events: none;
+}
+
+.sticker-body {
+  display: inline-block;
+  font-family: 'Syne', 'Clash Display', sans-serif;
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: auto;
+  cursor: grab;
+  user-select: none;
+  box-sizing: border-box;
+  border: 3.5px solid #000000 !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+}
+
+.sticker-body:active {
+  cursor: grabbing;
+}
+
+.sticker-body:hover {
+  transform: scale(1.08) !important;
+  z-index: 50;
+}
+
+.sticker-size-sm {
+  padding: 6px 16px;
+  font-size: 1.05rem;
+  line-height: 1.25;
+  border-radius: 9999px;
+}
+
+.sticker-size-md {
+  padding: 8px 24px;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  border-radius: 9999px;
+}
+
+.sticker-size-lg {
+  padding: 10px 32px;
+  font-size: 1.85rem;
+  line-height: 1.25;
+  border-radius: 9999px;
+}
+
+.sticker-theme-pink {
+  background-color: #ff007f !important;
+  color: #ffffff !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 0, 127, 0.65) !important;
+}
+.sticker-theme-pink:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 0, 127, 0.85) !important;
+}
+
+.sticker-theme-orange {
+  background-color: #ff9f1c !important;
+  color: #3d1a00 !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 159, 28, 0.65) !important;
+}
+.sticker-theme-orange:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 159, 28, 0.85) !important;
+}
+
+.sticker-theme-purple {
+  background-color: #9b5de5 !important;
+  color: #ffffff !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(155, 93, 229, 0.65) !important;
+}
+.sticker-theme-purple:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(155, 93, 229, 0.85) !important;
+}
+
+.sticker-theme-cyan {
+  background-color: #00f0ff !important;
+  color: #0a2040 !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(0, 240, 255, 0.65) !important;
+}
+.sticker-theme-cyan:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(0, 240, 255, 0.85) !important;
+}
+
+.sticker-theme-green {
+  background-color: #788c24 !important;
+  color: #ffffff !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(120, 140, 36, 0.65) !important;
+}
+.sticker-theme-green:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(120, 140, 36, 0.85) !important;
+}
+
+.sticker-theme-cyber-glass {
+  background-color: #ffd32a !important;
+  color: #3d2b00 !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 211, 42, 0.65) !important;
+}
+.sticker-theme-cyber-glass:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 211, 42, 0.85) !important;
+}
+
+.sticker-theme-red {
+  background-color: #ff3838 !important;
+  color: #ffffff !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 56, 56, 0.65) !important;
+}
+.sticker-theme-red:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 56, 56, 0.85) !important;
+}
+
+.sticker-theme-blue {
+  background-color: #1b62ff !important;
+  color: #ffffff !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(27, 98, 255, 0.65) !important;
+}
+.sticker-theme-blue:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(27, 98, 255, 0.85) !important;
+}
+
+.sticker-theme-lime {
+  background-color: #adff2f !important;
+  color: #000000 !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(173, 255, 47, 0.65) !important;
+}
+.sticker-theme-lime:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(173, 255, 47, 0.85) !important;
+}
+
+.sticker-heart-raw {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-size: 2.2rem !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  text-shadow: 0 0 15px rgba(255, 0, 127, 0.9) !important;
+  cursor: grab;
+  user-select: none;
+}
+.sticker-heart-raw:active {
+  cursor: grabbing;
+}
+.sticker-heart-raw:hover {
+  transform: scale(1.2) !important;
+}
+
+.sticker-theme-white {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  box-shadow: 5px 5px 0px #000000, 0 0 20px rgba(255, 255, 255, 0.5) !important;
+}
+.sticker-theme-white:hover {
+  box-shadow: 7px 7px 0px #000000, 0 0 30px rgba(255, 255, 255, 0.75) !important;
 }

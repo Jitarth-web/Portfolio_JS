@@ -1,8 +1,10 @@
 import image164 from "../assets/figma/image 164.png";
+import FloatingSticker from "./FloatingSticker";
 
 export default function Footer() {
   return (
     <footer className="w-full py-8 border-t border-[rgba(255,255,255,0.05)] relative overflow-hidden min-h-[180px] flex items-center">
+      <FloatingSticker text="thankyou" theme="red" size="md" top="30%" left="15%" rotation={-5} allowCenter={true} />
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 w-full">
         
         <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left z-20 pl-0 md:pl-28">

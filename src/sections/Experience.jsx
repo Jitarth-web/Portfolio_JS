@@ -1,4 +1,5 @@
 import SectionHeading from "../components/SectionHeading";
+import FloatingSticker from "../components/FloatingSticker";
 import { experience } from "../data/portfolio";
 import astronaut from "../assets/figma/astronaut-space-suit-white-background-3d-illustration 1.png";
 import image34 from "../assets/figma/image 34.png";
@@ -7,6 +8,14 @@ import image35 from "../assets/figma/image 35.png";
 export default function Experience() {
   return (
     <section id="experience" className="content-section relative overflow-hidden">
+      <FloatingSticker text="Fixing typo in prod" theme="cyan" size="md" top="15%" right="3%" rotation={10} />
+      <FloatingSticker text="Senior Copy Paster" theme="purple" size="md" top="28%" right="12%" rotation={-6} allowCenter={true} className="hidden lg:block" />
+      <FloatingSticker text="Git Push. Hope." theme="pink" size="md" top="42%" left="2%" rotation={-9} className="hidden lg:block" />
+      <FloatingSticker text="It worked yesterday" theme="blue" size="md" top="56%" left="15%" rotation={8} allowCenter={true} />
+      <FloatingSticker text="TODO: Delete this." theme="cyber-glass" size="md" top="70%" right="2%" rotation={7} allowCenter={true} className="hidden lg:block" />
+      <FloatingSticker text="Rubber Duck Approved" theme="orange" size="sm" top="80%" right="8%" rotation={-8} allowCenter={true} />
+      <FloatingSticker text="Is it coffee time?" theme="green" size="md" top="90%" left="4%" rotation={-6} />
+      
       <div className="section-inner relative z-10">
         <SectionHeading label="Experience" title="A Focused {Software Development} Path." />
         

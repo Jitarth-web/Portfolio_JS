@@ -9,6 +9,7 @@ import {
   GitIcon, GithubIcon, VsCodeIcon, FigmaMark, VercelIcon, FramerIcon, GsapIcon
 } from "../components/Icons";
 import { ExternalLink, Play } from "lucide-react";
+import FloatingSticker from "../components/FloatingSticker";
 
 const getTechIcon = (tech) => {
   const iconStyle = {
@@ -119,6 +120,17 @@ const getTechIcon = (tech) => {
 export default function Projects() {
   return (
     <section id="projects" className="content-section">
+      <FloatingSticker text="git push --force" theme="red" size="md" top="12%" left="2%" rotation={-7} />
+      <FloatingSticker text="Fixing prod" theme="green" size="sm" top="25%" right="3%" rotation={-8} className="hidden lg:block" />
+      <FloatingSticker text="Works on My Machine" theme="orange" size="md" top="38%" right="2%" rotation={9} allowCenter={true} className="hidden lg:block" />
+      <FloatingSticker text="Spaghetti Code Chef" theme="cyber-glass" size="md" top="48%" right="10%" rotation={5} allowCenter={true} />
+      <FloatingSticker text="Clean coder... jk" theme="purple" size="md" top="58%" left="4%" rotation={7} allowCenter={true} className="hidden lg:block" />
+      <FloatingSticker text="LGTM! (Didn't read)" theme="lime" size="md" top="65%" right="18%" rotation={-6} allowCenter={true} />
+      <FloatingSticker text="One more bug..." theme="blue" size="md" top="72%" left="3%" rotation={-10} allowCenter={true} className="hidden lg:block" />
+      <FloatingSticker text="It compiled on Sunday" theme="green" size="md" top="78%" right="14%" rotation={11} allowCenter={true} className="hidden lg:block" />
+      <FloatingSticker text="git merge --doom" theme="pink" size="md" top="84%" right="25%" rotation={-9} allowCenter={true} className="hidden lg:block" />
+      <FloatingSticker text="Deploy > Pray" theme="pink" size="md" top="89%" right="2%" rotation={8} allowCenter={true} />
+      
       <div className="section-inner">
         <SectionHeading label="Projects" title="Real-World {Builds with Clean} Presentation." />
         <div className="glass-card reveal h-[500px] md:h-[600px] relative w-full my-10 overflow-hidden">

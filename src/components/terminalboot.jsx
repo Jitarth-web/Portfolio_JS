@@ -6,6 +6,7 @@ import {
     useState,
     startTransition,
 } from "react"
+import FloatingSticker from "./FloatingSticker"
 
 const BOOT_LINES = [
     { text: "JITARTH BIOS v2.0.26", instant: true },
@@ -310,6 +311,10 @@ export default function BootTypingLog(props) {
 
     return (
         <div className={className} style={rootStyle} onClick={completeBoot} onTouchStart={completeBoot}>
+            <FloatingSticker text="Welcome" theme="white" size="md" top="15%" left="5%" rotation={-8} allowCenter={true} />
+            <FloatingSticker text="Hello World" theme="white" size="md" top="45%" right="8%" rotation={6} allowCenter={true} />
+            <FloatingSticker text="Initiating Boot..." theme="white" size="md" top="75%" left="10%" rotation={-5} allowCenter={true} />
+
             <video
                 src={videoSrc}
                 autoPlay

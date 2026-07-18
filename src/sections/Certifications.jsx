@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { certifications } from "../data/portfolio";
 import SectionHeading from "../components/SectionHeading";
+import FloatingSticker from "../components/FloatingSticker";
 
 export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState(null);
@@ -10,6 +11,10 @@ export default function Certifications() {
 
   return (
     <section id="certifications" className="content-section">
+      <FloatingSticker text="Undefined is not a function" theme="purple" size="md" top="25%" left="3%" rotation={-8} />
+      <FloatingSticker text="404 Brain Not Found" theme="red" size="md" top="55%" right="4%" rotation={8} />
+      <FloatingSticker text="404? Never." theme="blue" size="md" top="82%" left="2%" rotation={-6} />
+      
       <div className="section-inner">
         <SectionHeading label="Credentials" title="Cert{ifica}tions" />
       </div>
