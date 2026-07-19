@@ -65,7 +65,7 @@ export default function Experience() {
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundImage: 'linear-gradient(135deg, color-mix(in srgb, var(--theme-color) 10%, transparent), transparent)' }}></div>
                     <p className="font-semibold text-sm tracking-widest uppercase mb-2" style={{ color: 'var(--theme-color)' }}>{item.meta}</p>
                     <h3 className="text-2xl font-bold mb-4 text-white">{item.title}</h3>
-                    <span className="text-gray-400 leading-relaxed text-sm block">{item.detail}</span>
+                    <span className="text-white leading-relaxed text-sm block">{item.detail}</span>
                   </div>
                 </article>
               );

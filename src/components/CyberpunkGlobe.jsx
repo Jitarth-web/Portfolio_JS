@@ -370,7 +370,7 @@ export default function CyberpunkGlobe() {
           }}
         >
           <div className="font-bold text-[var(--theme-color)] text-[11px] mb-0.5">{tooltip.title}</div>
-          <div className="text-gray-300">{tooltip.desc}</div>
+          <div className="text-white">{tooltip.desc}</div>
         </div>
       )}
     </div>

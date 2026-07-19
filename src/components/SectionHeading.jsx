@@ -24,6 +24,7 @@ export default function SectionHeading({ label, title }) {
   // Typewriter state
   const [typedLength, setTypedLength] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
+  const [isDeletingHeading, setIsDeletingHeading] = useState(false);
   const containerRef = useRef(null);
 
   const outlineText = mapped.outline;
@@ -49,18 +50,42 @@ export default function SectionHeading({ label, title }) {
     return () => observer.disconnect();
   }, []);
 
+  // Reset state when outlineText or solidText changes
+  useEffect(() => {
+    setTypedLength(0);
+    setIsDeletingHeading(false);
+  }, [outlineText, solidText]);
+
   useEffect(() => {
     if (!hasStarted) return;
 
     let timer;
-    if (typedLength < totalLength) {
-      timer = setTimeout(() => {
-        setTypedLength((prev) => prev + 1);
-      }, 70); // speed of heading typing
+    if (!isDeletingHeading) {
+      if (typedLength < totalLength) {
+        timer = setTimeout(() => {
+          setTypedLength((prev) => prev + 1);
+        }, 25); // increased speed of heading typing
+      } else {
+        // Hold for 2.5 seconds at the end
+        timer = setTimeout(() => {
+          setIsDeletingHeading(true);
+        }, 2500);
+      }
+    } else {
+      if (typedLength > 0) {
+        timer = setTimeout(() => {
+          setTypedLength((prev) => prev - 1);
+        }, 12); // backspace twice as fast
+      } else {
+        // Hold for 0.5 seconds at the beginning
+        timer = setTimeout(() => {
+          setIsDeletingHeading(false);
+        }, 500);
+      }
     }
 
     return () => clearTimeout(timer);
-  }, [typedLength, hasStarted, totalLength]);
+  }, [typedLength, hasStarted, totalLength, isDeletingHeading]);
 
   // Compute currently typed outline and solid texts
   const currentOutline = outlineText.substring(0, Math.min(typedLength, outlineText.length));
@@ -69,14 +94,14 @@ export default function SectionHeading({ label, title }) {
     : "";
 
   const isOutlineTyping = typedLength <= outlineText.length;
-  const isSolidTyping = hasSolid && typedLength > outlineText.length && typedLength < totalLength;
+  const isSolidTyping = hasSolid && typedLength > outlineText.length && typedLength <= totalLength;
 
   return (
     <div ref={containerRef} className="premium-heading-container">
       <div className="premium-heading">
         <span className={`heading-outline ${sizeClass}`} data-text={currentOutline || "\u00A0"}>
           {currentOutline || "\u00A0"}
-          {isOutlineTyping && <span className="typewriter-cursor">|</span>}
+          {(isOutlineTyping || (!hasSolid && typedLength === totalLength)) && <span className="typewriter-cursor">|</span>}
         </span>
         {hasSolid && (currentSolid || !isOutlineTyping) && (
           <span className={`heading-solid ${sizeClass}`}>
@@ -86,7 +111,7 @@ export default function SectionHeading({ label, title }) {
         )}
       </div>
       <h3 className="premium-subheading">
-        <TypewriterHeading text={title} />
+        <TypewriterHeading text={title} infinite={true} typingSpeed={40} />
       </h3>
     </div>
   );

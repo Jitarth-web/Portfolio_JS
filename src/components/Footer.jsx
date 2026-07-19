@@ -8,14 +8,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 w-full">
         
         <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left z-20 pl-0 md:pl-28">
-          <p className="text-gray-400 text-sm tracking-wide">
+          <p className="text-white text-sm tracking-wide">
             Made with love by <span className="text-[var(--theme-color)] font-semibold">Jitarth Singh</span>. All rights reserved 2026.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-6 z-20">
           <div className="flex items-center gap-2 px-4 py-2 rounded-full" style={{ background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-            <span className="text-gray-300 text-xs tracking-widest uppercase font-semibold">System is under control</span>
+            <span className="text-white text-xs tracking-widest uppercase font-semibold">System is under control</span>
             <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]"></span>
           </div>
           

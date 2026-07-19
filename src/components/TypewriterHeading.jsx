@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 
-export default function TypewriterHeading({ text, typingSpeed = 80 }) {
+export default function TypewriterHeading({ text, typingSpeed = 80, infinite = false }) {
   const [typedLength, setTypedLength] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const containerRef = useRef(null);
 
   // Parse the segments from the text (e.g. "Let us {Connect}")
@@ -38,6 +39,12 @@ export default function TypewriterHeading({ text, typingSpeed = 80 }) {
 
   const cleanText = segments.map((s) => s.text).join("");
 
+  // Reset state if text changes
+  useEffect(() => {
+    setTypedLength(0);
+    setIsDeleting(false);
+  }, [text]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -60,14 +67,40 @@ export default function TypewriterHeading({ text, typingSpeed = 80 }) {
     if (!hasStarted) return;
 
     let timer;
-    if (typedLength < cleanText.length) {
-      timer = setTimeout(() => {
-        setTypedLength((prev) => prev + 1);
-      }, typingSpeed);
+    const cleanTextLength = cleanText.length;
+
+    if (!infinite) {
+      if (typedLength < cleanTextLength) {
+        timer = setTimeout(() => {
+          setTypedLength((prev) => prev + 1);
+        }, typingSpeed);
+      }
+    } else {
+      if (!isDeleting) {
+        if (typedLength < cleanTextLength) {
+          timer = setTimeout(() => {
+            setTypedLength((prev) => prev + 1);
+          }, typingSpeed);
+        } else {
+          timer = setTimeout(() => {
+            setIsDeleting(true);
+          }, 2000); // Wait 2 seconds at the end
+        }
+      } else {
+        if (typedLength > 0) {
+          timer = setTimeout(() => {
+            setTypedLength((prev) => prev - 1);
+          }, typingSpeed / 2); // Backspace twice as fast
+        } else {
+          timer = setTimeout(() => {
+            setIsDeleting(false);
+          }, 500); // Wait 0.5 seconds at the beginning
+        }
+      }
     }
 
     return () => clearTimeout(timer);
-  }, [typedLength, hasStarted, cleanText.length, typingSpeed]);
+  }, [typedLength, hasStarted, cleanText, typingSpeed, infinite, isDeleting]);
 
   // Construct the visible typed elements
   const renderTypedContent = () => {

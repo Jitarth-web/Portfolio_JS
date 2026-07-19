@@ -370,7 +370,7 @@ export default function About() {
                         </span>
                         <span className="text-[10px] text-[var(--theme-color)] font-bold uppercase">2024 - 2028</span>
                       </div>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Pursuing Computer Science and Engineering. Focusing on advanced algorithms, systems architecture, and database engineering.
                       </p>
                     </div>
@@ -382,7 +382,7 @@ export default function About() {
                         </span>
                         <span className="text-[10px] text-gray-500 font-semibold uppercase">Class 12 | 2024</span>
                       </div>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Completed Class 12 with a strong academic record, specializing in Physics, Chemistry, Mathematics, and Computer Science.
                       </p>
                     </div>
@@ -394,7 +394,7 @@ export default function About() {
                         </span>
                         <span className="text-[10px] text-gray-500 font-semibold uppercase">Class 10 | 2022</span>
                       </div>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Completed Class 10 with high credentials, establishing a solid logical and scientific foundation.
                       </p>
                     </div>
@@ -408,7 +408,7 @@ export default function About() {
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
                         <Brain className="w-4 h-4 text-[var(--theme-color)]" /> AI Tinkering & LLMs
                       </h5>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Experimenting with neural networking, open-source model fine-tuning, smart agent logic, and RAG.
                       </p>
                     </div>
@@ -416,7 +416,7 @@ export default function About() {
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
                         <Code className="w-4 h-4 text-[var(--theme-color)]" /> Creative Frontends
                       </h5>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Building gorgeous interfaces using GSAP timelines, responsive layout constraints, and vector canvases.
                       </p>
                     </div>
@@ -424,7 +424,7 @@ export default function About() {
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
                         <Target className="w-4 h-4 text-[var(--theme-color)]" /> Competitive Programming
                       </h5>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Solving complex algorithmic math challenges on platforms like LeetCode (300+ problems completed).
                       </p>
                     </div>
@@ -438,7 +438,7 @@ export default function About() {
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
                         <Target className="w-4 h-4 text-[var(--theme-color)]" /> Hackathon Engineering
                       </h5>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Developing smart full-stack products within tight execution windows to address actual user problems.
                       </p>
                     </div>
@@ -446,7 +446,7 @@ export default function About() {
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
                         <Code className="w-4 h-4 text-[var(--theme-color)]" /> Open-Source Contributions
                       </h5>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Contributing active pull requests to public developer packages, visual modules, and UI utilities.
                       </p>
                     </div>
@@ -454,7 +454,7 @@ export default function About() {
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
                         <Sparkles className="w-4 h-4 text-[var(--theme-color)]" /> 3D WebGL Interactions
                       </h5>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Mastering shader coordinate maths, WebGL canvas integrations, and rich 3D graphics rendering.
                       </p>
                     </div>
@@ -468,7 +468,7 @@ export default function About() {
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
                         <Sparkles className="w-4 h-4 text-[var(--theme-color)]" /> Harmonizing AI & Design
                       </h5>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Coupling state-of-the-art neural models with gorgeous, responsive user design frameworks.
                       </p>
                     </div>
@@ -476,7 +476,7 @@ export default function About() {
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
                         <Target className="w-4 h-4 text-[var(--theme-color)]" /> User-First Focus
                       </h5>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Constructing fast, accessible web solutions that deliver immediate utility and value to active users.
                       </p>
                     </div>
@@ -484,7 +484,7 @@ export default function About() {
                       <h5 className="text-[13px] font-bold text-white mb-0.5 flex items-center gap-1.5">
                         <Brain className="w-4 h-4 text-[var(--theme-color)]" /> Continuous Prototyping
                       </h5>
-                      <p className="text-[12px] text-gray-400 leading-normal">
+                      <p className="text-[12px] text-white leading-normal">
                         Gathering user feedback rapidly, learning through deployment, and iterating constantly.
                       </p>
                     </div>
@@ -605,7 +605,7 @@ export default function About() {
                   <Hourglass className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "4s" }} /> Time on Earth
                   <Heart className="w-3.5 h-3.5 animate-heart-beat" />
                 </h4>
-                <p className="text-[10px] text-gray-500 font-mono mt-1">Present on this planet since:</p>
+                <p className="text-[10px] text-white font-mono mt-1">Present on this planet since:</p>
               </div>
 
               <div className="about-ticker-grid">
