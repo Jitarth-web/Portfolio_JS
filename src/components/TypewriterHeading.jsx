@@ -105,13 +105,22 @@ export default function TypewriterHeading({ text, typingSpeed = 80, infinite = f
   // Construct the visible typed elements
   const renderTypedContent = () => {
     const elements = [];
-    let remaining = typedLength;
+    let currentLength = 0;
+    let cursorRendered = false;
+
+    // Special case: cursor at the very beginning
+    if (typedLength === 0) {
+      elements.push(<span key="cursor-start" className="typewriter-cursor">|</span>);
+      cursorRendered = true;
+    }
 
     for (let i = 0; i < segments.length; i++) {
       const seg = segments[i];
-      if (remaining <= 0) break;
+      const start = currentLength;
+      const end = currentLength + seg.text.length;
 
-      if (seg.text.length <= remaining) {
+      if (typedLength >= end) {
+        // Entirely typed
         elements.push(
           <span
             key={i}
@@ -120,18 +129,47 @@ export default function TypewriterHeading({ text, typingSpeed = 80, infinite = f
             {seg.text}
           </span>
         );
-        remaining -= seg.text.length;
+        // If cursor is exactly at the end of this segment
+        if (typedLength === end && !cursorRendered) {
+          elements.push(<span key={`cursor-${i}`} className="typewriter-cursor">|</span>);
+          cursorRendered = true;
+        }
+      } else if (typedLength <= start) {
+        // Entirely untyped (hidden to reserve layout space)
+        elements.push(
+          <span
+            key={i}
+            style={{
+              ...(seg.highlight ? { color: "var(--theme-color)" } : {}),
+              visibility: "hidden",
+            }}
+          >
+            {seg.text}
+          </span>
+        );
       } else {
+        // Partially typed
+        const typedPart = seg.text.substring(0, typedLength - start);
+        const untypedPart = seg.text.substring(typedLength - start);
         elements.push(
           <span
             key={i}
             style={seg.highlight ? { color: "var(--theme-color)" } : {}}
           >
-            {seg.text.substring(0, remaining)}
+            <span>{typedPart}</span>
+            <span className="typewriter-cursor" style={{ visibility: "visible" }}>|</span>
+            <span style={{ visibility: "hidden" }}>{untypedPart}</span>
           </span>
         );
-        remaining = 0;
+        cursorRendered = true;
       }
+
+      currentLength = end;
+    }
+
+    // fallback cursor if not rendered
+    if (!cursorRendered) {
+      elements.push(<span key="cursor-end" className="typewriter-cursor">|</span>);
     }
 
     return elements;
@@ -140,7 +178,6 @@ export default function TypewriterHeading({ text, typingSpeed = 80, infinite = f
   return (
     <span ref={containerRef} style={{ display: "inline-block" }}>
       {renderTypedContent()}
-      <span className="typewriter-cursor">|</span>
     </span>
   );
 }

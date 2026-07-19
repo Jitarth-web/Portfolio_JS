@@ -89,24 +89,34 @@ export default function SectionHeading({ label, title }) {
 
   // Compute currently typed outline and solid texts
   const currentOutline = outlineText.substring(0, Math.min(typedLength, outlineText.length));
+  const untypedOutline = outlineText.substring(Math.min(typedLength, outlineText.length));
+  
   const currentSolid = hasSolid 
     ? solidText.substring(0, Math.max(0, typedLength - outlineText.length - 1))
+    : "";
+  const untypedSolid = hasSolid
+    ? solidText.substring(Math.max(0, typedLength - outlineText.length - 1))
     : "";
 
   const isOutlineTyping = typedLength <= outlineText.length;
   const isSolidTyping = hasSolid && typedLength > outlineText.length && typedLength <= totalLength;
 
+  const isOutlineCursor = isOutlineTyping || (!hasSolid && typedLength === totalLength);
+  const isSolidCursor = isSolidTyping;
+
   return (
     <div ref={containerRef} className="premium-heading-container">
       <div className="premium-heading">
         <span className={`heading-outline ${sizeClass}`} data-text={currentOutline || "\u00A0"}>
-          {currentOutline || "\u00A0"}
-          {(isOutlineTyping || (!hasSolid && typedLength === totalLength)) && <span className="typewriter-cursor">|</span>}
+          <span>{currentOutline}</span>
+          {isOutlineCursor && <span className="typewriter-cursor">|</span>}
+          <span style={{ visibility: "hidden" }}>{untypedOutline}</span>
         </span>
-        {hasSolid && (currentSolid || !isOutlineTyping) && (
+        {hasSolid && (
           <span className={`heading-solid ${sizeClass}`}>
-            {currentSolid || "\u00A0"}
-            {isSolidTyping && <span className="typewriter-cursor">|</span>}
+            <span>{currentSolid}</span>
+            {isSolidCursor && <span className="typewriter-cursor">|</span>}
+            <span style={{ visibility: "hidden" }}>{untypedSolid}</span>
           </span>
         )}
       </div>

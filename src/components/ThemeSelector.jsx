@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Palette } from 'lucide-react';
+import { Palette, Volume2, VolumeX } from 'lucide-react';
+import song from '../assets/V_J_x_Narvent_-_Memory_Reboot_Slowed_(mp3.pm).mp3';
 
 const themes = [
   { name: 'red', color: '#e53935' },
@@ -21,8 +22,36 @@ export default function ThemeSelector() {
   const [isOpen, setIsOpen] = useState(false);
   const [isHouseHovered, setIsHouseHovered] = useState(false);
   const [isBoneHovered, setIsBoneHovered] = useState(false);
+  const [isMusicHovered, setIsMusicHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [hasBeenClicked, setHasBeenClicked] = useState(false);
   const containerRef = useRef(null);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio(song);
+    audioRef.current.loop = true;
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
+
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(err => {
+        console.error("Audio playback failed:", err);
+      });
+    }
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -108,6 +137,35 @@ export default function ThemeSelector() {
           ))}
         </div>
       )}
+      <button
+        onClick={togglePlay}
+        onMouseEnter={() => setIsMusicHovered(true)}
+        onMouseLeave={() => setIsMusicHovered(false)}
+        style={{
+          width: '48px',
+          height: '48px',
+          borderRadius: '50%',
+          background: 'var(--bg-nav)',
+          backdropFilter: 'blur(24px)',
+          border: `1px solid ${isPlaying || isMusicHovered ? activeThemeColor : 'rgba(255, 255, 255, 0.24)'}`,
+          boxShadow: isPlaying || isMusicHovered ? `0 0 20px ${activeThemeColor}80` : 'none',
+          transform: isMusicHovered ? 'translateY(-3px)' : 'none',
+          display: 'grid',
+          placeItems: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          color: 'white',
+        }}
+        title={isPlaying ? "Pause Music 🎵" : "Play Music 🔇"}
+        aria-label="Toggle Music"
+      >
+        {isPlaying ? (
+          <Volume2 size={20} color={activeThemeColor} />
+        ) : (
+          <VolumeX size={20} color="white" />
+        )}
+      </button>
+
       <button
         onClick={(e) => {
           e.stopPropagation();
