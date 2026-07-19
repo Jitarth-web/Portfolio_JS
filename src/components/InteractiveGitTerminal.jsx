@@ -7,7 +7,9 @@ import certImg from "../pages/cert1.png";
 import heatWavesCover from "../assets/figma/heat_waves_cover.png";
 import daylightCover from "../assets/figma/daylight_cover.png";
 import haayeReCover from "../assets/figma/haaye_re_cover.png";
-
+import roopDeRaniCover from "../assets/figma/roop.png";
+import bairanCover from "../assets/figma/bairan.png";
+import kitaabCover from "../assets/figma/kitaab.png";
 const COMMITS = [
   {
     message: "feat: integrate NEXA AI agent",
@@ -68,7 +70,35 @@ const SPOTIFY_TRACKS = [
     percent: "24%",
     coverImg: haayeReCover,
     gradient: "from-orange-500 to-red-600"
+  },
+  {
+    title: "Kitaab",
+    artist: "Manan Bhardwaj",
+    duration: "3:12",
+    progress: "0:45",
+    percent: "24%",
+    coverImg: kitaabCover,
+    gradient: "from-orange-500 to-red-600"
+  },
+  {
+    title: "Bairan",
+    artist: "Sumit & Arjun",
+    duration: "3:12",
+    progress: "0:45",
+    percent: "24%",
+    coverImg: bairanCover,
+    gradient: "from-orange-500 to-red-600"
+  },
+  {
+    title: "Roop De Rani",
+    artist: "Tanishk Bagchi,Guru Randhawa...",
+    duration: "3:12",
+    progress: "0:45",
+    percent: "24%",
+    coverImg: roopDeRaniCover,
+    gradient: "from-orange-500 to-red-600"
   }
+
 ];
 
 export default function InteractiveGitTerminal() {
@@ -110,12 +140,12 @@ export default function InteractiveGitTerminal() {
       let direction = 1;
       demoIntervalRef.current = setInterval(() => {
         setDemoScroll((prev) => {
-          if (prev >= 620) {
+          if (prev >= 720) {
             direction = -1;
           } else if (prev <= 0) {
             direction = 1;
           }
-          return prev + direction * 1.5;
+          return prev + direction * 2.2;
         });
       }, 50);
     } else {
@@ -268,7 +298,7 @@ export default function InteractiveGitTerminal() {
       timer = setTimeout(() => {
         setCommitIdx((prev) => (prev + 1) % COMMITS.length);
         setPhase("init");
-      }, 15000); // Show live browser preview for 15 seconds
+      }, 22000); // Show live browser preview for 22 seconds to cycle through all 6 songs (3.5s each)
     }
 
     return () => {
@@ -331,12 +361,12 @@ export default function InteractiveGitTerminal() {
         </div>
 
         {/* Browser Body Mockup */}
-        <div 
+        <div
           className="flex-1 relative overflow-hidden flex flex-col items-center"
           style={{ background: "radial-gradient(circle at 50% 15%, rgba(7, 126, 126, 0.22), rgba(0,0,0,0) 65%), #03060a" }}
         >
           {/* Mock scrolling web container */}
-          <div 
+          <div
             className="w-full px-5 py-4 flex flex-col gap-4.5 transition-transform duration-75 ease-out select-none"
             style={{ transform: `translateY(-${demoScroll}px)` }}
           >
@@ -381,36 +411,38 @@ export default function InteractiveGitTerminal() {
 
             {/* Section 2: Projects Showcase */}
             <div className="flex flex-col gap-2.5 shrink-0">
-              <span className="text-[10px] font-bold text-white tracking-wider uppercase">Projects Showcase</span>
-              
+              <span className="text-[10px] font-bold text-white tracking-wider uppercase flex items-center gap-1">
+                <span className="text-cyan-400 font-bold">●</span> Projects Showcase
+              </span>
+
               {/* Project Card 1 */}
-              <div className="p-3 bg-[#090d16]/80 border border-white/5 rounded-lg flex gap-3 items-center justify-between shadow-[0_4px_12px_rgba(0,0,0,0.4)] overflow-hidden">
+              <div className="p-3.5 bg-[#090d16]/90 border border-white/10 rounded-lg flex gap-3.5 items-center justify-between shadow-[0_4px_12px_rgba(0,0,0,0.5)] overflow-hidden">
                 <div className="flex-1 min-w-0">
-                  <span className="text-[7.5px] text-cyan-400 uppercase tracking-widest font-bold">Featured Project</span>
-                  <span className="text-[12px] font-bold text-white mt-0.5 block truncate">Domiq AI</span>
-                  <span className="text-[9.5px] text-white/50 block leading-snug mt-0.5">Interactive 3D floor layout planner & compiler</span>
+                  <span className="text-[8.5px] text-cyan-400 uppercase tracking-widest font-bold font-mono">Featured Project</span>
+                  <span className="text-[13.5px] font-bold text-white mt-0.5 block truncate">Domiq AI</span>
+                  <span className="text-[11px] text-white/60 block leading-snug mt-1">Interactive 3D floor layout planner & compiler</span>
                 </div>
-                <img src={projectThumb} alt="Domiq Preview" className="w-16 h-11 object-cover rounded border border-white/10 shrink-0 shadow-[0_0_6px_rgba(255,255,255,0.08)]" />
+                <img src={projectThumb} alt="Domiq Preview" className="w-[85px] h-[56px] object-cover rounded border border-white/15 shrink-0 shadow-[0_0_8px_rgba(255,255,255,0.1)]" />
               </div>
 
               {/* Project Card 2 */}
-              <div className="p-3 bg-[#090d16]/80 border border-white/5 rounded-lg flex gap-3 items-center justify-between shadow-[0_4px_12px_rgba(0,0,0,0.4)] overflow-hidden">
+              <div className="p-3.5 bg-[#090d16]/90 border border-white/10 rounded-lg flex gap-3.5 items-center justify-between shadow-[0_4px_12px_rgba(0,0,0,0.5)] overflow-hidden">
                 <div className="flex-1 min-w-0">
-                  <span className="text-[7.5px] text-purple-400 uppercase tracking-widest font-bold">Neural Engine</span>
-                  <span className="text-[12px] font-bold text-white mt-0.5 block truncate">Soundwave AI</span>
-                  <span className="text-[9.5px] text-white/50 block leading-snug mt-0.5">Real-time voice processing & synthesis model</span>
+                  <span className="text-[8.5px] text-purple-400 uppercase tracking-widest font-bold font-mono">Neural Engine</span>
+                  <span className="text-[13.5px] font-bold text-white mt-0.5 block truncate">Soundwave AI</span>
+                  <span className="text-[11px] text-white/60 block leading-snug mt-1">Real-time voice processing & synthesis model</span>
                 </div>
-                <img src={soundwaveAiImg} alt="Soundwave Preview" className="w-16 h-11 object-cover rounded border border-white/10 shrink-0 shadow-[0_0_6px_rgba(255,255,255,0.08)]" />
+                <img src={soundwaveAiImg} alt="Soundwave Preview" className="w-[85px] h-[56px] object-cover rounded border border-white/15 shrink-0 shadow-[0_0_8px_rgba(255,255,255,0.1)]" />
               </div>
 
               {/* Project Card 3 */}
-              <div className="p-3 bg-[#090d16]/80 border border-white/5 rounded-lg flex gap-3 items-center justify-between shadow-[0_4px_12px_rgba(0,0,0,0.4)] overflow-hidden">
+              <div className="p-3.5 bg-[#090d16]/90 border border-white/10 rounded-lg flex gap-3.5 items-center justify-between shadow-[0_4px_12px_rgba(0,0,0,0.5)] overflow-hidden">
                 <div className="flex-1 min-w-0">
-                  <span className="text-[7.5px] text-emerald-400 uppercase tracking-widest font-bold">Agentic Orchestration</span>
-                  <span className="text-[12px] font-bold text-white mt-0.5 block truncate">Nexa AI</span>
-                  <span className="text-[9.5px] text-white/50 block leading-snug mt-0.5">Autonomous workspace assistant network</span>
+                  <span className="text-[8.5px] text-emerald-400 uppercase tracking-widest font-bold font-mono">Agentic Orchestration</span>
+                  <span className="text-[13.5px] font-bold text-white mt-0.5 block truncate">Nexa AI</span>
+                  <span className="text-[11px] text-white/60 block leading-snug mt-1">Autonomous workspace assistant network</span>
                 </div>
-                <img src={nexaAiImg} alt="Nexa Preview" className="w-16 h-11 object-cover rounded border border-white/10 shrink-0 shadow-[0_0_6px_rgba(255,255,255,0.08)]" />
+                <img src={nexaAiImg} alt="Nexa Preview" className="w-[85px] h-[56px] object-cover rounded border border-white/15 shrink-0 shadow-[0_0_8px_rgba(255,255,255,0.1)]" />
               </div>
             </div>
 
@@ -424,7 +456,7 @@ export default function InteractiveGitTerminal() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
                     <svg className="w-4 h-4 text-green-500 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-1.007-.336.074-.67-.14-.744-.477-.074-.336.14-.67.477-.744 3.844-.88 7.15-.502 9.813 1.13.295.18.387.565.207.861zm1.226-2.723c-.226.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.076-1.183-.412.125-.845-.107-.97-.52-.125-.413.107-.847.52-.972 3.666-1.112 8.243-.57 11.34 1.333.367.227.487.708.26 1.076zm.106-2.833C14.707 9.07 9.3 8.892 6.182 9.837c-.478.145-.98-.124-1.125-.6-.145-.478.125-.98.6-.126 3.593-1.09 9.544-.883 13.275 1.332.43.256.57.813.314 1.243-.256.43-.813.57-1.243.314z"/>
+                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-1.007-.336.074-.67-.14-.744-.477-.074-.336.14-.67.477-.744 3.844-.88 7.15-.502 9.813 1.13.295.18.387.565.207.861zm1.226-2.723c-.226.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.076-1.183-.412.125-.845-.107-.97-.52-.125-.413.107-.847.52-.972 3.666-1.112 8.243-.57 11.34 1.333.367.227.487.708.26 1.076zm.106-2.833C14.707 9.07 9.3 8.892 6.182 9.837c-.478.145-.98-.124-1.125-.6-.145-.478.125-.98.6-.126 3.593-1.09 9.544-.883 13.275 1.332.43.256.57.813.314 1.243-.256.43-.813.57-1.243.314z" />
                     </svg>
                     <span className="text-[9px] text-green-400 font-bold uppercase tracking-wider font-mono">Spotify Now Playing</span>
                   </div>
@@ -437,16 +469,16 @@ export default function InteractiveGitTerminal() {
                 </div>
 
                 {/* Track Details */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3.5">
                   {/* Album art cover */}
-                  <div className="w-11 h-11 rounded-lg border border-white/10 shrink-0 flex items-center justify-center relative overflow-hidden transition-all duration-500 shadow-[0_0_8px_rgba(0,0,0,0.5)]">
+                  <div className="w-14 h-14 rounded-lg border border-white/10 shrink-0 flex items-center justify-center relative overflow-hidden transition-all duration-500 shadow-[0_0_8px_rgba(0,0,0,0.5)]">
                     <img src={SPOTIFY_TRACKS[spotifyTrackIdx].coverImg} alt="Album Art" className="w-full h-full object-cover" />
                   </div>
-                  
+
                   {/* Title & Artist */}
                   <div className="flex-1 min-w-0">
-                    <div className="text-[12px] font-bold text-white truncate leading-tight transition-all duration-500">{SPOTIFY_TRACKS[spotifyTrackIdx].title}</div>
-                    <div className="text-[9.5px] text-white/50 truncate transition-all duration-500">{SPOTIFY_TRACKS[spotifyTrackIdx].artist}</div>
+                    <div className="text-[13.5px] font-bold text-white truncate leading-tight transition-all duration-500">{SPOTIFY_TRACKS[spotifyTrackIdx].title}</div>
+                    <div className="text-[11px] text-white/50 truncate transition-all duration-500 mt-1">{SPOTIFY_TRACKS[spotifyTrackIdx].artist}</div>
                   </div>
                 </div>
 
@@ -455,30 +487,72 @@ export default function InteractiveGitTerminal() {
                   <div className="w-full h-1 bg-white/15 rounded-full overflow-hidden">
                     <div className="h-full bg-green-500 rounded-full transition-all duration-500" style={{ width: SPOTIFY_TRACKS[spotifyTrackIdx].percent }} />
                   </div>
-                  <div className="flex justify-between text-[7px] text-white/40 font-mono">
+                  <div className="flex justify-between text-[8.5px] text-white/40 font-mono">
                     <span>{SPOTIFY_TRACKS[spotifyTrackIdx].progress}</span>
                     <span>{SPOTIFY_TRACKS[spotifyTrackIdx].duration}</span>
                   </div>
                 </div>
 
                 {/* Mini Playlist list */}
-                <div className="flex flex-col gap-2 border-t border-white/5 pt-2.5 mt-0.5">
+                <div className="flex flex-col gap-2.5 border-t border-white/5 pt-2.5 mt-0.5">
                   {SPOTIFY_TRACKS.map((track, idx) => (
-                    <div key={idx} className={`flex items-center justify-between text-[9px] transition-colors duration-300 ${idx === spotifyTrackIdx ? "text-green-400 font-bold" : "text-white/60"}`}>
-                      <div className="flex items-center gap-2 min-w-0">
+                    <div key={idx} className={`flex items-center justify-between text-[11px] transition-colors duration-300 ${idx === spotifyTrackIdx ? "text-green-400 font-bold" : "text-white/60"}`}>
+                      <div className="flex items-center gap-2.5 min-w-0">
                         {idx === spotifyTrackIdx ? (
-                          <span className="text-green-400 font-mono text-[7px]">▶</span>
+                          <span className="text-green-400 font-mono text-[8px]">▶</span>
                         ) : (
-                          <span className="text-white/30">{idx + 1}</span>
+                          <span className="text-white/30 w-3 text-center">{idx + 1}</span>
                         )}
-                        <div className="w-6 h-6 rounded-md border border-white/5 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
+                        <div className="w-[30px] h-[30px] rounded-md border border-white/5 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
                           <img src={track.coverImg} alt="cover" className="w-full h-full object-cover" />
                         </div>
                         <span className="truncate">{track.title}</span>
                       </div>
-                      <span className={idx === spotifyTrackIdx ? "text-green-400" : "text-white/30 font-mono"}>{track.duration}</span>
+                      <span className={idx === spotifyTrackIdx ? "text-green-400" : "text-white/30 font-mono text-[9.5px]"}>{track.duration}</span>
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Section 4: VS Code Presence Widget */}
+            <div className="flex flex-col gap-2.5 shrink-0">
+              <span className="text-[10px] font-bold text-white tracking-wider uppercase flex items-center gap-1">
+                <span className="text-blue-500 font-bold">●</span> Developer Presence
+              </span>
+              <div className="p-3.5 bg-[#090d16]/95 border border-blue-500/20 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.5)] flex flex-col gap-2.5">
+                {/* Header */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <svg className="w-4 h-4 text-blue-400 fill-current" viewBox="0 0 24 24">
+                      <path d="M23.922 16.916a.712.712 0 0 0-.295-.494l-3.32-2.457 3.32-2.456a.713.713 0 0 0 .295-.495.733.733 0 0 0-.15-.558L22.25 8.358a.72.72 0 0 0-.853-.162L12.3 12.8v-.6l5.772-4.275a.732.732 0 0 0 .293-.574.723.723 0 0 0-.276-.52L16.48 5.6a.718.718 0 0 0-.85-.054l-7.79 5.766L1.876.544A.723.723 0 0 0 1.01.4a.719.719 0 0 0-.422.645v21.91c0 .278.16.53.42.646a.727.727 0 0 0 .868-.145l6.97-5.158 7.78 5.757a.72.72 0 0 0 .852-.054l1.608-1.233a.723.723 0 0 0 .278-.521.733.733 0 0 0-.295-.575L12.3 15.8v-.6l9.102 4.606a.717.717 0 0 0 .852-.162l1.52-2.164a.729.729 0 0 0 .148-.564z" />
+                    </svg>
+                    <span className="text-[9px] text-blue-400 font-bold uppercase tracking-wider font-mono">VS Code Presence</span>
+                  </div>
+                  <div className="flex gap-1 items-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                    <span className="text-[7.5px] text-blue-400 font-mono font-bold uppercase">Active</span>
+                  </div>
+                </div>
+
+                {/* Details */}
+                <div className="flex items-center gap-3">
+                  <div className="w-[44px] h-[44px] rounded-lg bg-blue-500/10 border border-blue-500/20 shrink-0 flex items-center justify-center relative overflow-hidden transition-all duration-500">
+                    <span className="text-[16px] font-bold text-blue-400 font-mono">JS</span>
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[13.5px] font-bold text-white truncate leading-tight transition-all duration-500">InteractiveGitTerminal.jsx</div>
+                    <div className="text-[11px] text-white/50 truncate transition-all duration-500 mt-1">Editing portfolio codebase</div>
+                  </div>
+                </div>
+
+                {/* Footer stats */}
+                <div className="flex flex-col gap-1 mt-0.5 border-t border-white/5 pt-2.5">
+                  <div className="flex justify-between text-[9px] text-white/40 font-mono">
+                    <span>Lines: 608</span>
+                    <span>Workspace: portfolio</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -496,7 +570,7 @@ export default function InteractiveGitTerminal() {
               </div>
               <span className="text-[8px] font-mono text-white/40 shrink-0 pl-1">#{currentCommit.hash}</span>
             </div>
-            
+
             <div className="h-36 shrink-0" /> {/* Large Spacer for scroll-end visibility */}
           </div>
         </div>
@@ -523,8 +597,8 @@ export default function InteractiveGitTerminal() {
       </div>
 
       {/* Terminal logs content */}
-      <div 
-        ref={scrollRef} 
+      <div
+        ref={scrollRef}
         className="flex-1 p-4 overflow-y-auto scrollbar-thin select-text text-left"
         style={{
           scrollbarWidth: "none",

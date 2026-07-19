@@ -8,17 +8,17 @@ import { profile } from "../data/portfolio";
 import avatarMain from "../assets/figma/image 30.png";
 import ringImg from "../assets/figma/image 4.png";
 import { PythonIcon, ReactIcon, JsIcon, LeetcodeIcon } from "../components/Icons";
-import { 
-  Terminal, 
-  Cpu, 
-  Award, 
-  Coffee, 
-  Activity, 
-  Sparkles, 
-  GraduationCap, 
-  Target, 
-  Milestone, 
-  Brain, 
+import {
+  Terminal,
+  Cpu,
+  Award,
+  Coffee,
+  Activity,
+  Sparkles,
+  GraduationCap,
+  Target,
+  Milestone,
+  Brain,
   Code,
   Compass,
   MapPin,
@@ -128,7 +128,7 @@ export default function About() {
 
   useEffect(() => {
     const dob = new Date("2006-10-01T00:00:00");
-    
+
     const calculateAge = () => {
       const now = new Date();
       let years = now.getFullYear() - dob.getFullYear();
@@ -208,7 +208,7 @@ export default function About() {
       statElements.forEach((el) => {
         const val = parseInt(el.getAttribute("data-val") || "0", 10);
         const obj = { val: 0 };
-        gsap.fromTo(obj, 
+        gsap.fromTo(obj,
           { val: 0 },
           {
             val: val,
@@ -240,19 +240,19 @@ export default function About() {
       <FloatingSticker text="Googled It." theme="orange" size="md" top="35%" right="3%" rotation={7} />
       <FloatingSticker text="Coffee. Code. Regret." theme="red" size="md" top="58%" left="4%" rotation={-8} />
       <FloatingSticker text="CSS is my passion" theme="blue" size="md" top="82%" right="2%" rotation={10} />
-      
+
       <div className="section-inner">
         <SectionHeading label="About" title="CSE Student {Building Modern} Digital Experiences." />
-        
+
         {/* Unified Bento Grid Layout */}
         <div className="about-bento-grid">
-          
+
           {/* Card 1: Profile Main Card */}
           <div className="about-bento-card about-card-profile-main about-parallax-card">
             <div className="about-profile-badge-wrapper">
               <span className="about-profile-tag">ABOUT ME</span>
             </div>
-            
+
             <div className="about-profile-avatar-container">
               <div className="about-avatar-orbit-ring">
                 <div className="about-orbit-emblem py"><PythonIcon /></div>
@@ -265,7 +265,7 @@ export default function About() {
             <div className="about-profile-info">
               <h3 className="about-profile-name">{profile.name}</h3>
               <p className="about-profile-title">AI Engineer & Developer</p>
-              
+
               <div className="mt-3 flex justify-center">
                 <div className="about-status-badge">
                   <span className="about-status-pulse"></span>
@@ -291,7 +291,7 @@ export default function About() {
               {/* Developer Diagnostics Status & GitHub Contributions */}
               <div className="mt-5 pt-5 border-t border-white/5 flex flex-col gap-3 text-left w-full">
                 <h4 className="text-[10px] font-mono tracking-wider font-bold text-[var(--theme-color)] uppercase">System Diagnostics</h4>
-                
+
                 {/* Diagnostics Status Metrics */}
                 <div className="grid grid-cols-2 gap-2 text-[10px]">
                   <div className="p-2 bg-white/[0.01] border border-white/5 rounded-lg flex flex-col gap-0.5">
@@ -308,7 +308,7 @@ export default function About() {
                 <div className="p-2.5 bg-white/[0.01] border border-white/5 rounded-lg flex flex-col gap-1.5">
                   <div className="flex justify-between items-center text-[8px] font-mono text-white/50">
                     <span>GITHUB CONTRIBUTIONS</span>
-                    <span className="text-green-400">842 commits this year</span>
+                    <span className="text-green-400">100+ commits this year</span>
                   </div>
                   <div className="w-full overflow-x-auto scrollbar-none py-1">
                     <div className="flex gap-[3px] justify-center min-w-[165px]">
@@ -321,9 +321,9 @@ export default function About() {
                             else if (rand > 30) bg = "bg-emerald-600";
                             else if (rand > 0) bg = "bg-emerald-800";
                             return (
-                              <span 
-                                key={rowIdx} 
-                                className={`w-[6px] h-[6px] rounded-[1px] transition-all duration-300 hover:scale-125 ${bg}`} 
+                              <span
+                                key={rowIdx}
+                                className={`w-[6px] h-[6px] rounded-[1px] transition-all duration-300 hover:scale-125 ${bg}`}
                               />
                             );
                           })}
@@ -350,9 +350,9 @@ export default function About() {
                             else if (rand > 25) bg = "bg-[#d97706]";
                             else if (rand > -5) bg = "bg-[#78350f]";
                             return (
-                              <span 
-                                key={rowIdx} 
-                                className={`w-[6px] h-[6px] rounded-[1px] transition-all duration-300 hover:scale-125 ${bg}`} 
+                              <span
+                                key={rowIdx}
+                                className={`w-[6px] h-[6px] rounded-[1px] transition-all duration-300 hover:scale-125 ${bg}`}
                               />
                             );
                           })}
@@ -408,25 +408,25 @@ export default function About() {
           <div className="about-bento-card about-card-stack about-parallax-card">
             <div className="about-stack-container">
               <div className="about-stack-tabs">
-                <button 
+                <button
                   className={`about-stack-tab-btn ${activeTab === "education" ? "active" : ""}`}
                   onClick={() => setActiveTab("education")}
                 >
                   Education
                 </button>
-                <button 
+                <button
                   className={`about-stack-tab-btn ${activeTab === "interests" ? "active" : ""}`}
                   onClick={() => setActiveTab("interests")}
                 >
                   Interests
                 </button>
-                <button 
+                <button
                   className={`about-stack-tab-btn ${activeTab === "goals" ? "active" : ""}`}
                   onClick={() => setActiveTab("goals")}
                 >
                   Goals
                 </button>
-                <button 
+                <button
                   className={`about-stack-tab-btn ${activeTab === "mission" ? "active" : ""}`}
                   onClick={() => setActiveTab("mission")}
                 >
@@ -435,7 +435,7 @@ export default function About() {
               </div>
 
               <div className="about-stack-windows">
-                
+
                 {/* Education Tab */}
                 <div className={`about-stack-window ${activeTab === "education" ? "active" : ""}`}>
                   <div className="about-timeline-feed">
