@@ -1077,6 +1077,7 @@ svg {
   grid-column: span 8;
   grid-row: span 2;
   padding: 0 !important;
+  height: 480px;
 }
 
 .about-card-stats {
@@ -1091,12 +1092,15 @@ svg {
 
 .about-card-quote {
   grid-column: span 4;
-  grid-row: span 2;
+  grid-row: span 1;
+  height: 230px;
 }
 
 .about-card-radar {
   grid-column: span 4;
-  grid-row: span 1;
+  grid-row: span 2;
+  padding: 0 !important;
+  height: 480px;
 }
 
 .about-card-journey {
@@ -1761,6 +1765,10 @@ svg {
     grid-column: span 1 !important;
     grid-row: auto !important;
     transform: none !important;
+  }
+  .about-card-terminal,
+  .about-card-radar {
+    height: 420px;
   }
   .about-bento-grid:hover .about-bento-card:not(:hover) {
     opacity: 1 !important;
@@ -3560,4 +3568,13 @@ select {
 }
 .sticker-theme-white:hover {
   box-shadow: calc(var(--sticker-shadow-offset) + 2px) calc(var(--sticker-shadow-offset) + 2px) 0px #000000, 0 0 calc(var(--sticker-glow-blur) + 10px) rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Scrollbar Utilities */
+.scrollbar-none {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none; /* Safari/Chrome */
 }

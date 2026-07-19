@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeading from "../components/SectionHeading";
 import InteractiveCodingTerminal from "../components/InteractiveCodingTerminal";
+import InteractiveGitTerminal from "../components/InteractiveGitTerminal";
 import { profile } from "../data/portfolio";
 import avatarMain from "../assets/figma/image 30.png";
 import ringImg from "../assets/figma/image 4.png";
@@ -286,6 +287,81 @@ export default function About() {
                   <span>Open to Opportunities</span>
                 </div>
               </div>
+
+              {/* Developer Diagnostics Status & GitHub Contributions */}
+              <div className="mt-5 pt-5 border-t border-white/5 flex flex-col gap-3 text-left w-full">
+                <h4 className="text-[10px] font-mono tracking-wider font-bold text-[var(--theme-color)] uppercase">System Diagnostics</h4>
+                
+                {/* Diagnostics Status Metrics */}
+                <div className="grid grid-cols-2 gap-2 text-[10px]">
+                  <div className="p-2 bg-white/[0.01] border border-white/5 rounded-lg flex flex-col gap-0.5">
+                    <span className="text-white/40 block text-[9px] uppercase tracking-wide font-mono">🧠 Brain Load</span>
+                    <span className="font-bold text-white font-mono text-[11px]">94% (High Alert)</span>
+                  </div>
+                  <div className="p-2 bg-white/[0.01] border border-white/5 rounded-lg flex flex-col gap-0.5">
+                    <span className="text-white/40 block text-[9px] uppercase tracking-wide font-mono">☕ Coffee Level</span>
+                    <span className="font-bold text-white font-mono text-[11px]">15% (Critical)</span>
+                  </div>
+                </div>
+
+                {/* Git Contribution Heatmap Grid */}
+                <div className="p-2.5 bg-white/[0.01] border border-white/5 rounded-lg flex flex-col gap-1.5">
+                  <div className="flex justify-between items-center text-[8px] font-mono text-white/50">
+                    <span>GITHUB CONTRIBUTIONS</span>
+                    <span className="text-green-400">842 commits this year</span>
+                  </div>
+                  <div className="w-full overflow-x-auto scrollbar-none py-1">
+                    <div className="flex gap-[3px] justify-center min-w-[165px]">
+                      {Array.from({ length: 18 }).map((_, colIdx) => (
+                        <div key={colIdx} className="flex flex-col gap-[3px] shrink-0">
+                          {Array.from({ length: 7 }).map((_, rowIdx) => {
+                            const rand = Math.floor(Math.sin(colIdx * rowIdx + colIdx) * 100);
+                            let bg = "bg-neutral-800/80";
+                            if (rand > 60) bg = "bg-emerald-400 shadow-[0_0_3px_rgba(52,211,153,0.3)]";
+                            else if (rand > 30) bg = "bg-emerald-600";
+                            else if (rand > 0) bg = "bg-emerald-800";
+                            return (
+                              <span 
+                                key={rowIdx} 
+                                className={`w-[6px] h-[6px] rounded-[1px] transition-all duration-300 hover:scale-125 ${bg}`} 
+                              />
+                            );
+                          })}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* LeetCode Submission Heatmap Grid */}
+                <div className="p-2.5 bg-white/[0.01] border border-white/5 rounded-lg flex flex-col gap-1.5">
+                  <div className="flex justify-between items-center text-[8px] font-mono text-white/50">
+                    <span>LEETCODE SUBMISSIONS</span>
+                    <span className="text-[#ffa116]">300+ problems solved</span>
+                  </div>
+                  <div className="w-full overflow-x-auto scrollbar-none py-1">
+                    <div className="flex gap-[3px] justify-center min-w-[165px]">
+                      {Array.from({ length: 18 }).map((_, colIdx) => (
+                        <div key={colIdx} className="flex flex-col gap-[3px] shrink-0">
+                          {Array.from({ length: 7 }).map((_, rowIdx) => {
+                            const rand = Math.floor(Math.cos(colIdx * rowIdx - rowIdx) * 100);
+                            let bg = "bg-neutral-800/80";
+                            if (rand > 55) bg = "bg-[#ffa116] shadow-[0_0_3px_rgba(255,161,22,0.3)]";
+                            else if (rand > 25) bg = "bg-[#d97706]";
+                            else if (rand > -5) bg = "bg-[#78350f]";
+                            return (
+                              <span 
+                                key={rowIdx} 
+                                className={`w-[6px] h-[6px] rounded-[1px] transition-all duration-300 hover:scale-125 ${bg}`} 
+                              />
+                            );
+                          })}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -495,7 +571,12 @@ export default function About() {
             </div>
           </div>
 
-          {/* Card 5: Philosophy Quote Carousel with Ring */}
+          {/* Card 5: Interactive GitHub Terminal */}
+          <div className="about-bento-card about-card-radar about-parallax-card">
+            <InteractiveGitTerminal />
+          </div>
+
+          {/* Card 6: Philosophy Quote Carousel with Ring */}
           <div className="about-bento-card about-card-quote about-parallax-card">
             <div className="about-quote-card-layout">
               <div className="about-quote-content">
@@ -510,41 +591,6 @@ export default function About() {
               <div className="about-quote-image-wrapper float-anim-1">
                 <img src={ringImg} alt="Orange Ring Asset" className="about-quote-ring-img animate-spin-ring" />
               </div>
-            </div>
-          </div>
-
-          {/* Card 6: Skill Radar (Rotating Web SVG) */}
-          <div className="about-bento-card about-card-radar about-parallax-card flex flex-col justify-between">
-            <h4 className="text-xs text-[var(--theme-color)] font-semibold tracking-wider uppercase mb-2">Core Dimensions</h4>
-            <div className="about-radar-container">
-              <svg className="about-radar-svg" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="40" stroke="rgba(255, 106, 33, 0.15)" strokeWidth="0.5" fill="none" />
-                <circle cx="50" cy="50" r="30" stroke="rgba(255, 106, 33, 0.1)" strokeWidth="0.5" fill="none" />
-                <circle cx="50" cy="50" r="20" stroke="rgba(255, 106, 33, 0.08)" strokeWidth="0.5" fill="none" />
-                <circle cx="50" cy="50" r="10" stroke="rgba(255, 106, 33, 0.05)" strokeWidth="0.5" fill="none" />
-
-                <line x1="50" y1="10" x2="50" y2="90" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="0.5" />
-                <line x1="15" y1="30" x2="85" y2="70" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="0.5" />
-                <line x1="15" y1="70" x2="85" y2="30" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="0.5" />
-
-                <text x="50" y="8" textAnchor="middle" fontSize="3.5" fill="rgba(255, 255, 255, 0.5)" fontWeight="bold">PROBLEM SOLVING</text>
-                <text x="90" y="32" textAnchor="start" fontSize="3.5" fill="rgba(255, 255, 255, 0.5)" fontWeight="bold">FRONTEND</text>
-                <text x="90" y="72" textAnchor="start" fontSize="3.5" fill="rgba(255, 255, 255, 0.5)" fontWeight="bold">AI / ML</text>
-                <text x="50" y="94" textAnchor="middle" fontSize="3.5" fill="rgba(255, 255, 255, 0.5)" fontWeight="bold">SYSTEMS</text>
-                <text x="10" y="72" textAnchor="end" fontSize="3.5" fill="rgba(255, 255, 255, 0.5)" fontWeight="bold">BACKEND</text>
-                <text x="10" y="32" textAnchor="end" fontSize="3.5" fill="rgba(255, 255, 255, 0.5)" fontWeight="bold">TOOLS / GIT</text>
-
-                <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" stroke="color-mix(in srgb, var(--theme-color) 25%, transparent)" strokeWidth="0.5" fill="none" />
-                <polygon points="50,12 81.5,35 78.7,66 50,80 20.2,67.5 20.8,33.5" 
-                         stroke="var(--theme-color)" strokeWidth="1" fill="color-mix(in srgb, var(--theme-color) 15%, transparent)" />
-                
-                <circle cx="50" cy="12" r="1.5" fill="var(--theme-color)" />
-                <circle cx="81.5" cy="35" r="1.5" fill="var(--theme-color)" />
-                <circle cx="78.7" cy="66" r="1.5" fill="var(--theme-color)" />
-                <circle cx="50" cy="80" r="1.5" fill="var(--theme-color)" />
-                <circle cx="20.2" cy="67.5" r="1.5" fill="var(--theme-color)" />
-                <circle cx="20.8" cy="33.5" r="1.5" fill="var(--theme-color)" />
-              </svg>
             </div>
           </div>
 
