@@ -12,31 +12,31 @@ import bairanCover from "../assets/figma/bairan.png";
 import kitaabCover from "../assets/figma/kitaab.png";
 const COMMITS = [
   {
-    message: "feat: integrate NEXA AI agent",
+    message: "feat: add coding playlist & Spotify track widget",
     hash: "c7f8b9d",
-    files: "About.jsx, styles.css",
-    changes: "2 files changed, 48 insertions(+), 12 deletions(-)"
+    files: "InteractiveGitTerminal.jsx",
+    changes: "1 file changed, 68 insertions(+), 4 deletions(-)"
   },
   {
-    message: "style: customize premium HSL color themes",
+    message: "feat: implement mock bento projects showcase",
     hash: "8a9b2c3",
-    files: "styles.css, ThemeSelector.jsx",
-    changes: "2 files changed, 84 insertions(+), 6 deletions(-)"
+    files: "InteractiveGitTerminal.jsx",
+    changes: "1 file changed, 52 insertions(+), 2 deletions(-)"
   },
   {
-    message: "perf: optimize WebGL shaders for mobile",
+    message: "feat: replace dev presence with experience timeline",
     hash: "d4e5f6a",
-    files: "CyberpunkGlobe.jsx",
-    changes: "1 file changed, 19 insertions(+), 35 deletions(-)"
+    files: "InteractiveGitTerminal.jsx",
+    changes: "1 file changed, 42 insertions(+), 48 deletions(-)"
   },
   {
-    message: "fix: resolve 3D viewport canvas resizing",
+    message: "feat: add clean mock copyright footer to browser preview",
     hash: "f1a2b3c",
-    files: "OrbitSystem.jsx",
-    changes: "1 file changed, 5 insertions(+), 4 deletions(-)"
+    files: "InteractiveGitTerminal.jsx",
+    changes: "1 file changed, 15 insertions(+), 1 deletion(-)"
   },
   {
-    message: "refactor: clean up bento grid layouts",
+    message: "refactor: optimize bento grid responsiveness",
     hash: "e5f6a7b",
     files: "About.jsx",
     changes: "1 file changed, 14 insertions(+), 14 deletions(-)"
@@ -74,27 +74,27 @@ const SPOTIFY_TRACKS = [
   {
     title: "Kitaab",
     artist: "Manan Bhardwaj",
-    duration: "3:12",
-    progress: "0:45",
-    percent: "24%",
+    duration: "3:08",
+    progress: "1:42",
+    percent: "57%",
     coverImg: kitaabCover,
     gradient: "from-orange-500 to-red-600"
   },
   {
     title: "Bairan",
     artist: "Sumit & Arjun",
-    duration: "3:12",
-    progress: "0:45",
-    percent: "24%",
+    duration: "2:42",
+    progress: "2:02",
+    percent: "78%",
     coverImg: bairanCover,
     gradient: "from-orange-500 to-red-600"
   },
   {
     title: "Roop De Rani",
     artist: "Tanishk Bagchi,Guru Randhawa...",
-    duration: "3:12",
-    progress: "0:45",
-    percent: "24%",
+    duration: "2:58",
+    progress: "1:10",
+    percent: "48%",
     coverImg: roopDeRaniCover,
     gradient: "from-orange-500 to-red-600"
   }
@@ -515,44 +515,36 @@ export default function InteractiveGitTerminal() {
               </div>
             </div>
 
-            {/* Section 4: VS Code Presence Widget */}
+            {/* Section 4: Work Experience & Education Timeline */}
             <div className="flex flex-col gap-2.5 shrink-0">
               <span className="text-[10px] font-bold text-white tracking-wider uppercase flex items-center gap-1">
-                <span className="text-blue-500 font-bold">●</span> Developer Presence
+                <span className="text-amber-500 font-bold">●</span> Experience & Education
               </span>
-              <div className="p-3.5 bg-[#090d16]/95 border border-blue-500/20 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.5)] flex flex-col gap-2.5">
-                {/* Header */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5">
-                    <svg className="w-4 h-4 text-blue-400 fill-current" viewBox="0 0 24 24">
-                      <path d="M23.922 16.916a.712.712 0 0 0-.295-.494l-3.32-2.457 3.32-2.456a.713.713 0 0 0 .295-.495.733.733 0 0 0-.15-.558L22.25 8.358a.72.72 0 0 0-.853-.162L12.3 12.8v-.6l5.772-4.275a.732.732 0 0 0 .293-.574.723.723 0 0 0-.276-.52L16.48 5.6a.718.718 0 0 0-.85-.054l-7.79 5.766L1.876.544A.723.723 0 0 0 1.01.4a.719.719 0 0 0-.422.645v21.91c0 .278.16.53.42.646a.727.727 0 0 0 .868-.145l6.97-5.158 7.78 5.757a.72.72 0 0 0 .852-.054l1.608-1.233a.723.723 0 0 0 .278-.521.733.733 0 0 0-.295-.575L12.3 15.8v-.6l9.102 4.606a.717.717 0 0 0 .852-.162l1.52-2.164a.729.729 0 0 0 .148-.564z" />
-                    </svg>
-                    <span className="text-[9px] text-blue-400 font-bold uppercase tracking-wider font-mono">VS Code Presence</span>
+              <div className="p-3.5 bg-[#090d16]/95 border border-amber-500/20 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.5)] flex flex-col gap-3">
+                {/* Timeline Item 1 */}
+                <div className="relative pl-4 border-l border-amber-500/30 text-left">
+                  <span className="absolute -left-[4.5px] top-1.5 w-2 h-2 rounded-full bg-amber-500" />
+                  <div className="flex justify-between items-start gap-1">
+                    <span className="text-[13px] font-bold text-white leading-tight">B.Tech CSE Student</span>
+                    <span className="text-[9.5px] font-mono text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded shrink-0">2024-Present</span>
                   </div>
-                  <div className="flex gap-1 items-center">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                    <span className="text-[7.5px] text-blue-400 font-mono font-bold uppercase">Active</span>
-                  </div>
+                  <span className="text-[11px] text-white/40 block mt-0.5 font-mono">NIT Delhi</span>
+                  <p className="text-[11px] text-white/60 mt-1 leading-relaxed">
+                    Focusing on Data Structures, Algorithms, Web Technologies, and Machine Learning.
+                  </p>
                 </div>
 
-                {/* Details */}
-                <div className="flex items-center gap-3">
-                  <div className="w-[44px] h-[44px] rounded-lg bg-blue-500/10 border border-blue-500/20 shrink-0 flex items-center justify-center relative overflow-hidden transition-all duration-500">
-                    <span className="text-[16px] font-bold text-blue-400 font-mono">JS</span>
+                {/* Timeline Item 2 */}
+                <div className="relative pl-4 border-l border-amber-500/30 text-left">
+                  <span className="absolute -left-[4.5px] top-1.5 w-2 h-2 rounded-full bg-amber-500" />
+                  <div className="flex justify-between items-start gap-1">
+                    <span className="text-[13px] font-bold text-white leading-tight">Full Stack AI Developer</span>
+                    <span className="text-[9.5px] font-mono text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded shrink-0">Projects</span>
                   </div>
-
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[13.5px] font-bold text-white truncate leading-tight transition-all duration-500">InteractiveGitTerminal.jsx</div>
-                    <div className="text-[11px] text-white/50 truncate transition-all duration-500 mt-1">Editing portfolio codebase</div>
-                  </div>
-                </div>
-
-                {/* Footer stats */}
-                <div className="flex flex-col gap-1 mt-0.5 border-t border-white/5 pt-2.5">
-                  <div className="flex justify-between text-[9px] text-white/40 font-mono">
-                    <span>Lines: 608</span>
-                    <span>Workspace: portfolio</span>
-                  </div>
+                  <span className="text-[11px] text-white/40 block mt-0.5 font-mono">Self-Initiatives</span>
+                  <p className="text-[11px] text-white/60 mt-1 leading-relaxed">
+                    Developed AI-driven layout compiler, real-time voice synthesis agents, and customized 3D dashboards.
+                  </p>
                 </div>
               </div>
             </div>
@@ -569,6 +561,14 @@ export default function InteractiveGitTerminal() {
                 </span>
               </div>
               <span className="text-[8px] font-mono text-white/40 shrink-0 pl-1">#{currentCommit.hash}</span>
+            </div>
+
+            {/* Mock Footer */}
+            <div className="border-t border-white/5 pt-3.5 mt-2 flex flex-col items-center gap-1 text-[11px] font-mono text-center">
+              <span className="text-white/60 flex items-center gap-1 justify-center">
+                Made with <span className="text-red-500 animate-pulse">♥</span> by Jitarth Singh
+              </span>
+              <span className="text-white/30">© {new Date().getFullYear()} Jitarth. All Rights Reserved.</span>
             </div>
 
             <div className="h-36 shrink-0" /> {/* Large Spacer for scroll-end visibility */}
