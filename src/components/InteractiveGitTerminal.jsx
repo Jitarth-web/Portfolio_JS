@@ -10,7 +10,7 @@ import haayeReCover from "../assets/figma/haaye_re_cover.png";
 
 const COMMITS = [
   {
-    message: "feat: integrate Antigravity AI agent",
+    message: "feat: integrate NEXA AI agent",
     hash: "c7f8b9d",
     files: "About.jsx, styles.css",
     changes: "2 files changed, 48 insertions(+), 12 deletions(-)"
@@ -322,8 +322,7 @@ export default function InteractiveGitTerminal() {
             <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
           </div>
           <div className="flex-1 max-w-[200px] mx-4 py-1 px-3.5 bg-white/[0.03] border border-white/5 rounded-md text-[10.5px] font-mono text-center text-white/70 flex items-center justify-center gap-1">
-            <span className="text-green-400">🔒</span>
-            <span className="truncate">jitarth.dev</span>
+            <span className="truncate">http://127.0.0.1:5174/</span>
           </div>
           <div className="flex items-center gap-1.5 text-[10.5px] font-semibold text-green-400 shrink-0">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-ping" />
