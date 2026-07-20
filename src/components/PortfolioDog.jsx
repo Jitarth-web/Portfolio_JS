@@ -185,12 +185,12 @@ export default function PortfolioDog({ booting = false }) {
 
   // --- Animation Refs (avoid triggers of render loops) ---
   const stateRef = useRef({
-    x: window.innerWidth / 2,
-    y: window.innerHeight * 0.75,
-    px: window.innerWidth / 2,
-    py: window.innerHeight * 0.75,
-    tx: window.innerWidth / 2,
-    ty: window.innerHeight * 0.75,
+    x: window.innerWidth - 120,
+    y: window.innerHeight * 0.8,
+    px: window.innerWidth - 120,
+    py: window.innerHeight * 0.8,
+    tx: window.innerWidth - 120,
+    ty: window.innerHeight * 0.8,
     vx: 0,
     vy: 0,
     size: 50,
@@ -216,7 +216,7 @@ export default function PortfolioDog({ booting = false }) {
     continuousWag: false
   });
 
-  const mouseRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight * 0.75 });
+  const mouseRef = useRef({ x: window.innerWidth - 120, y: window.innerHeight * 0.8 });
   const isMouseActiveRef = useRef(false);
   const lastMouseMoveTimeRef = useRef(Date.now());
   const activeSectionRef = useRef("home");

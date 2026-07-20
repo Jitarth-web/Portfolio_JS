@@ -3578,3 +3578,95 @@ select {
 .scrollbar-none::-webkit-scrollbar {
   display: none; /* Safari/Chrome */
 }
+
+/* Footer Giant Text Hover Effect */
+.footer-text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  user-select: none;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 0.5rem;
+}
+
+.footer-bg-glow {
+  background: radial-gradient(
+    280px circle at var(--mouse-x, 50%) var(--mouse-y, -200px), 
+    color-mix(in srgb, var(--theme-color) 12%, transparent) 0%, 
+    color-mix(in srgb, var(--theme-color) 4%, transparent) 50%, 
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.footer-text-container:hover .footer-bg-glow {
+  opacity: 1;
+}
+
+.footer-big-text {
+  font-family: 'Clash Display', 'Outfit', 'Syne', sans-serif;
+  font-size: clamp(50px, 12vw, 190px);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: 0.02em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(6px, 1.2vw, 20px);
+  width: 100%;
+  max-width: 100%;
+  padding: 0 2vw;
+}
+
+.footer-letter {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: color 0.4s ease, -webkit-text-fill-color 0.4s ease, -webkit-text-stroke-color 0.4s ease, transform 0.4s ease;
+  padding: 0 2px;
+}
+
+/* Active Fill Class for GSAP Scroll Wave */
+.footer-letter.active-fill {
+  color: var(--theme-color) !important;
+  -webkit-text-fill-color: var(--theme-color) !important;
+  -webkit-text-stroke-color: var(--theme-color) !important;
+}
+
+/* Hover States */
+.footer-letter:hover {
+  color: var(--theme-color) !important;
+  -webkit-text-fill-color: var(--theme-color) !important;
+  -webkit-text-stroke-color: var(--theme-color) !important;
+  transform: translateY(-4px); /* subtle premium pop-up */
+}
+
+.footer-copyright {
+  font-family: 'Outfit', 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: clamp(14px, 1.25vw, 18px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.footer-copyright span.footer-author-name {
+  font-family: 'Clash Display', 'Outfit', 'Syne', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--theme-color);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--theme-color) 50%, transparent);
+}
+
+
