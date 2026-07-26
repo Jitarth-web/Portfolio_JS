@@ -14,6 +14,7 @@ import imgButtonmax from './assets/ChatGPT Image Jun 27, 2026, 01_06_59 PM.png'
 import imgPerspective from './assets/ChatGPT Image Jul 2, 2026, 08_29_15 PM.png'
 import nexa from './assets/nexa_ai.png'
 import parkin from './assets/parqin.png'
+import coming from './assets/comingsoon.png'
 // Showcase items with custom titles, descriptions, theme colors, and local imported images
 const items = [
   {
@@ -38,7 +39,7 @@ const items = [
     desc: "An intelligent agriculture platform providing real-time crop prices, market trends, and AI-assisted insights to help farmers make informed decisions.",
     color: "#00d2ff",
     url: imgAgrisort,
-    link: "https://github.com/"
+    link: coming,
   },
   {
     id: 7,
@@ -78,7 +79,7 @@ const items = [
     desc: "A cross-platform smart parking application that enables users to locate, reserve, and manage parking spaces in real time. Features secure authentication, live parking availability, booking management, navigation, and a dedicated dashboard for parking owners to manage slots and pricing.",
     color: "#000000",
     url: parkin,
-    link: "https://parqin.vercel.app"
+    link: coming,
   }
 ];
 // Glowing background particle system to create space and depth
