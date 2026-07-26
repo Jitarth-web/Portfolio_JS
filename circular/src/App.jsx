@@ -13,6 +13,7 @@ import imgStudent from './assets/student_management_system.png'
 import imgButtonmax from './assets/ChatGPT Image Jun 27, 2026, 01_06_59 PM.png'
 import imgPerspective from './assets/ChatGPT Image Jul 2, 2026, 08_29_15 PM.png'
 import nexa from './assets/nexa_ai.png'
+import parkin from './assets/parqin.png'
 // Showcase items with custom titles, descriptions, theme colors, and local imported images
 const items = [
   {
@@ -70,6 +71,14 @@ const items = [
     color: "#00d2ff",
     url: imgSoundwave,
     link: "https://soundwave-ai-ioik.vercel.app"
+  },
+   {
+    id: 6,
+    title: "PARQIN",
+    desc: "A cross-platform smart parking application that enables users to locate, reserve, and manage parking spaces in real time. Features secure authentication, live parking availability, booking management, navigation, and a dedicated dashboard for parking owners to manage slots and pricing.",
+    color: "#000000",
+    url: parkin,
+    link: "https://parqin.vercel.app"
   }
 ];
 // Glowing background particle system to create space and depth
@@ -219,7 +228,7 @@ const CylinderPanel = ({
                 ref={materialRef}
                 map={texture}
                 emissiveMap={texture}
-                emissive={new THREE.Color(item.color)}
+                emissive={new THREE.Color(item.color === "#000000" ? "#3c3c3c" : item.color)}
                 emissiveIntensity={emissiveBase}
                 side={THREE.DoubleSide}
                 transparent={true}
@@ -361,7 +370,16 @@ const App = () => {
                     </div>
                     <h2>{activeItem.title}</h2>
                     <p>{activeItem.desc}</p>
-                    <a href={activeItem.link} target="_blank" rel="noopener noreferrer" className="btn" style={{ background: activeItem.color }}>
+                    <a 
+                        href={activeItem.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="btn" 
+                        style={{ 
+                            background: activeItem.color === "#000000" ? "#ffffff" : activeItem.color,
+                            color: activeItem.color === "#000000" ? "#000000" : "#ffffff"
+                        }}
+                    >
                         Launch Showcase Project
                     </a>
                 </div>

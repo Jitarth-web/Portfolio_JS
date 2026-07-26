@@ -5,6 +5,8 @@ import attendanceSystem from "../assets/figma/soundwave_ai.png";
 import shagunFashions from "../assets/figma/shaun.png";
 import domiqAi from "../assets/figma/domiq.png";
 import nexaai from "../assets/figma/nexa_ai.png";
+import parqin from "../assets/figma/parqin.png";
+
 const thumbnails = [
   domiqAi,
   attendanceSystem,
@@ -13,7 +15,7 @@ const thumbnails = [
   studentManagement,
   paymentGateway,
   blindStick,
-  attendanceSystem,
+  parqin,
 ];
 
 export default function ProjectVisual({ index }) {

@@ -130,6 +130,23 @@ export const projects = [
     github: "https://github.com/Jitarth-web/SwachhCity",
     live: "https://swachh-city-16db.vercel.app/"
   },
+  {
+  title: "PARQIN",
+  description:
+    "A cross-platform smart parking application that enables users to locate, reserve, and manage parking spaces in real time. Features secure authentication, live parking availability, booking management, navigation, and a dedicated dashboard for parking owners to manage slots and pricing.",
+  tech: [
+    "React Native",
+    "Kotlin",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "Google Maps API"
+  ],
+  github: "https://github.com/Jitarth-web/PARQIN",
+  live: "Coming Soon",
+  underBuild: true,
+  progress: 78
+},
 ];
 
 export const experience = [
