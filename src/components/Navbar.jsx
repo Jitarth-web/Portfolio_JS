@@ -3,6 +3,8 @@ import { DownloadIcon } from "./Icons";
 import { navItems, profile } from "../data/portfolio";
 import { useActiveSection } from "../hooks/useActiveSection";
 import { GithubIcon, LinkedinIcon, MailIcon } from "./Icons";
+import logoImg from "../assets/logo_cropped.png";
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const ids = navItems.map((item) => item.toLowerCase());
@@ -16,7 +18,8 @@ export default function Navbar() {
   return (
     <header className="topbar">
       <button className="brand" onClick={() => goTo("home")} aria-label="Go to home">
-        Jitarth.
+        <img src={logoImg} alt="Brand Logo" className="brand-logo" />
+        <span className="brand-text">Jitarth.</span>
       </button>
 
       <nav className={`nav-pill ${open ? "open" : ""}`} aria-label="Primary navigation">
