@@ -337,7 +337,7 @@ export default function About() {
                 <div className="p-2.5 bg-white/[0.01] border border-white/5 rounded-lg flex flex-col gap-1.5">
                   <div className="flex justify-between items-center text-[8px] font-mono text-white/50">
                     <span>LEETCODE SUBMISSIONS</span>
-                    <span className="text-[#ffa116]">300+ problems solved</span>
+                    <span className="text-[#ffa116]">400+ problems solved</span>
                   </div>
                   <div className="w-full overflow-x-auto scrollbar-none py-1">
                     <div className="flex gap-[3px] justify-center min-w-[165px]">
@@ -384,7 +384,7 @@ export default function About() {
                 <div className="about-stat-icon text-[#ffa116]">
                   <LeetcodeIcon />
                 </div>
-                <h4 className="about-stat-number" data-val="300">300+</h4>
+                <h4 className="about-stat-number" data-val="400">400+</h4>
                 <p>LeetCode</p>
               </div>
               <div className="about-stat-item">
@@ -501,7 +501,7 @@ export default function About() {
                         <Target className="w-4 h-4 text-[var(--theme-color)]" /> Competitive Programming
                       </h5>
                       <p className="text-[12px] text-white leading-normal">
-                        Solving complex algorithmic math challenges on platforms like LeetCode (300+ problems completed).
+                        Solving complex algorithmic math challenges on platforms like LeetCode ( 400+ problems completed).
                       </p>
                     </div>
                   </div>
