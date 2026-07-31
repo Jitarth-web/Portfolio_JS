@@ -9,6 +9,10 @@ export default function Certifications() {
   const openModal = (cert) => setSelectedCert(cert);
   const closeModal = () => setSelectedCert(null);
 
+  const row1Certs = certifications.filter((_, index) => index % 2 === 0);
+  const row2Certs = certifications.filter((_, index) => index % 2 !== 0);
+  const isPaused = selectedCert !== null;
+
   return (
     <section id="certifications" className="content-section">
       <FloatingSticker text="Undefined is not a function" theme="purple" size="md" top="25%" left="3%" rotation={-8} />
@@ -20,19 +24,57 @@ export default function Certifications() {
       </div>
       
       <div className="cert-slider-wrapper">
-        <div className={`cert-slider ${selectedCert ? 'paused' : ''}`}>
-          {[...certifications, ...certifications].map((cert, index) => (
+        {/* Row 1: Sliding Left */}
+        <div className={`cert-slider slide-left ${isPaused ? 'paused' : ''}`}>
+          {[...row1Certs, ...row1Certs].map((cert, index) => (
             <div 
-              key={index} 
+              key={`row1-${index}`} 
               className="cert-card"
               onClick={() => openModal(cert)}
             >
+              <div className="cert-card-arrow">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </div>
               <div className="cert-image-wrapper">
                 <img src={cert.image} alt={cert.title} loading="lazy" />
               </div>
-              <div className="cert-content">
-                <h3 className="cert-title">{cert.title}</h3>
-                <p className="cert-issuer">{cert.issuer}</p>
+              <div className="cert-card-overlay">
+                <div className="cert-card-overlay-content">
+                  <h3 className="cert-card-title">{cert.title}</h3>
+                  <p className="cert-card-issuer">{cert.issuer}</p>
+                  <p className="cert-card-date">{cert.date}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Row 2: Sliding Right */}
+        <div className={`cert-slider slide-right ${isPaused ? 'paused' : ''}`}>
+          {[...row2Certs, ...row2Certs].map((cert, index) => (
+            <div 
+              key={`row2-${index}`} 
+              className="cert-card"
+              onClick={() => openModal(cert)}
+            >
+              <div className="cert-card-arrow">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </div>
+              <div className="cert-image-wrapper">
+                <img src={cert.image} alt={cert.title} loading="lazy" />
+              </div>
+              <div className="cert-card-overlay">
+                <div className="cert-card-overlay-content">
+                  <h3 className="cert-card-title">{cert.title}</h3>
+                  <p className="cert-card-issuer">{cert.issuer}</p>
+                  <p className="cert-card-date">{cert.date}</p>
+                </div>
               </div>
             </div>
           ))}

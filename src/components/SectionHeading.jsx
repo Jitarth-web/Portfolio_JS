@@ -106,6 +106,10 @@ export default function SectionHeading({ label, title }) {
 
   return (
     <div ref={containerRef} className="premium-heading-container">
+      <span className="box-corner top-left"></span>
+      <span className="box-corner top-right"></span>
+      <span className="box-corner bottom-left"></span>
+      <span className="box-corner bottom-right"></span>
       <div className="premium-heading">
         <span className={`heading-outline ${sizeClass}`} data-text={currentOutline || "\u00A0"}>
           <span>{currentOutline}</span>
