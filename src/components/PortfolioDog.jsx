@@ -165,6 +165,36 @@ const drawPixelAnger = (ctx, cx, cy, size, alpha) => {
   ctx.restore();
 };
 
+const drawPixelFire = (ctx, cx, cy, size, alpha) => {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  const s = Math.max(1, Math.round(size * 0.8));
+  const r = Math.round;
+  const flame = [
+    [0, 0, 1, 0, 0],
+    [0, 1, 1, 0, 0],
+    [0, 1, 2, 1, 0],
+    [1, 1, 2, 1, 0],
+    [1, 2, 2, 2, 1],
+    [1, 2, 2, 2, 1],
+    [0, 1, 1, 1, 0],
+  ];
+  const orange = "#f97316";
+  const yellow = "#facc15";
+  const ox = r(cx - 2.5 * s), oy = r(cy - 3.5 * s);
+  for (let row = 0; row < flame.length; row++) {
+    for (let col = 0; col < flame[row].length; col++) {
+      const pixel = flame[row][col];
+      if (pixel === 1) {
+        rect(ctx, ox + col * s, oy + row * s, s, s, orange);
+      } else if (pixel === 2) {
+        rect(ctx, ox + col * s, oy + row * s, s, s, yellow);
+      }
+    }
+  }
+  ctx.restore();
+};
+
 export default function PortfolioDog({ booting = false }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -233,7 +263,7 @@ export default function PortfolioDog({ booting = false }) {
 
   // Spawns canvas-based local particles
   const spawnCanvasParticle = (x, y, type) => {
-    const isSpecial = type === "heart" || type === "anger";
+    const isSpecial = type === "heart" || type === "anger" || type === "fire";
     stateRef.current.particles.push({
       x,
       y,
@@ -260,7 +290,7 @@ export default function PortfolioDog({ booting = false }) {
   // Trigger random dog barks
   const bark = () => {
     const dog = stateRef.current;
-    if (dog.state === "HOUSE_SLEEP" || dog.state === "EATING") return;
+    if (dog.state === "HOUSE_SLEEP" || dog.state === "EATING" || dog.state === "ANGRY") return;
 
     const barks = ["WOOF!", "WUF!", "BORK!", "WEF!", "🐾 WOOF 🐾", "RUFF!", "BO-BO!!"];
     showSpeechBubble(barks[Math.floor(Math.random() * barks.length)]);
@@ -285,15 +315,20 @@ export default function PortfolioDog({ booting = false }) {
     const dog = stateRef.current;
     if (dog.state === "HOUSE_SLEEP" || dog.state === "EATING") return;
 
+    // Clear any existing heart or fire particles immediately to prevent them
+    // from showing up when a double-click event is triggered (since single-click
+    // barks spawn hearts just before the dblclick event fires)
+    dog.particles = dog.particles.filter(p => p.type !== "heart" && p.type !== "fire");
+
     dog.state = "ANGRY";
     dog.idleT = 0;
 
-    const angryBarks = ["BO-BO!! 💢", "GRRR! BO-BO!! 😡", "BORK BORK! 💢", "BO-BO!!!"];
+    const angryBarks = ["BO-BO!! ⚡", "GRRR! BO-BO!! 🤬", "BORK BORK! 🔥", "BO-BO!!! 👿"];
     showSpeechBubble(angryBarks[Math.floor(Math.random() * angryBarks.length)], 2.2);
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       spawnCanvasParticle(80 + (Math.random() - 0.5) * 30, 80 + (Math.random() - 0.5) * 15, "anger");
-      spawnCanvasParticle(80 + (Math.random() - 0.5) * 30, 80 + (Math.random() - 0.5) * 15, "heart");
+      spawnCanvasParticle(80 + (Math.random() - 0.5) * 40, 80 + (Math.random() - 0.5) * 20, "fire");
     }
 
     setTimeout(() => {
@@ -531,6 +566,8 @@ export default function PortfolioDog({ booting = false }) {
   useEffect(() => {
     if (booting) return;
 
+    let clickTimeout = null;
+
     const updateCoords = (clientX, clientY) => {
       const dog = stateRef.current;
       
@@ -577,12 +614,24 @@ export default function PortfolioDog({ booting = false }) {
 
     const handleGlobalClick = (e) => {
       if (isCoordOverDog(e.clientX, e.clientY)) {
-        bark();
+        if (clickTimeout) {
+          clearTimeout(clickTimeout);
+          clickTimeout = null;
+        } else {
+          clickTimeout = setTimeout(() => {
+            bark();
+            clickTimeout = null;
+          }, 250);
+        }
       }
     };
 
     const handleGlobalDblClick = (e) => {
       if (isCoordOverDog(e.clientX, e.clientY)) {
+        if (clickTimeout) {
+          clearTimeout(clickTimeout);
+          clickTimeout = null;
+        }
         triggerAngry();
       }
     };
@@ -590,6 +639,10 @@ export default function PortfolioDog({ booting = false }) {
     const handleGlobalContextMenu = (e) => {
       if (isCoordOverDog(e.clientX, e.clientY)) {
         e.preventDefault();
+        if (clickTimeout) {
+          clearTimeout(clickTimeout);
+          clickTimeout = null;
+        }
         triggerAngry();
       }
     };
@@ -623,6 +676,7 @@ export default function PortfolioDog({ booting = false }) {
     window.addEventListener("pointercancel", handleGlobalPointerUp);
 
     return () => {
+      if (clickTimeout) clearTimeout(clickTimeout);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("click", handleGlobalClick);
@@ -940,7 +994,7 @@ export default function PortfolioDog({ booting = false }) {
         p.x += p.vx * dt * 60;
         p.y += p.vy * dt * 60;
         
-        if (p.type === "heart" || p.type === "anger") {
+        if (p.type === "heart" || p.type === "anger" || p.type === "fire") {
           p.vy -= 0.012 * dt * 60;
         } else {
           p.vy += 0.02 * dt * 60;
@@ -959,6 +1013,8 @@ export default function PortfolioDog({ booting = false }) {
           drawPixelHeart(ctx, p.x, p.y, p.size, alpha * 0.9);
         } else if (p.type === "anger") {
           drawPixelAnger(ctx, p.x, p.y, p.size, alpha * 0.95);
+        } else if (p.type === "fire") {
+          drawPixelFire(ctx, p.x, p.y, p.size, alpha * 0.95);
         } else if (p.type === "sparkle") {
           drawPixelSparkle(ctx, p.x, p.y, p.size, alpha, p.rot);
         } else if (p.type === "dust") {
